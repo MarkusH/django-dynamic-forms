@@ -1,0 +1,6 @@
+{% load i18n %}{% blocktrans %}Hello,
+
+you receive this e-mail because someone submitted the form “{{ form }}”.{% endblocktrans %}
+
+{% for entry in data %}{{ entry.0 }}: {{ entry.1 }}
+{% endfor %}

@@ -1,0 +1,10 @@
+.*
+*.pyc
+coverage.xml
+build/
+django_dynamic_forms.egg-info/
+dist/
+docs/build/
+
+!.gitignore
+!.coveragerc
