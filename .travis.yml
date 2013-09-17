@@ -14,6 +14,7 @@ env:
 
 install:
   - pip install $DJANGO
+  - pip install -e .
   - pip install -r tests/requirements.txt
 
 script:
