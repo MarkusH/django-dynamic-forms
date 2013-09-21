@@ -8,7 +8,7 @@ Django Dynamic Form
 .. image:: https://travis-ci.org/Markush2010/django-dynamic-forms.png
    :target: https://travis-ci.org/Markush2010/django-dynamic-forms
 
-.. image:: https://coveralls.io/repos/Markush2010/django-dynamic-forms/badge.png
+.. image:: https://coveralls.io/repos/Markush2010/django-dynamic-forms/badge.png?branch=develop
    :target: https://coveralls.io/r/Markush2010/django-dynamic-forms
 
 
