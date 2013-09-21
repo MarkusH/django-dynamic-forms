@@ -1,4 +1,22 @@
-============
+===================
+Django Dynamic Form
+===================
+
+.. image:: https://badge.fury.io/py/django-dynamic-forms.png
+   :target: https://badge.fury.io/py/django-dynamic-forms
+
+.. image:: https://travis-ci.org/Markush2010/django-dynamic-forms.png
+   :target: https://travis-ci.org/Markush2010/django-dynamic-forms
+
+.. image:: https://coveralls.io/repos/Markush2010/django-dynamic-forms/badge.png
+   :target: https://coveralls.io/r/Markush2010/django-dynamic-forms
+
+
+**django-dynamic-forms** lets you create your forms through the Django admin.
+You can add and remove form fields as you need them. That makes it perfect
+for creating survey or application forms.
+
+
 INSTALLATION
 ============
 
@@ -26,7 +44,6 @@ see *all* other recipients. See `send_mail
 in the officiall documentation.
 
 
-=======
 Example
 =======
 
@@ -41,7 +58,6 @@ The *admin* is available at http://127.0.0.1:8000/admin/.
 You can find an example form at http://127.0.0.1:8000/example-form/.
 
 
-=================
 Running the tests
 =================
 
