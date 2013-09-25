@@ -2,8 +2,11 @@
 Django Dynamic Form
 ===================
 
-.. image:: https://badge.fury.io/py/django-dynamic-forms.png
-   :target: https://badge.fury.io/py/django-dynamic-forms
+.. image:: https://pypip.in/v/django-dynamic-forms/badge.png
+   :target: https://crate.io/packages/django-dynamic-forms/
+
+.. image:: https://pypip.in/d/django-dynamic-forms/badge.png
+   :target: https://crate.io/packages/django-dynamic-forms/
 
 .. image:: https://travis-ci.org/Markush2010/django-dynamic-forms.png
    :target: https://travis-ci.org/Markush2010/django-dynamic-forms
