@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django import VERSION
 from django.contrib.auth.models import User
 from django.test import TestCase
 # TODO: Django >1.4:
@@ -47,7 +48,10 @@ class TestAdmin(TestCase):
 
         # 3 extra forms + 1 empty for construction
         # TODO: Django >1.4: assertInHTML
-        self.assertContains(response, '<b>Form Field:</b>', count=4, html=True)
+        if VERSION < (1, 7):
+            self.assertContains(response, 'Form Field:', count=4, html=False)
+        else:
+            self.assertContains(response, 'Form field:', count=4, html=False)
 
         # 3 extra forms + 1 empty for construction
         # don't use html=True as we don't care about the <select>-Tag
@@ -66,7 +70,10 @@ class TestAdmin(TestCase):
 
         # 3 extra forms + 1 empty for construction
         # TODO: Django >1.4: assertInHTML
-        self.assertContains(response, '<b>Form Field:</b>', count=4, html=True)
+        if VERSION < (1, 7):
+            self.assertContains(response, 'Form Field:', count=4, html=False)
+        else:
+            self.assertContains(response, 'Form field:', count=4, html=False)
 
         # 3 extra forms + 1 empty for construction
         # don't use html=True as we don't care about the <select>-Tag
@@ -169,7 +176,10 @@ class TestAdmin(TestCase):
 
         # 3 existing + 3 extra forms + 1 empty for construction
         # TODO: Django >1.4: assertInHTML
-        self.assertContains(response, '<b>Form Field:</b>', count=7, html=True)
+        if VERSION < (1, 7):
+            self.assertContains(response, 'Form Field:', count=7, html=False)
+        else:
+            self.assertContains(response, 'Form field:', count=7, html=False)
 
         # 3 extra forms + 1 empty for construction
         # don't use html=True as we don't care about the <select>-Tag
