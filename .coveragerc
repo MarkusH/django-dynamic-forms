@@ -1,4 +1,4 @@
 [run]
 branch = True
 source = dynamic_forms/
-omit = dynamic_forms/__init__.py,dynamic_forms/migrations/*,dynamic_forms/contrib/**
+omit = dynamic_forms/__init__.py,dynamic_forms/dj_migrations/*,dynamic_forms/migrations/*,dynamic_forms/contrib/**
