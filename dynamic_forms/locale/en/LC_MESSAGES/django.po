@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-16 19:07+0200\n"
+"POT-Creation-Date: 2013-11-08 01:08+0100\n"
 "PO-Revision-Date: 2013-09-16 17:39+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Store in database"
 msgstr ""
 
-#: admin.py:151 models.py:74
+#: admin.py:151 models.py:75
 msgid "Options"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Time"
 msgstr ""
 
-#: models.py:23 models.py:73
+#: models.py:23 models.py:74
 msgid "Name"
 msgstr ""
 
@@ -110,61 +110,61 @@ msgstr ""
 msgid "Form template path"
 msgstr ""
 
-#: models.py:36
+#: models.py:37
 msgid "Success template path"
 msgstr ""
 
-#: models.py:41
+#: models.py:42
 msgid "Dynamic form"
 msgstr ""
 
-#: models.py:42
+#: models.py:43
 msgid "Dynamic forms"
 msgstr ""
 
-#: models.py:70
+#: models.py:71
 msgid "Type"
 msgstr ""
 
-#: models.py:72
+#: models.py:73
 msgid "Label"
 msgstr ""
 
-#: models.py:75
+#: models.py:76
 msgid "Position"
 msgstr ""
 
-#: models.py:80
+#: models.py:81
 msgid "Form field"
 msgstr ""
 
-#: models.py:81
+#: models.py:82
 msgid "Form fields"
 msgstr ""
 
-#: models.py:84
+#: models.py:85
 #, python-format
 msgid "Field “%(field_name)s” in form “%(form_name)s”"
 msgstr ""
 
-#: models.py:140 models.py:144 models.py:145
+#: models.py:141 models.py:145 models.py:146
 msgid "Form data"
 msgstr ""
 
-#: models.py:141
+#: models.py:142
 msgid "Submitted on"
 msgstr ""
 
-#: models.py:148
+#: models.py:149
 #, python-format
 msgid "Form: “%(form)s” on %(date)s"
 msgstr ""
 
-#: views.py:47
+#: views.py:48
 msgid "Thank you for submitting this form."
 msgstr ""
 
-#: views.py:52
+#: views.py:53
 msgid "An error occurred during submitting this form."
 msgstr ""
 
@@ -176,7 +176,7 @@ msgid ""
 "you receive this e-mail because someone submitted the form “%(form)s”."
 msgstr ""
 
-#: templates/dynamic_forms/form.html:7
+#: templates/dynamic_forms/form.html:6
 msgid "Submit"
 msgstr ""
 

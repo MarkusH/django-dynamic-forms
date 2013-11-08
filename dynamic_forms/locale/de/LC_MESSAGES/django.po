@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-16 19:07+0200\n"
+"POT-Creation-Date: 2013-11-08 01:08+0100\n"
 "PO-Revision-Date: 2013-09-16 17:39+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
@@ -31,7 +31,7 @@ msgstr "Formular „%(formname)s“ wurde abgeschickt"
 msgid "Store in database"
 msgstr "In der Datenbank speichern"
 
-#: admin.py:151 models.py:74
+#: admin.py:151 models.py:75
 msgid "Options"
 msgstr "Optionen"
 
@@ -77,7 +77,7 @@ msgstr "Einzeiliger Text"
 msgid "Time"
 msgstr "Uhrzeit"
 
-#: models.py:23 models.py:73
+#: models.py:23 models.py:74
 msgid "Name"
 msgstr "Name"
 
@@ -117,61 +117,61 @@ msgstr "Aktionen"
 msgid "Form template path"
 msgstr "Formular Template"
 
-#: models.py:36
+#: models.py:37
 msgid "Success template path"
 msgstr "Template der Zielseite"
 
-#: models.py:41
+#: models.py:42
 msgid "Dynamic form"
 msgstr "Dynamisches Formular"
 
-#: models.py:42
+#: models.py:43
 msgid "Dynamic forms"
 msgstr "Dynamische Formulare"
 
-#: models.py:70
+#: models.py:71
 msgid "Type"
 msgstr "Typ"
 
-#: models.py:72
+#: models.py:73
 msgid "Label"
 msgstr "Beschriftung"
 
-#: models.py:75
+#: models.py:76
 msgid "Position"
 msgstr "Position"
 
-#: models.py:80
+#: models.py:81
 msgid "Form field"
 msgstr "Formfeld"
 
-#: models.py:81
+#: models.py:82
 msgid "Form fields"
 msgstr "Formfelder"
 
-#: models.py:84
+#: models.py:85
 #, python-format
 msgid "Field “%(field_name)s” in form “%(form_name)s”"
 msgstr "Feld „%(field_name)s“ im Formular „%(form_name)s“"
 
-#: models.py:140 models.py:144 models.py:145
+#: models.py:141 models.py:145 models.py:146
 msgid "Form data"
 msgstr "Formulardaten"
 
-#: models.py:141
+#: models.py:142
 msgid "Submitted on"
 msgstr "Abgeschickt am"
 
-#: models.py:148
+#: models.py:149
 #, python-format
 msgid "Form: “%(form)s” on %(date)s"
 msgstr "Formular „%(form)s“ vom %(date)s"
 
-#: views.py:47
+#: views.py:48
 msgid "Thank you for submitting this form."
 msgstr "Vielen Dank für das Ausfüllen des Formulars"
 
-#: views.py:52
+#: views.py:53
 msgid "An error occurred during submitting this form."
 msgstr "Während des Bearbeiten der Eingaben trat ein Fehler auf"
 
@@ -186,7 +186,7 @@ msgstr ""
 "\n"
 "Sie erhalten diese E-Mail weil das Formular „%(form)s“ abgeschickt wurde"
 
-#: templates/dynamic_forms/form.html:7
+#: templates/dynamic_forms/form.html:6
 msgid "Submit"
 msgstr "Abschicken"
 
