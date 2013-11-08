@@ -10,9 +10,12 @@ def read(*parts):
         return fp.read()
 
 
+from dynamic_forms import get_version
+
+
 setup(
     name='django-dynamic-forms',
-    version='0.2',
+    version=get_version(),
     description='django-dynamic-forms is a reusable Django application to create and configure forms through the admin.',
     long_description=read('README.rst'),
     author='Markus Holtermann',
