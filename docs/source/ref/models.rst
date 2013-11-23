@@ -6,7 +6,7 @@ Models
 
 
 :class:`FormModel`
-========================================
+==================
 
 .. py:class:: FormModel()
 
@@ -45,12 +45,14 @@ Models
       :class:`django.db.models.CharField`
 
       * max_length = 100
+      * choices = :data:`dynamic_forms.conf.DYNAMIC_FORMS_FORM_TEMPLATES`
 
    .. py:attribute:: success_template
 
       :class:`django.db.models.CharField`
 
       * max_length = 100
+      * choices = :data:`dynamic_forms.conf.DYNAMIC_FORMS_SUCCESS_TEMPLATES`
 
 
    .. py:attribute:: fields

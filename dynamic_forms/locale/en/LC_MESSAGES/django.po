@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-08 01:08+0100\n"
+"POT-Creation-Date: 2013-11-23 19:06+0100\n"
 "PO-Revision-Date: 2013-09-16 17:39+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Store in database"
 msgstr ""
 
-#: admin.py:151 models.py:75
+#: admin.py:151 models.py:78
 msgid "Options"
 msgstr ""
 
@@ -38,6 +38,14 @@ msgstr ""
 msgid ""
 "The options for this field will be available once it has been stored the "
 "first time."
+msgstr ""
+
+#: conf.py:11
+msgid "Default form template"
+msgstr ""
+
+#: conf.py:14
+msgid "Default success template"
 msgstr ""
 
 #: formfields.py:186
@@ -76,25 +84,25 @@ msgstr ""
 msgid "Time"
 msgstr ""
 
-#: models.py:23 models.py:74
+#: models.py:24 models.py:77
 msgid "Name"
 msgstr ""
 
-#: models.py:24
+#: models.py:25
 msgid "Submit URL"
 msgstr ""
 
-#: models.py:25
+#: models.py:26
 msgid ""
 "The full URL path to the form. It should start and end with a forward slash "
 "(<code>/</code>)."
 msgstr ""
 
-#: models.py:27
+#: models.py:28
 msgid "Success URL"
 msgstr ""
 
-#: models.py:28
+#: models.py:29
 msgid ""
 "The full URL path where the user will be redirected after successfully "
 "sending the form. It should start and end with a forward slash (<code>/</"
@@ -102,60 +110,60 @@ msgid ""
 "code> to the “Submit URL”."
 msgstr ""
 
-#: models.py:33
+#: models.py:34
 msgid "Actions"
 msgstr ""
 
-#: models.py:35
+#: models.py:36
 msgid "Form template path"
 msgstr ""
 
-#: models.py:37
+#: models.py:39
 msgid "Success template path"
 msgstr ""
 
-#: models.py:42
+#: models.py:45
 msgid "Dynamic form"
 msgstr ""
 
-#: models.py:43
+#: models.py:46
 msgid "Dynamic forms"
 msgstr ""
 
-#: models.py:71
+#: models.py:74
 msgid "Type"
 msgstr ""
 
-#: models.py:73
+#: models.py:76
 msgid "Label"
 msgstr ""
 
-#: models.py:76
+#: models.py:79
 msgid "Position"
 msgstr ""
 
-#: models.py:81
+#: models.py:84
 msgid "Form field"
 msgstr ""
 
-#: models.py:82
+#: models.py:85
 msgid "Form fields"
 msgstr ""
 
-#: models.py:85
+#: models.py:88
 #, python-format
 msgid "Field “%(field_name)s” in form “%(form_name)s”"
 msgstr ""
 
-#: models.py:141 models.py:145 models.py:146
+#: models.py:144 models.py:148 models.py:149
 msgid "Form data"
 msgstr ""
 
-#: models.py:142
+#: models.py:145
 msgid "Submitted on"
 msgstr ""
 
-#: models.py:149
+#: models.py:152
 #, python-format
 msgid "Form: “%(form)s” on %(date)s"
 msgstr ""

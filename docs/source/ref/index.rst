@@ -12,6 +12,7 @@ References
    forms
    middlewares
    models
+   settings
    views
 
 

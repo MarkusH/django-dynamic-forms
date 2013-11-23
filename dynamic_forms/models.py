@@ -14,6 +14,7 @@ from django.utils.html import escape, mark_safe
 from django.utils.translation import ugettext as _
 
 from dynamic_forms.actions import action_registry
+from dynamic_forms.conf import settings
 from dynamic_forms.fields import TextMultiSelectField
 from dynamic_forms.formfields import dynamic_form_field_registry
 
@@ -33,9 +34,11 @@ class FormModel(models.Model):
     actions = TextMultiSelectField(_('Actions'), default='',
         choices=action_registry.get_as_choices())
     form_template = models.CharField(_('Form template path'), max_length=100,
-        default='dynamic_forms/form.html')
+        default='dynamic_forms/form.html',
+        choices=settings.DYNAMIC_FORMS_FORM_TEMPLATES)
     success_template = models.CharField(_('Success template path'),
-        max_length=100, default='dynamic_forms/form_success.html')
+        max_length=100, default='dynamic_forms/form_success.html',
+        choices=settings.DYNAMIC_FORMS_SUCCESS_TEMPLATES)
 
     class Meta:
         ordering = ['name']

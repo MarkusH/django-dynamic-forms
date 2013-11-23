@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django import VERSION
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.test.utils import override_settings
 # TODO: Django >1.4:
 # from django.utils.html import format_html, format_html_join
 from django.utils.html import conditional_escape
@@ -82,6 +83,32 @@ class TestAdmin(TestCase):
         # 3 extra forms + 1 empty for construction
         self.assertContains(response, _('The options for this field will be '
             'available once it has been stored the first time.'), count=4)
+
+    def test_unconfigured_post(self):
+        data = {
+            'name': 'Some Name',
+            'submit_url': '/form/',
+            'success_url': '/done/form/',
+            'actions': 'dynamic_forms.actions.dynamic_form_send_email',
+            'form_template': 'other_form_template.html',
+            'success_template': 'other_success_template.html',
+
+            'fields-TOTAL_FORMS': 1,
+            'fields-INITIAL_FORMS': 0,
+            'fields-MAX_NUM_FORMS': 1000,
+
+            'fields-0-field_type': 'dynamic_forms.formfields.SingleLineTextField',
+            'fields-0-label': 'String Field',
+            'fields-0-name': 'string-field',
+            'fields-0-position': 0,
+            '_save': True,
+        }
+        response = self.client.post('/admin/dynamic_forms/formmodel/add/', data)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<li>Select a valid choice. other_form_template.html '
+                                      'is not one of the available choices.</li>')
+        self.assertContains(response, '<li>Select a valid choice. other_success_template.html '
+                                      'is not one of the available choices.</li>')
 
     def test_add_and_change_post(self):
         data = {

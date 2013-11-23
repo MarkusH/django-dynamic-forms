@@ -5,6 +5,10 @@ Changes
 v0.3
 ====
 
+* Introduced the settings variables ``DYNAMIC_FORMS_FORM_TEMPLATES`` and
+  ``DYNAMIC_FORMS_SUCCESS_TEMPLATES`` to make defining the templates for the
+  form and success display easier and more usable for non-developers.
+
 
 v0.2
 ====
