@@ -10,9 +10,11 @@ two basic actions :func:`~dynamic_form_send_email` and
 :func:`~dynamic_form_store_database` that, as their names indicate, either
 send the submitted data via e-mail to the receipients defined in the
 :data:`~dynamic_forms.conf.DYNAMIC_FORMS_EMAIL_RECIPIENTS` settings variable
-or stores it into the database (precisely the :class:`~FormModelData` model).
+or stores it into the database (precisely the
+:class:`~dynamic_forms.models.FormModelData` model).
 
-Any action that should be available for usage must be registered in the :class:`ActionRegistry`. This can be done with the following code::
+Any action that should be available for usage must be registered in the
+:class:`ActionRegistry`. This can be done with the following code::
 
    >>> def my_function(form_model, form):
    ...     # do something
