@@ -21,8 +21,9 @@ class ActionRegistry(object):
         return self._actions.get(key, None)
 
     def get_as_choices(self):
-        return sorted([(k, f.label) for k, f in six.iteritems(self._actions)],
-                      key=lambda x: x[1])
+        for item in sorted([(k, f.label) for k, f in
+                            six.iteritems(self._actions)], key=lambda x: x[1]):
+            yield item
 
     def register(self, func, label):
         if not callable(func):

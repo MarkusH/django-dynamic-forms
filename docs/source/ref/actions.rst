@@ -60,6 +60,12 @@ Providing and accessing actions
 
    .. py:method:: get_as_choices()
 
+      .. versionchanged:: 0.3
+         Returns a generator instead of a list
+
+      Returns a generator that yields all registered actions as 2-tuples in the
+      form ``(key, label)``.
+
    .. py:method:: register(func, label)
 
       Registers the function ``func`` with the label ``label``. The function

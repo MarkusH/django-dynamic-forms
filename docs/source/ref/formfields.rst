@@ -20,6 +20,13 @@ Form fields
 
    .. py:method:: get_as_choices()
 
+      .. versionchanged:: 0.3
+         Returns a generator instead of a list
+
+      Returns a generator that yields all registered dynamic form fields as
+      2-tuples in the form ``(key, display_type)``.
+
+
    .. py:method:: register(cls)
 
    .. py:method:: unregister(key)
