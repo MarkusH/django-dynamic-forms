@@ -34,3 +34,5 @@ html_theme = 'nature'
 html_static_path = ['_static']
 htmlhelp_basename = 'django-dynamic-formsdoc'
 modindex_common_prefix = ['dynamic_forms.']
+
+RTD_NEW_THEME = True
