@@ -58,6 +58,11 @@ Providing and accessing actions
 
    .. py:method:: get(key)
 
+      :param str key: The key to get an action
+      :returns: Either the action previously registered or ``None`` if no
+         action with the given key has been found.
+
+
    .. py:method:: get_as_choices()
 
       .. versionchanged:: 0.3
@@ -65,6 +70,7 @@ Providing and accessing actions
 
       Returns a generator that yields all registered actions as 2-tuples in the
       form ``(key, label)``.
+
 
    .. py:method:: register(func, label)
 
@@ -80,14 +86,43 @@ Providing and accessing actions
 
    .. py:method:: unregister(key)
 
+      Looks up the given key in the internal dictionary and deletes the action
+      if it exists.
+
+      :param str key: The key an action is assigned to
+
 
 .. py:data:: action_registry
+
+   The singleton instance of the :class:`ActionRegistry`.
 
 
 Action registry utilities
 -------------------------
 
 .. py:decorator:: formmodel_action(label)
+
+   Registering various actions by hand can be time consuming. This function
+   decorator eases this heavily: given a string as the first argument, this
+   decorator registeres the decorated function withing the
+   :data:`action_registry` with its fully dotted Python path.
+
+   Usage:
+
+   .. code-block:: python
+
+      @formmodel_action('My super awesome action')
+      def my_action(form_model, form):
+         # do something with the data ...
+
+   This is equivalent to:
+
+   .. code-block:: python
+
+      def my_action(form_model, form):
+         # do something with the data ...
+
+      action_registry.register(my_action, 'My super awesome action')
 
 
 Default Actions
@@ -109,3 +144,11 @@ Default Actions
 
 
 .. py:function:: dynamic_form_store_database(form_model, form)
+
+   This action takes the mapped data from the ``form`` and serializes it as
+   JSON. This value is then stored in the
+   :class:`~dynamic_forms.models.FormModelData`.
+
+   .. seealso:: :func:`dynamic_form_store_database` for a detailed explaination
+      of the arguments.
+

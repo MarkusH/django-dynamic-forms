@@ -17,10 +17,3 @@ References
 
    contrib/index
 
-
-Dynamic Forms
-=============
-
-.. py:module:: dynamic_forms
-
-.. py:data:: VERSION

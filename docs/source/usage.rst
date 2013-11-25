@@ -54,10 +54,10 @@ the template context related to the form:
 
 
 Third Party Apps
-----------------
+================
 
 django-simple-captcha
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 .. py:package:: dynamic_forms.contrib.simple_captcha
 
