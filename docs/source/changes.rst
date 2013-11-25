@@ -15,6 +15,8 @@ v0.3
   form fields <ref/formfields>`.
 * Allow dynamic fields to exclude their value from the ``mapped_data`` by
   overriding :classmethod:`~formfields.do_display_data`.
+* Dropped support for Python 3.2. Nobody is really using it and it's a pain to
+  integrate other libraries.
 
 
 v0.2
