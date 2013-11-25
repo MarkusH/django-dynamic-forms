@@ -179,6 +179,10 @@ class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
     def options_valid(self):
         return True
 
+    @classonlymethod
+    def do_display_data(cls):
+        return True
+
 
 @dynamic_form_field
 class BooleanField(BaseDynamicFormField):

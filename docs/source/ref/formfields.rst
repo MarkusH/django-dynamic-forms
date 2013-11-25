@@ -109,6 +109,8 @@ Base Form Field Classes
 
    .. py:method:: options_valid()
 
+   .. py:classmethod:: do_display_data()
+
 
 Default Fields
 ==============

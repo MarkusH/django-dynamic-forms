@@ -13,6 +13,8 @@ v0.3
   non-developers.
 * Allow delayed registration of :doc:`actions <ref/actions>` and :doc:`dynamic
   form fields <ref/formfields>`.
+* Allow dynamic fields to exclude their value from the ``mapped_data`` by
+  overriding :classmethod:`~formfields.do_display_data`.
 
 
 v0.2
