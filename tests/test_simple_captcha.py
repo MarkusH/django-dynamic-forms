@@ -14,6 +14,7 @@ from dynamic_forms.formfields import dynamic_form_field_registry as registry
 class TestSimpleCaptcha(TestCase):
 
     def setUp(self):
+        from dynamic_forms.contrib.simple_captcha.models import CaptchaField
         self.captcha_key = 'dynamic_forms.contrib.simple_captcha.models.CaptchaField'
 
     def tearDown(self):

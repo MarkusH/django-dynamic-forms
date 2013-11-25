@@ -18,7 +18,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'captcha',
     'dynamic_forms',
-    'dynamic_forms.contrib.simple_captcha',
     'tests',
 )
 
