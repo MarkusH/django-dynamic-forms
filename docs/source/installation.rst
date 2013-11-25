@@ -16,8 +16,8 @@ If you already use the wheel package format you can use the wheel build:
    $ pip install --use-wheel django-dynamic-forms
 
 To make **django-dynamic-forms** available in your Django project, you first
-have to add it to the ``INSTALLED_APPS`` in your ``settings.py``. If you are unsure where to put it,
-just append it:
+have to add it to the ``INSTALLED_APPS`` in your ``settings.py``. If you are
+unsure where to put it, just append it:
 
 .. code-block:: python
 

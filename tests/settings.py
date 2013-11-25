@@ -16,7 +16,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.admin',
+    'captcha',
     'dynamic_forms',
+    'dynamic_forms.contrib.simple_captcha',
     'tests',
 )
 

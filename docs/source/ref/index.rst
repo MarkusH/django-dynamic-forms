@@ -15,6 +15,8 @@ References
    settings
    views
 
+   contrib/index
+
 
 Dynamic Forms
 =============

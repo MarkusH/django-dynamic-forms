@@ -112,6 +112,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'dynamic_forms',
+    # 'captcha',
+    # 'dynamic_forms.contrib.simple_captcha',
 )
 
 MIGRATION_MODULES = {

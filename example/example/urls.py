@@ -5,4 +5,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    # url(r'^captcha/', include('captcha.urls')),
 )

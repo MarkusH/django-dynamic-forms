@@ -111,6 +111,8 @@ Base Form Field Classes
 
    .. py:classmethod:: do_display_data()
 
+      Default: ``True``
+
 
 Default Fields
 ==============

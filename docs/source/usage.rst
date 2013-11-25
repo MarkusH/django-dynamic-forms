@@ -51,3 +51,35 @@ the template context related to the form:
 
 ``model``
    An instance of the form model assigned to this URL.
+
+
+Third Party Apps
+----------------
+
+django-simple-captcha
+~~~~~~~~~~~~~~~~~~~~~
+
+.. py:package:: dynamic_forms.contrib.simple_captcha
+
+`django-simple-captcha <https://github.com/mbi/django-simple-captcha>`_ provides
+easy CAPTCHA support for Django forms. This contrib package integrates
+django-simple-captcha into **django-dynamic-forms** allowing users to add a
+CAPTCHA field to their dynamic forms.
+
+To use it make sure you installed **django-simple-captcha**:
+
+.. code-block:: console
+
+   $ pip install django-simple-captcha
+
+Next put ``'captcha'`` and ``'dynamic_forms.contrib.simple_captcha'`` in the
+``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        ...
+        'captcha',
+        'dynamic_forms.contrib.simple_captcha',
+        ...
+    )
