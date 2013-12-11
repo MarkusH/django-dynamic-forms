@@ -6,6 +6,8 @@ django_dynamic_forms.egg-info/
 dist/
 docs/build/
 
+example/*.db
+
 !.coveragerc
 !.gitignore
 !.travis.yml
