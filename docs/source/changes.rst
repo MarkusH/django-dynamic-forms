@@ -18,6 +18,7 @@ v0.3
 * Dropped support for Python 3.2. Nobody is really using it and it's a pain to
   integrate other libraries.
 * Support for `django-simple-captcha <https://github.com/mbi/django-simple-captcha>`_
+* Add Portuguese translation (thanks Gladson Simplicio)
 
 
 v0.2
