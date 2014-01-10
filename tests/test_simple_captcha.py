@@ -14,7 +14,7 @@ from dynamic_forms.formfields import dynamic_form_field_registry as registry
 class TestSimpleCaptcha(TestCase):
 
     def setUp(self):
-        from dynamic_forms.contrib.simple_captcha.models import CaptchaField
+        from dynamic_forms.contrib.simple_captcha.models import CaptchaField  # noqa
         self.captcha_key = 'dynamic_forms.contrib.simple_captcha.models.CaptchaField'
 
     def tearDown(self):
@@ -47,4 +47,3 @@ class TestSimpleCaptcha(TestCase):
         self.assertRedirects(response, '/done/')
         data = FormModelData.objects.get()
         self.assertEqual(data.value, '{"Field 1": "Some value"}')
-

@@ -141,7 +141,7 @@ class TestGenericDynamicFormFields(TestCase):
         self.assertTrue(isinstance(formfield, forms.CharField))
 
     def test_construct_options(self):
-        charfield = CharField('name', 'Label', required=False, 
+        charfield = CharField('name', 'Label', required=False,
             help_text='Some help')
         formfield = charfield.construct()
         self.assertFalse(formfield.required)

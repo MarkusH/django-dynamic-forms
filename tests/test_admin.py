@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django import VERSION
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.test.utils import override_settings
 # TODO: Django >1.4:
 # from django.utils.html import format_html, format_html_join
 from django.utils.html import conditional_escape
@@ -18,7 +17,7 @@ from dynamic_forms.models import FormModel, FormFieldModel, FormModelData
 
 def get_fields_html():
     # TODO: Django >1.4:
-    # reutrn format_html_join('\n', '<option value="{0}">{1}</option>',
+    # return format_html_join('\n', '<option value="{0}">{1}</option>',
     #     (df for df in dffr.get_as_choices()))
     return mark_safe(
         '\n'.join(
@@ -168,9 +167,9 @@ class TestAdmin(TestCase):
 
         options = FormFieldModel.objects.get().options
         self.assertEqual(options, {
-            'min_length': 5, 
+            'min_length': 5,
             'help_text': 'Some help text',
-            'max_length': 100, 
+            'max_length': 100,
             'required': False
         })
 
@@ -287,7 +286,7 @@ class TestAdmin(TestCase):
         self.assertEqual(FormFieldModel.objects.all().count(), 1)
         self.assertEqual(FormModelData.objects.all().count(), 1)
 
-        response = self.client.post('/admin/dynamic_forms/formmodel/%d/delete/' % form.pk, {'post': 'yes',})
+        response = self.client.post('/admin/dynamic_forms/formmodel/%d/delete/' % form.pk, {'post': 'yes'})
         self.assertRedirects(response, '/admin/dynamic_forms/formmodel/')
 
         self.assertEqual(FormModel.objects.all().count(), 0)

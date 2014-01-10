@@ -69,8 +69,8 @@ class TestForms(TestCase):
             OrderedDict([
                 ('Label 2', 'Value 2',),
                 ('Label 1', 'Value 1',),
-            ]
-        ))
+            ])
+        )
 
     def test_get_mapped_data_no_display(self):
         try:

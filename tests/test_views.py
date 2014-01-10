@@ -42,7 +42,6 @@ class TestAction2(object):
         pass
 
 
-
 class TestViews(TestCase):
 
     def setUp(self):
