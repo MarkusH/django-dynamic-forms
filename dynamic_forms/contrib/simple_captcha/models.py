@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.utils.decorators import classonlymethod
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext_lazy as _
 
 from dynamic_forms.formfields import dynamic_form_field, BaseDynamicFormField
 
@@ -11,7 +11,7 @@ from dynamic_forms.formfields import dynamic_form_field, BaseDynamicFormField
 class CaptchaField(BaseDynamicFormField):
 
     cls = 'captcha.fields.CaptchaField'
-    display_type = ugettext('CAPTCHA')
+    display_type = _('CAPTCHA')
 
     class Meta:
         _exclude = ('required',)

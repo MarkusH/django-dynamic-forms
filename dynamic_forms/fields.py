@@ -25,9 +25,9 @@ class TextMultiSelectField(six.with_metaclass(models.SubfieldBase,
     def contribute_to_class(self, cls, name):
         super(TextMultiSelectField, self).contribute_to_class(cls, name)
         if self.choices:
-            def _func(self, fieldname=name, choicedict=dict(self.choices)):
+            def _func(self, fieldname=name):
                 return self.separate_values_by.join([
-                    choicedict.get(value, value) for value in
+                    self.choices.get(value, value) for value in
                     getattr(self, fieldname)
                 ])
             setattr(cls, 'get_%s_display' % self.name, _func)

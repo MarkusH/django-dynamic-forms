@@ -11,7 +11,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.html import escape, mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from dynamic_forms.actions import action_registry
 from dynamic_forms.conf import settings
