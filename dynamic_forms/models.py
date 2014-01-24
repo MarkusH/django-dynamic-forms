@@ -63,7 +63,7 @@ class FormModel(models.Model):
                 self.success_url = self.success_url + '/'
         else:
             self.success_url = self.submit_url + 'done/'
-        return super(FormModel, self).save(*args, **kwargs)
+        super(FormModel, self).save(*args, **kwargs)
 
 
 @python_2_unicode_compatible
@@ -134,7 +134,7 @@ class FormFieldModel(models.Model):
                 del given_options[key]
             self.options = given_options
 
-        return super(FormFieldModel, self).save(*args, **kwargs)
+        super(FormFieldModel, self).save(*args, **kwargs)
 
 
 @python_2_unicode_compatible
