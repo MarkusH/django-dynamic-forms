@@ -19,6 +19,8 @@ v0.3
   integrate other libraries.
 * Support for `django-simple-captcha <https://github.com/mbi/django-simple-captcha>`_
 * Add Portuguese translation (thanks Gladson Simplicio)
+* Replaced :data:`formfields.dynamic_form_field_registry` with
+  :data:`formfields.formfield_registry` and deprecated the former.
 
 
 v0.2

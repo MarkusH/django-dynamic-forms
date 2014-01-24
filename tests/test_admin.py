@@ -11,7 +11,7 @@ from django.utils.safestring import mark_safe
 
 from django.utils.translation import ugettext as _
 
-from dynamic_forms.formfields import dynamic_form_field_registry as dffr
+from dynamic_forms.formfields import formfield_registry as registry
 from dynamic_forms.models import FormModel, FormFieldModel, FormModelData
 
 
@@ -25,7 +25,7 @@ def get_fields_html():
                 conditional_escape(df[0]),
                 conditional_escape(df[1])
             )
-            for df in dffr.get_as_choices()
+            for df in registry.get_as_choices()
         )
     )
 

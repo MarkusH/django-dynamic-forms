@@ -32,8 +32,16 @@ Form fields
    .. py:method:: unregister(key)
 
 
+.. py:data:: formfield_registry
+
+   .. versionadded:: 0.3
+      Use this instead of :data:`dynamic_form_field_registry`
+
+
 .. py:data:: dynamic_form_field_registry
 
+   .. deprecated:: 0.3
+      Deprecated in favor of :data:`formfield_registry`
 
 .. py:decorator:: dynamic_form_field(cls)
 

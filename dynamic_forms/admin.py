@@ -14,7 +14,7 @@ from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from dynamic_forms.formfields import dynamic_form_field_registry
+from dynamic_forms.formfields import formfield_registry
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
@@ -142,7 +142,7 @@ class AdminFormFieldInlineForm(forms.ModelForm):
         instance = kwargs.get('instance', None)
         meta = None
         if instance:
-            df = dynamic_form_field_registry.get(instance.field_type)
+            df = formfield_registry.get(instance.field_type)
             if df:
                 meta = df._meta
         super(AdminFormFieldInlineForm, self).__init__(*args, **kwargs)

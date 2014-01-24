@@ -8,7 +8,7 @@ from django.utils.encoding import force_text
 from captcha.models import CaptchaStore
 
 from dynamic_forms.models import FormModel, FormFieldModel, FormModelData
-from dynamic_forms.formfields import dynamic_form_field_registry as registry
+from dynamic_forms.formfields import formfield_registry as registry
 
 
 class TestSimpleCaptcha(TestCase):

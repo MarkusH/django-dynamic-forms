@@ -16,7 +16,7 @@ from django.utils.translation import ugettext as _
 from dynamic_forms.actions import action_registry
 from dynamic_forms.conf import settings
 from dynamic_forms.fields import TextMultiSelectField
-from dynamic_forms.formfields import dynamic_form_field_registry
+from dynamic_forms.formfields import formfield_registry
 
 
 @python_2_unicode_compatible
@@ -72,7 +72,7 @@ class FormFieldModel(models.Model):
     parent_form = models.ForeignKey(FormModel, on_delete=models.CASCADE,
         related_name='fields')
     field_type = models.CharField(_('Type'), max_length=255,
-        choices=dynamic_form_field_registry.get_as_choices())
+        choices=formfield_registry.get_as_choices())
     label = models.CharField(_('Label'), max_length=20)
     name = models.SlugField(_('Name'), max_length=50, blank=True)
     _options = models.TextField(_('Options'), blank=True, null=True)
@@ -91,7 +91,7 @@ class FormFieldModel(models.Model):
         }
 
     def generate_form_field(self, form):
-        field_type_cls = dynamic_form_field_registry.get(self.field_type)
+        field_type_cls = formfield_registry.get(self.field_type)
         field = field_type_cls(**self.get_form_field_kwargs())
         field.contribute_to_form(form)
         return field
@@ -127,7 +127,7 @@ class FormFieldModel(models.Model):
             self.name = slugify(self.label)
 
         given_options = self.options
-        field_type_cls = dynamic_form_field_registry.get(self.field_type)
+        field_type_cls = formfield_registry.get(self.field_type)
         invalid = set(self.options.keys()) - set(field_type_cls._meta.keys())
         if invalid:
             for key in invalid:

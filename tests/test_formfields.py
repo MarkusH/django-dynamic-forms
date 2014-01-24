@@ -7,7 +7,7 @@ from copy import deepcopy
 from django import forms
 from django.test import TestCase
 
-from dynamic_forms.formfields import (dynamic_form_field_registry as registry,
+from dynamic_forms.formfields import (formfield_registry as registry,
     BaseDynamicFormField, BooleanField, ChoiceField, DateField, DateTimeField,
     EmailField, IntegerField, MultiLineTextField, SingleLineTextField,
     TimeField, format_display_type)

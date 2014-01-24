@@ -12,7 +12,7 @@ from django.test import TestCase
 from django.utils.decorators import classonlymethod
 
 from dynamic_forms.formfields import (SingleLineTextField,
-    dynamic_form_field_registry as registry)
+    formfield_registry as registry)
 from dynamic_forms.forms import FormModelForm
 from dynamic_forms.models import FormModel, FormFieldModel
 

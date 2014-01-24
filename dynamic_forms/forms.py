@@ -10,7 +10,7 @@ except ImportError:  # pragma: no cover
 
 from django import forms
 
-from dynamic_forms.formfields import dynamic_form_field_registry
+from dynamic_forms.formfields import formfield_registry
 
 
 class MultiSelectFormField(forms.MultipleChoiceField):
@@ -56,7 +56,7 @@ class FormModelForm(forms.Form):
         data = self.cleaned_data
         mapped_data = OrderedDict()
         for key, field in six.iteritems(self.model_fields):
-            df = dynamic_form_field_registry.get(field.field_type)
+            df = formfield_registry.get(field.field_type)
             if df and df.do_display_data():
                 name = field.label
                 value = data.get(key, None)

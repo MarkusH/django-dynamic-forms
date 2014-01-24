@@ -51,7 +51,8 @@ class DynamicFormFieldRegistry(object):
             del self._fields[key]
 
 
-dynamic_form_field_registry = DynamicFormFieldRegistry()
+formfield_registry = DynamicFormFieldRegistry()
+dynamic_form_field_registry = formfield_registry
 
 
 def dynamic_form_field(cls):
@@ -59,7 +60,7 @@ def dynamic_form_field(cls):
     A class decorator to register the class as a dynamic form field in the
     :class:`DynamicFormFieldRegistry`.
     """
-    dynamic_form_field_registry.register(cls)
+    formfield_registry.register(cls)
     return cls
 
 
