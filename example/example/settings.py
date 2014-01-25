@@ -118,13 +118,20 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'dynamic_forms',
     # 'captcha',
     # 'dynamic_forms.contrib.simple_captcha',
 )
 
 if django.VERSION[:2] < (1, 7):
-    INSTALLED_APPS = INSTALLED_APPS + ('south',)
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'dynamic_forms',
+        'south',
+    )
+else:
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'dynamic_forms.apps.DynamicFormsConfig',
+    )
+
 
 MIGRATION_MODULES = {
     'dynamic_forms': 'dynamic_forms.dj_migrations',
