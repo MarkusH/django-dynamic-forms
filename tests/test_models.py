@@ -232,3 +232,35 @@ class TestFormModelData(TestCase):
         data = 'Some plain text value that is not JSON'
         fmd = FormModelData.objects.create(form=self.fm, value=data)
         self.assertEqual(fmd.pretty_value(), data)
+
+    def test_display_key_no_allow_display(self):
+        data = json.dumps({
+            'Some Key': 'Some value',
+            'Another key': 'Another value',
+            'Test': 'data',
+        })
+        fmd = FormModelData.objects.create(form=self.fm, value=data)
+        self.assertIsNone(fmd.display_key)
+
+    def test_display_key_allow_display(self):
+        data = json.dumps({
+            'Some Key': 'Some value',
+            'Another key': 'Another value',
+            'Test': 'data',
+        })
+        self.fm.allow_display = True
+        self.fm.save()
+        fmd = FormModelData.objects.create(form=self.fm, value=data)
+        self.assertIsNotNone(fmd.display_key)
+
+    def test_display_key_preserve(self):
+        data = json.dumps({
+            'Some Key': 'Some value',
+            'Another key': 'Another value',
+            'Test': 'data',
+        })
+        self.fm.allow_display = True
+        self.fm.save()
+        fmd = FormModelData(form=self.fm, value=data, display_key='somekey')
+        fmd.save()
+        self.assertEqual(fmd.display_key, 'somekey')

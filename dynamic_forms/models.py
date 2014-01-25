@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import json
 
 try:  # pragma: no cover
@@ -8,7 +9,14 @@ except ImportError:  # pragma: no cover
     from django.utils.datastructures import SortedDict as OrderedDict
 
 from django.db import models
+
+try:  # pragma: no cover
+    from django.db.transaction import atomic
+except ImportError:  # pragma: no cover
+    from django.db.transaction import commit_on_success as atomic
+
 from django.template.defaultfilters import slugify
+from django.utils.crypto import get_random_string
 from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.html import escape, mark_safe
 from django.utils.translation import ugettext_lazy as _
@@ -39,6 +47,10 @@ class FormModel(models.Model):
     success_template = models.CharField(_('Success template path'),
         max_length=100, default='dynamic_forms/form_success.html',
         choices=settings.DYNAMIC_FORMS_SUCCESS_TEMPLATES)
+    allow_display = models.BooleanField(_('Allow display'), default=False,
+        help_text=_('Allow a user to view the input at a later time. This '
+            'requires the “Store in database” action to be active. The sender '
+            'will be given a unique URL to recall the data.'))
 
     class Meta:
         ordering = ['name']
@@ -143,6 +155,10 @@ class FormModelData(models.Model):
         related_name='data', null=True)
     value = models.TextField(_('Form data'), blank=True, default='')
     submitted = models.DateTimeField(_('Submitted on'), auto_now_add=True)
+    display_key = models.CharField(_('Display key'), max_length=24, null=True,
+        blank=True, db_index=True, default=None, unique=True,
+        help_text=_('A unique identifier that is used to allow users to view '
+                    'their sent data. Unique over all stored data sets.'))
 
     class Meta:
         verbose_name = _('Form data')
@@ -154,11 +170,23 @@ class FormModelData(models.Model):
             'date': self.submitted,
         }
 
+    def save(self, *args, **kwargs):
+        with atomic():
+            if self.form.allow_display and not self.display_key:
+                dk = get_random_string(24)
+                while FormModelData.objects.filter(display_key=dk).exists():
+                    dk = get_random_string(24)
+                self.display_key = dk
+            super(FormModelData, self).save(*args, **kwargs)
+
+    @property
+    def json_value(self):
+            return OrderedDict(sorted(json.loads(self.value).items()))
+
     def pretty_value(self):
         try:
-            data = json.loads(self.value)
             output = ['<dl>']
-            for k, v in sorted(data.items()):
+            for k, v in self.json_value.items():
                 output.append('<dt>%(key)s</dt><dd>%(value)s</dd>' % {
                     'key': escape(force_text(k)),
                     'value': escape(force_text(v)),

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import json
 
 try:
     from collections import OrderedDict
@@ -14,7 +15,7 @@ from django.utils.decorators import classonlymethod
 
 from dynamic_forms.actions import action_registry
 from dynamic_forms.forms import FormModelForm
-from dynamic_forms.models import FormFieldModel, FormModel
+from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
 class TestAction(object):
@@ -151,3 +152,43 @@ class TestViews(TestCase):
             'field-for-boolean': True,
             'date-and-time': '2013-09-07 12:34:56'
         })
+
+    def test_get_display_success(self):
+        data = json.dumps({
+            'Another key': 'Another value',
+            'Some Key': 'Some value',
+            'Test': 'data',
+        })
+        self.fm.allow_display = True
+        self.fm.save()
+        fmd = FormModelData.objects.create(form=self.fm, value=data)
+        url = '/dynamic_forms/show/' + fmd.display_key + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dynamic_forms/data_set.html')
+
+    def test_get_display_404_invalid_key(self):
+        data = json.dumps({
+            'Another key': 'Another value',
+            'Some Key': 'Some value',
+            'Test': 'data',
+        })
+        self.fm.allow_display = True
+        self.fm.save()
+        FormModelData.objects.create(form=self.fm, value=data)
+        url = '/dynamic_forms/show/' + ('0' * 24) + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, 'dynamic_forms/data_set_404.html')
+
+    def test_get_display_404_no_allow_display(self):
+        data = json.dumps({
+            'Another key': 'Another value',
+            'Some Key': 'Some value',
+            'Test': 'data',
+        })
+        FormModelData.objects.create(form=self.fm, value=data)
+        url = '/dynamic_forms/show/' + ('0' * 24) + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, 'dynamic_forms/data_set_404.html')

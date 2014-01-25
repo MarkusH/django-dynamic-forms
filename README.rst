@@ -64,5 +64,4 @@ You can find an example form at http://127.0.0.1:8000/example-form/.
 Running the tests
 =================
 
-1. Change into the ``tests/`` directory
-2. Run ``./runtests.sh``
+1. Run ``./tests/runtests.sh``

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import json
 import six
 
@@ -166,7 +167,7 @@ class FormFieldModelInlineAdmin(admin.StackedInline):
 
 class FormModelAdmin(admin.ModelAdmin):
     inlines = (FormFieldModelInlineAdmin,)
-    list_display = ('name', 'submit_url', 'success_url')
+    list_display = ('name', 'submit_url', 'success_url', 'allow_display')
     model = FormModel
 
 admin.site.register(FormModel, FormModelAdmin)
@@ -175,5 +176,6 @@ admin.site.register(FormModel, FormModelAdmin)
 class FormModelDataAdmin(admin.ModelAdmin):
     list_display = ('form', 'pretty_value', 'submitted')
     model = FormModelData
+    readonly_fields = ('display_key',)
 
 admin.site.register(FormModelData, FormModelDataAdmin)
