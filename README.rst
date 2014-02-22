@@ -64,4 +64,5 @@ You can find an example form at http://127.0.0.1:8000/example-form/.
 Running the tests
 =================
 
-1. Run ``./tests/runtests.sh``
+1. Make sure to install tox: ``$ pip install tox``
+2. Run ``tox``
