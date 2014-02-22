@@ -15,6 +15,8 @@ try:  # pragma: no cover
 except ImportError:  # pragma: no cover
     from django.db.transaction import commit_on_success as atomic
 
+from django.core.urlresolvers import reverse
+
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_text, python_2_unicode_compatible
@@ -196,3 +198,19 @@ class FormModelData(models.Model):
         except ValueError:
             return self.value
     pretty_value.allow_tags = True
+
+    @property
+    def show_url(self):
+        if self.form.allow_display:
+            return reverse('dynamic_forms:data-set-detail',
+                kwargs={'display_key': self.display_key})
+        return ''
+
+    @property
+    def show_url_link(self):
+        if self.form.allow_display:
+            # TODO: Django >1.4
+            # Use format_html
+            return mark_safe('<a href="{0}">{1}</a>'.format(self.show_url,
+                self.display_key))
+        return ''

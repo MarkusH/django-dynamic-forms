@@ -185,8 +185,9 @@ admin.site.register(FormModel, FormModelAdmin)
 
 
 class FormModelDataAdmin(admin.ModelAdmin):
+    fields = ('form', 'value', 'submitted', 'show_url_link')
     list_display = ('form', 'pretty_value', 'submitted')
     model = FormModelData
-    readonly_fields = ('display_key',)
+    readonly_fields = ('submitted', 'show_url_link',)
 
 admin.site.register(FormModelData, FormModelDataAdmin)
