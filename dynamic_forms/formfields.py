@@ -35,9 +35,8 @@ class DynamicFormFieldRegistry(object):
         return self._fields.get(key, None)
 
     def get_as_choices(self):
-        for item in sorted([(k, c.get_display_type()) for k, c in
-                            six.iteritems(self._fields)], key=lambda x: x[0]):
-            yield item
+        for k, c in six.iteritems(self._fields):
+            yield k, c.get_display_type()
 
     def register(self, cls):
         if not issubclass(cls, BaseDynamicFormField):

@@ -18,14 +18,15 @@ from dynamic_forms.models import FormModel, FormFieldModel, FormModelData
 def get_fields_html():
     # TODO: Django >1.4:
     # return format_html_join('\n', '<option value="{0}">{1}</option>',
-    #     (df for df in dffr.get_as_choices()))
+    #     (df for df in choices))
+    choices = sorted(registry.get_as_choices(), key=lambda x: x[1])
     return mark_safe(
         '\n'.join(
             '<option value="{0}">{1}</option>'.format(
                 conditional_escape(df[0]),
                 conditional_escape(df[1])
             )
-            for df in registry.get_as_choices()
+            for df in choices
         )
     )
 

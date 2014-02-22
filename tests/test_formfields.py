@@ -87,7 +87,8 @@ class TestDynamicFormFieldRegistry(TestCase):
         self.assertEqual(registry.get(self.key % 'ChoiceField'), ChoiceField)
 
     def test_get_default_actions_as_choices(self):
-        self.assertEqual(list(registry.get_as_choices()), [
+        choices = sorted(registry.get_as_choices(), key=lambda x: x[1])
+        self.assertEqual(choices, [
             (self.key % 'BooleanField', 'Boolean'),
             (self.key % 'ChoiceField', 'Choices'),
             (self.key % 'DateField', 'Date'),

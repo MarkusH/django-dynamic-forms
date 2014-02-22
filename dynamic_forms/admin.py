@@ -137,6 +137,14 @@ class OptionsField(forms.MultiValueField):
         return json.dumps(data)
 
 
+class AdminFormModelForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(AdminFormModelForm, self).__init__(*args, **kwargs)
+        choices = self.fields['actions'].choices
+        self.fields['actions'].choices = sorted(choices, key=lambda x: x[1])
+
+
 class AdminFormFieldInlineForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -147,6 +155,8 @@ class AdminFormFieldInlineForm(forms.ModelForm):
             if df:
                 meta = df._meta
         super(AdminFormFieldInlineForm, self).__init__(*args, **kwargs)
+        choices = self.fields['field_type'].choices
+        self.fields['field_type'].choices = sorted(choices, key=lambda x: x[1])
         if meta is not None:
             self.fields['_options'] = OptionsField(meta, required=False,
                 label=_('Options'))
@@ -166,6 +176,7 @@ class FormFieldModelInlineAdmin(admin.StackedInline):
 
 
 class FormModelAdmin(admin.ModelAdmin):
+    form = AdminFormModelForm
     inlines = (FormFieldModelInlineAdmin,)
     list_display = ('name', 'submit_url', 'success_url', 'allow_display')
     model = FormModel

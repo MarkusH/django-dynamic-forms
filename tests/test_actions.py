@@ -45,7 +45,8 @@ class TestActionRegistry(TestCase):
             dynamic_form_store_database)
 
     def test_get_default_actions_as_choices(self):
-        self.assertEqual(list(action_registry.get_as_choices()), [
+        choices = sorted(action_registry.get_as_choices(), key=lambda x: x[1])
+        self.assertEqual(choices, [
             (self.key1, 'Send via email'),
             (self.key2, 'Store in database')
         ])
@@ -65,7 +66,8 @@ class TestActionRegistry(TestCase):
         action_registry.unregister(self.key3)
 
         self.assertIsNone(action_registry.get(self.key3))
-        self.assertEqual(list(action_registry.get_as_choices()), [
+        choices = sorted(action_registry.get_as_choices(), key=lambda x: x[1])
+        self.assertEqual(choices, [
             ('dynamic_forms.actions.dynamic_form_send_email',
                 'Send via email'),
             ('dynamic_forms.actions.dynamic_form_store_database',
