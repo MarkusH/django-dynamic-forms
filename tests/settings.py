@@ -17,9 +17,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'captcha',
-    'dynamic_forms',
     'tests',
 )
+if django.VERSION[:2] < (1, 7):
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'dynamic_forms',
+    )
+else:
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'dynamic_forms.apps.DynamicFormsConfig',
+    )
 
 SECRET_KEY = 'test-secret-key'
 
