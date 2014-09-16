@@ -21,7 +21,7 @@ class ActionRegistry(object):
         return self._actions.get(key, None)
 
     def get_as_choices(self):
-        for k, f in six.iteritems(self._actions):
+        for k, f in sorted(six.iteritems(self._actions)):
             yield k, f.label
 
     def register(self, func, label):

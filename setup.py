@@ -25,6 +25,7 @@ setup(
     packages=[
         'dynamic_forms',
         'dynamic_forms.migrations',
+        'dynamic_forms.south_migrations',
     ],
     package_data = {
         'dynamic_forms': [
@@ -48,7 +49,9 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
         'Framework :: Django',
     ],
     zip_safe=False

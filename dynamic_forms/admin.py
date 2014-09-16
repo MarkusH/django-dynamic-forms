@@ -57,7 +57,7 @@ class OptionsWidget(forms.MultiWidget):
         i = 0
         for n, (r, w) in six.moves.zip(self.option_names, rendered_widgets):
             # TODO: Django >1.4:
-            #output.append(format_html('<label for="{0}_{1}">{2}:</label>{3}',
+            # output.append(format_html('<label for="{0}_{1}">{2}:</label>{3}',
             #    w.id_for_label(id_), i, n, r))
             output.append(
                 mark_safe('<label for="{0}_{1}">{2}:</label>{3}'.format(

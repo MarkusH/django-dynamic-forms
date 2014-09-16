@@ -35,7 +35,7 @@ class DynamicFormFieldRegistry(object):
         return self._fields.get(key, None)
 
     def get_as_choices(self):
-        for k, c in six.iteritems(self._fields):
+        for k, c in sorted(six.iteritems(self._fields)):
             yield k, c.get_display_type()
 
     def register(self, cls):
@@ -166,7 +166,7 @@ class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
 
     def set_options(self, **kwargs):
         for key, value in six.iteritems(kwargs):
-            if not key in self.options:
+            if key not in self.options:
                 raise KeyError('%s is not a valid option.' % key)
 
             expected_type = self.options[key][0]

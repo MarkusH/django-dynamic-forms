@@ -32,6 +32,13 @@ class TextMultiSelectField(six.with_metaclass(models.SubfieldBase,
                 ])
             setattr(cls, 'get_%s_display' % self.name, _func)
 
+    def deconstruct(self):
+        name, path, args, kwargs = super(TextMultiSelectField, self).deconstruct()
+        kwargs['separate_values_by'] = self.separate_values_by
+        if kwargs.get('separate_values_by', None) == '\n':
+            del kwargs['separate_values_by']
+        return name, path, args, kwargs
+
     def formfield(self, **kwargs):
         # don't call super, as that overrides default widget if it has choices
         defaults = {

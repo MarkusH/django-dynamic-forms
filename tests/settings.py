@@ -39,10 +39,6 @@ MIDDLEWARE_CLASSES = (
     'dynamic_forms.middlewares.FormModelMiddleware',
 )
 
-MIGRATION_MODULES = {
-    'dynamic_forms': 'dynamic_forms.dj_migrations',
-}
-
 ROOT_URLCONF = 'tests.urls'
 
 TEMPLATE_DIRS = (
