@@ -12,7 +12,7 @@ def read(*parts):
 
 setup(
     name='django-dynamic-forms',
-    version='0.3.1',
+    version='0.3.2',
     description='django-dynamic-forms is a reusable Django application to create and configure forms through the admin.',
     long_description=read('README.rst'),
     author='Markus Holtermann',
