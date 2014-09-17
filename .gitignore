@@ -8,6 +8,7 @@ docs/build/
 
 example/*.db
 
+!.bumpversion.cfg
 !.coveragerc
 !.gitignore
 !.travis.yml

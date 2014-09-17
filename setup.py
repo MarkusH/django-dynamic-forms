@@ -10,12 +10,9 @@ def read(*parts):
         return fp.read()
 
 
-from dynamic_forms import get_version
-
-
 setup(
     name='django-dynamic-forms',
-    version=get_version(),
+    version='0.2.0',
     description='django-dynamic-forms is a reusable Django application to create and configure forms through the admin.',
     long_description=read('README.rst'),
     author='Markus Holtermann',
@@ -27,7 +24,7 @@ setup(
         'dynamic_forms.migrations',
         'dynamic_forms.south_migrations',
     ],
-    package_data = {
+    package_data={
         'dynamic_forms': [
             'locale/*/LC_MESSAGES/*',
             'templates/dynamic_forms/*',
