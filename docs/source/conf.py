@@ -8,14 +8,14 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'example.settings'
 sys.path.insert(0, abspath(join(dirname(__file__), '..', '..', 'example')))
 sys.path.insert(0, abspath(join(dirname(__file__), '..', '..')))
 
-from dynamic_forms import get_version
+from dynamic_forms import __version__
 
 # -- General configuration -----------------------------------------------------
 
 project = 'django-dynamic-forms'
 copyright = '2013, Markus Holtermann'
-version = get_version(full=False)
-release = get_version()
+version = __version__
+release = __version__
 
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 exclude_patterns = []
