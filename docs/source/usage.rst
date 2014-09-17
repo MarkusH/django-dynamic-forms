@@ -46,11 +46,16 @@ The following code shows the success template after a successful form submit.
 .. literalinclude:: ../../dynamic_forms/templates/dynamic_forms/form_success.html
    :language: html+django
 
-The :class:`~dynamic_forms.views.DynamicTemplateView` exposes three variables to
+The :class:`~dynamic_forms.views.DynamicTemplateView` exposes two variables to
 the template context related to the form:
 
 ``model``
    An instance of the form model assigned to this URL.
+
+``data``
+   If an instance of :class:`~dynamic_forms.models.FormModelData` if a existing
+   ``display_key`` is given and the form model (``model``) has set
+   ``allow_display`` to ``True``.
 
 
 Third Party Apps

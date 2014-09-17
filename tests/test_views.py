@@ -92,6 +92,31 @@ class TestViews(TestCase):
             ('Date and time', datetime.datetime(2013, 9, 7, 12, 34, 56),),
         ]))
 
+    def test_post_form_not_allow_display(self):
+        self.fm.actions = ['dynamic_forms.actions.dynamic_form_store_database']
+        self.fm.save()
+        response = self.client.post('/form/', {
+            'string-field': 'Some submitted string',
+            'field-for-boolean': True,
+            'date-and-time': '2013-09-07 12:34:56'
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/done/')
+
+    def test_post_form_allow_display(self):
+        self.fm.actions = ['dynamic_forms.actions.dynamic_form_store_database']
+        self.fm.allow_display = True
+        self.fm.save()
+        response = self.client.post('/form/', {
+            'string-field': 'Some submitted string',
+            'field-for-boolean': True,
+            'date-and-time': '2013-09-07 12:34:56'
+        })
+        self.assertEqual(response.status_code, 302)
+        fmd = FormModelData.objects.get()
+        destination = '/done/?display_key=%s' % fmd.display_key
+        self.assertRedirects(response, destination)
+
     def test_post_form_invalid_form(self):
         response = self.client.post('/form/', {
             'field-for-boolean': 'foo',
@@ -128,6 +153,22 @@ class TestViews(TestCase):
         response = self.client.get('/done/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'dynamic_forms/form_success.html')
+
+    def test_get_done_allow_display(self):
+        self.fm.allow_display = True
+        self.fm.save()
+        fmd = FormModelData.objects.create(form=self.fm, value='{}')
+        response = self.client.get('/done/?display_key=%s' % fmd.display_key)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dynamic_forms/form_success.html')
+        self.assertContains(response, fmd.show_url_link, count=1, html=True)
+
+    def test_get_done_not_allow_display(self):
+        fmd = FormModelData.objects.create(form=self.fm, value='{}')
+        response = self.client.get('/done/?display_key=%s' % fmd.display_key)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dynamic_forms/form_success.html')
+        self.assertNotContains(response, fmd.show_url_link, html=True)
 
     def test_form_not_found(self):
         response = self.client.get('/form/does/not/exist/')

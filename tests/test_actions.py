@@ -96,13 +96,14 @@ class TestActions(TestCase):
 
     def test_store_database(self):
         self.assertTrue(self.form.is_valid())
-        dynamic_form_store_database(self.form_model, self.form)
+        action_data = dynamic_form_store_database(self.form_model, self.form)
         self.assertEqual(FormModelData.objects.count(), 1)
         data = FormModelData.objects.get()
         self.assertEqual(
             data.value,
             '{"Str": "Some string to store", "DT": "2013-08-29T12:34:56.789"}'
         )
+        self.assertEqual(action_data, data)
 
     @override_settings(DYNAMIC_FORMS_EMAIL_RECIPIENTS=['mail@example.com'])
     def test_send_email(self):

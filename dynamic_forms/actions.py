@@ -65,4 +65,5 @@ def dynamic_form_store_database(form_model, form):
     from dynamic_forms.models import FormModelData
     mapped_data = form.get_mapped_data()
     value = json.dumps(mapped_data, cls=DjangoJSONEncoder)
-    FormModelData.objects.create(form=form_model, value=value)
+    data = FormModelData.objects.create(form=form_model, value=value)
+    return data

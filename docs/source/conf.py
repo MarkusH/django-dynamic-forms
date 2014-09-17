@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 import sys
+import os
 from os.path import abspath, dirname, join
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'example.settings'
+
+sys.path.insert(0, abspath(join(dirname(__file__), '..', '..', 'example')))
 sys.path.insert(0, abspath(join(dirname(__file__), '..', '..')))
 
 from dynamic_forms import get_version

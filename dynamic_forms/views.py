@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView, DetailView, FormView
@@ -36,17 +37,24 @@ class DynamicFormView(FormView):
         return kwargs
 
     def get_success_url(self):
-        return self.form_model.success_url
+        url = self.form_model.success_url
+        if self.form_model.allow_display:
+            store_key = 'dynamic_forms.actions.dynamic_form_store_database'
+            data = self.action_results.get(store_key, None)
+            if data is not None:
+                url += '?display_key=%s' % data.display_key
+        return url
 
     def get_template_names(self):
         return self.form_model.form_template
 
     def form_valid(self, form):
+        self.action_results = {}
         for actionkey in self.form_model.actions:
             action = action_registry.get(actionkey)
             if action is None:
                 continue
-            action(self.form_model, form)
+            self.action_results[actionkey] = action(self.form_model, form)
         messages.success(self.request,
             _('Thank you for submitting this form.'))
         return super(DynamicFormView, self).form_valid(form)
@@ -74,6 +82,18 @@ class DynamicTemplateView(TemplateView):
         # self.form_model = self.kwargs.pop('model')
         return super(DynamicTemplateView, self).dispatch(request, *args,
             **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(DynamicTemplateView, self).get_context_data(**kwargs)
+        try:
+            display_key = self.request.GET.get('display_key')
+            data = FormModelData.objects.get(display_key=display_key)
+            context.update({
+                'data': data,
+            })
+        except FormModelData.DoesNotExist:
+            pass
+        return context
 
     def get_template_names(self):
         return self.form_model.success_template

@@ -21,6 +21,8 @@ v0.3
 * Add Portuguese translation (thanks Gladson Simplicio)
 * Replaced :data:`formfields.dynamic_form_field_registry` with
   :data:`formfields.formfield_registry` and deprecated the former.
+* Allow users to get a link to see the data they submitted before at a later
+  time (#6)
 
 
 v0.2

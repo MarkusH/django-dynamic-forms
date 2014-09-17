@@ -63,6 +63,11 @@ class FormModel(models.Model):
         return self.name
 
     def get_fields_as_dict(self):
+        """
+        Returns an ``OrderedDict`` (``SortedDict`` when ``OrderedDict is not
+        available) with all fields associated with this form where their name
+        is the key and their label is the value.
+        """
         return OrderedDict(self.fields.values_list('name', 'label').all())
 
     def save(self, *args, **kwargs):
@@ -201,6 +206,11 @@ class FormModelData(models.Model):
 
     @property
     def show_url(self):
+        """
+        If the form this data set belongs to has
+        :attr:`~FormModel.allow_display` ``== True``, return the permanent URL.
+        If displaying is not allowed, return an empty string.
+        """
         if self.form.allow_display:
             return reverse('dynamic_forms:data-set-detail',
                 kwargs={'display_key': self.display_key})
@@ -208,6 +218,10 @@ class FormModelData(models.Model):
 
     @property
     def show_url_link(self):
+        """
+        Similar to :attr:`show_url` but wraps the display key in an `<a>`-tag
+        linking to the permanent URL.
+        """
         if self.form.allow_display:
             # TODO: Django >1.4
             # Use format_html

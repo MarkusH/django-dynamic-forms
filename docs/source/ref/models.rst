@@ -29,7 +29,6 @@ Models
       :class:`django.db.models.CharField`
 
       * max_length = 100
-      * unique = ``True``
       * blank = ``True``
       * default = ``''``
 
@@ -53,6 +52,12 @@ Models
 
       * max_length = 100
       * choices = :data:`dynamic_forms.conf.DYNAMIC_FORMS_SUCCESS_TEMPLATES`
+
+   .. py:attribute:: allow_display
+
+      :class:`django.db.models.BooleanField`
+
+      * default = ``False``
 
 
    .. py:attribute:: fields
@@ -182,3 +187,7 @@ Models
                   __unicode__()
 
    .. py:method:: pretty_value()
+
+   .. autoattribute:: show_url
+
+   .. autoattribute:: show_url_link
