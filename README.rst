@@ -39,6 +39,21 @@ Add ``'dynamic_forms.middlewares.FormModelMiddleware'`` to the
         'dynamic_forms.middlewares.FormModelMiddleware'
     )
 
+Add ``'dynamic_forms.urls'`` to the URL patterns::
+
+    urlpatterns = patterns('',
+        ...
+        url(r'^dynamic_forms/',
+            include('dynamic_forms.urls', namespace='dynamic_forms')),
+        ...
+    )
+
+.. important::
+
+   Make sure that you get the namespace straight: ``dynamic_forms``!
+
+
+
 You can set ``DYNAMIC_FORMS_EMAIL_RECIPIENTS`` in your settings to a list of
 e-mail addresses. Forms being send via e-mail will then be send to those
 addresses instead of those defined in ``settings.ADMINS``. Each recipient will

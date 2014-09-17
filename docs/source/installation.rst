@@ -40,15 +40,36 @@ section of the documentation:
         'dynamic_forms.middlewares.FormModelMiddleware'
     )
 
-Finally you have to update your database. If you use `South
-<http://south.aeracode.org/>`_ you need to run:
+Last but not least you need to add the ``'dynamic_forms.urls'`` urlpatterns to
+your project's URL patterns::
+
+    urlpatterns = patterns('',
+        ...
+        url(r'^dynamic_forms/',
+            include('dynamic_forms.urls', namespace='dynamic_forms')),
+        ...
+    )
+
+.. important::
+
+   Make sure that you get the namespace straight: ``dynamic_forms``!
+
+
+Finally you have to update your database. If you use Django>=1.7 you need to
+run: 
+
+.. code-block:: console
+
+   $ python manage.py migrate dynamic_forms
+
+If you use `South <http://south.aeracode.org/>`_ you need to run:
 
 .. code-block:: console
 
    $ python manage.py syncdb
    $ python manage.py migrate
 
-otherwise, if you don't use South, you have to run:
+otherwise, if you don't use South or if you use Django<1.7, you have to run:
 
 .. code-block:: console
 
