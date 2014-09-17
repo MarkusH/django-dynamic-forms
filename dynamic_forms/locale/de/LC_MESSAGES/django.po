@@ -1,15 +1,15 @@
 # German translation for django-dynamic-forms.
 # Copyright (C) 2013
 # This file is distributed under the same license as the django-dynamic-forms package.
-# Markus Holtermann <info@markusholtermann.eu>, 2013
 #
 #
+# Markus Holtermann <info@markusholtermann.eu>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-23 19:06+0100\n"
-"PO-Revision-Date: 2013-09-16 17:39+0200\n"
+"POT-Creation-Date: 2014-09-17 03:34+0200\n"
+"PO-Revision-Date: 2014-09-17 03:34+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language: de\n"
@@ -31,15 +31,19 @@ msgstr "Formular „%(formname)s“ wurde abgeschickt"
 msgid "Store in database"
 msgstr "In der Datenbank speichern"
 
-#: admin.py:151 models.py:78
+#: admin.py:162 models.py:92
 msgid "Options"
 msgstr "Optionen"
 
-#: admin.py:154
+#: admin.py:165
 msgid ""
 "The options for this field will be available once it has been stored the "
 "first time."
 msgstr "Die Optionen für dieses Feld sind nach dem ersten Speichern verfügbar."
+
+#: apps.py:10
+msgid "Django Dynamic Forms"
+msgstr ""
 
 #: conf.py:11
 msgid "Default form template"
@@ -49,51 +53,55 @@ msgstr "Standard Formular Vorlage"
 msgid "Default success template"
 msgstr "Standard Zielseiten Vorlage"
 
-#: formfields.py:186
+#: contrib/simple_captcha/models.py:14
+msgid "CAPTCHA"
+msgstr "CAPTCHA"
+
+#: formfields.py:191
 msgid "Boolean"
 msgstr "Ja/Nein Auswahl"
 
-#: formfields.py:196
+#: formfields.py:201
 msgid "Choices"
 msgstr "Auswahl"
 
-#: formfields.py:216
+#: formfields.py:221
 msgid "Date"
 msgstr "Datum"
 
-#: formfields.py:226
+#: formfields.py:231
 msgid "Date and Time"
 msgstr "Datum und Uhrzeit"
 
-#: formfields.py:236
+#: formfields.py:241
 msgid "Email"
 msgstr "E-Mail"
 
-#: formfields.py:243
+#: formfields.py:248
 msgid "Integer"
 msgstr "Ganzzahl"
 
-#: formfields.py:255
+#: formfields.py:260
 msgid "Multi Line Text"
 msgstr "Mehrzeiliger Text"
 
-#: formfields.py:263
+#: formfields.py:268
 msgid "Single Line Text"
 msgstr "Einzeiliger Text"
 
-#: formfields.py:274
+#: formfields.py:279
 msgid "Time"
 msgstr "Uhrzeit"
 
-#: models.py:24 models.py:77
+#: models.py:34 models.py:91
 msgid "Name"
 msgstr "Name"
 
-#: models.py:25
+#: models.py:35
 msgid "Submit URL"
 msgstr "Formular URL"
 
-#: models.py:26
+#: models.py:36
 msgid ""
 "The full URL path to the form. It should start and end with a forward slash "
 "(<code>/</code>)."
@@ -101,11 +109,11 @@ msgstr ""
 "Der vollständige URL-Pfad bei dem das Formular angezeit werden soll. Der "
 "Pfad sollte mit einem Slash beginnen und enden (<code>/</code>)."
 
-#: models.py:28
+#: models.py:38
 msgid "Success URL"
 msgstr "Ziel URL"
 
-#: models.py:29
+#: models.py:39
 msgid ""
 "The full URL path where the user will be redirected after successfully "
 "sending the form. It should start and end with a forward slash (<code>/</"
@@ -117,71 +125,98 @@ msgstr ""
 "(<code>/</code>). Wenn das Feld leer bleibt wird an die Formular URL "
 "<code>done/</code> angehängt."
 
-#: models.py:34
+#: models.py:44
 msgid "Actions"
 msgstr "Aktionen"
 
-#: models.py:36
+#: models.py:46
 msgid "Form template path"
 msgstr "Formular Template"
 
-#: models.py:39
+#: models.py:49
 msgid "Success template path"
 msgstr "Template der Zielseite"
 
-#: models.py:45
+#: models.py:52
+msgid "Allow display"
+msgstr "Anzeigen erlaubt"
+
+#: models.py:53
+msgid ""
+"Allow a user to view the input at a later time. This requires the “Store in "
+"database” action to be active. The sender will be given a unique URL to "
+"recall the data."
+msgstr ""
+"Erlaubt es einem Benutzer seine eingegebenen Daten zu einem späteren "
+"Zeitpunkt erneut anzusehen. Dazu muss „In der Datenbank speichern“ Aktion "
+"aktiviert sein. Der Benutzer wird eine eindeutige und einmalige URL erhalten "
+"um die Daten wieder aufzurufen."
+
+#: models.py:59
 msgid "Dynamic form"
 msgstr "Dynamisches Formular"
 
-#: models.py:46
+#: models.py:60
 msgid "Dynamic forms"
 msgstr "Dynamische Formulare"
 
-#: models.py:74
+#: models.py:88
 msgid "Type"
 msgstr "Typ"
 
-#: models.py:76
+#: models.py:90
 msgid "Label"
 msgstr "Beschriftung"
 
-#: models.py:79
+#: models.py:93
 msgid "Position"
 msgstr "Position"
 
-#: models.py:84
+#: models.py:98
 msgid "Form field"
 msgstr "Formfeld"
 
-#: models.py:85
+#: models.py:99
 msgid "Form fields"
 msgstr "Formfelder"
 
-#: models.py:88
+#: models.py:102
 #, python-format
 msgid "Field “%(field_name)s” in form “%(form_name)s”"
 msgstr "Feld „%(field_name)s“ im Formular „%(form_name)s“"
 
-#: models.py:144 models.py:148 models.py:149
+#: models.py:158 models.py:166 models.py:167
 msgid "Form data"
 msgstr "Formulardaten"
 
-#: models.py:145
+#: models.py:159
 msgid "Submitted on"
 msgstr "Abgeschickt am"
 
-#: models.py:152
+#: models.py:160
+msgid "Display key"
+msgstr "Schlüssel zum erneuten Anzeigen"
+
+#: models.py:162
+msgid ""
+"A unique identifier that is used to allow users to view their sent data. "
+"Unique over all stored data sets."
+msgstr ""
+"Ein eindeutiger Schlüssel der es Benutzern erlaubt abgeschickte Daten erneut "
+"zu betrachten. Der Schlüssel ist über alle gespeicherten Datensätze hinweg "
+"eindeutig."
+
+#: models.py:170
 #, python-format
 msgid "Form: “%(form)s” on %(date)s"
 msgstr "Formular „%(form)s“ vom %(date)s"
 
-#: views.py:48
-msgid "Thank you for submitting this form."
-msgstr "Vielen Dank für das Ausfüllen des Formulars"
-
-#: views.py:53
-msgid "An error occurred during submitting this form."
-msgstr "Während des Bearbeiten der Eingaben trat ein Fehler auf"
+#: templates/dynamic_forms/data_set_404.html:2
+#, python-format
+msgid "Key %(display_key)s not found or not accessible anymore."
+msgstr ""
+"Der Schlüssel %(display_key)s konnte nicht gefunden werden oder ist "
+"abgelaufen."
 
 #: templates/dynamic_forms/email.txt:1
 #, python-format
@@ -205,3 +240,11 @@ msgstr "Senden erfolgreich"
 #: templates/dynamic_forms/form_success.html:3
 msgid "Form submitted successfully"
 msgstr "Das Formular wurde erfolgreich abgesendet"
+
+#: views.py:51
+msgid "Thank you for submitting this form."
+msgstr "Vielen Dank für das Ausfüllen des Formulars"
+
+#: views.py:56
+msgid "An error occurred during submitting this form."
+msgstr "Während des Bearbeiten der Eingaben trat ein Fehler auf"

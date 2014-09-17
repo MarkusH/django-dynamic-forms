@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-23 19:06+0100\n"
+"POT-Creation-Date: 2014-09-17 03:34+0200\n"
 "PO-Revision-Date: 2013-09-16 17:39+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
@@ -30,14 +30,18 @@ msgstr ""
 msgid "Store in database"
 msgstr ""
 
-#: admin.py:151 models.py:78
+#: admin.py:162 models.py:92
 msgid "Options"
 msgstr ""
 
-#: admin.py:154
+#: admin.py:165
 msgid ""
 "The options for this field will be available once it has been stored the "
 "first time."
+msgstr ""
+
+#: apps.py:10
+msgid "Django Dynamic Forms"
 msgstr ""
 
 #: conf.py:11
@@ -48,61 +52,65 @@ msgstr ""
 msgid "Default success template"
 msgstr ""
 
-#: formfields.py:186
+#: contrib/simple_captcha/models.py:14
+msgid "CAPTCHA"
+msgstr ""
+
+#: formfields.py:191
 msgid "Boolean"
 msgstr ""
 
-#: formfields.py:196
+#: formfields.py:201
 msgid "Choices"
 msgstr ""
 
-#: formfields.py:216
+#: formfields.py:221
 msgid "Date"
 msgstr ""
 
-#: formfields.py:226
+#: formfields.py:231
 msgid "Date and Time"
 msgstr ""
 
-#: formfields.py:236
+#: formfields.py:241
 msgid "Email"
 msgstr ""
 
-#: formfields.py:243
+#: formfields.py:248
 msgid "Integer"
 msgstr ""
 
-#: formfields.py:255
+#: formfields.py:260
 msgid "Multi Line Text"
 msgstr ""
 
-#: formfields.py:263
+#: formfields.py:268
 msgid "Single Line Text"
 msgstr ""
 
-#: formfields.py:274
+#: formfields.py:279
 msgid "Time"
 msgstr ""
 
-#: models.py:24 models.py:77
+#: models.py:34 models.py:91
 msgid "Name"
 msgstr ""
 
-#: models.py:25
+#: models.py:35
 msgid "Submit URL"
 msgstr ""
 
-#: models.py:26
+#: models.py:36
 msgid ""
 "The full URL path to the form. It should start and end with a forward slash "
 "(<code>/</code>)."
 msgstr ""
 
-#: models.py:28
+#: models.py:38
 msgid "Success URL"
 msgstr ""
 
-#: models.py:29
+#: models.py:39
 msgid ""
 "The full URL path where the user will be redirected after successfully "
 "sending the form. It should start and end with a forward slash (<code>/</"
@@ -110,70 +118,88 @@ msgid ""
 "code> to the “Submit URL”."
 msgstr ""
 
-#: models.py:34
+#: models.py:44
 msgid "Actions"
 msgstr ""
 
-#: models.py:36
+#: models.py:46
 msgid "Form template path"
 msgstr ""
 
-#: models.py:39
+#: models.py:49
 msgid "Success template path"
 msgstr ""
 
-#: models.py:45
+#: models.py:52
+msgid "Allow display"
+msgstr ""
+
+#: models.py:53
+msgid ""
+"Allow a user to view the input at a later time. This requires the “Store in "
+"database” action to be active. The sender will be given a unique URL to "
+"recall the data."
+msgstr ""
+
+#: models.py:59
 msgid "Dynamic form"
 msgstr ""
 
-#: models.py:46
+#: models.py:60
 msgid "Dynamic forms"
 msgstr ""
 
-#: models.py:74
+#: models.py:88
 msgid "Type"
 msgstr ""
 
-#: models.py:76
+#: models.py:90
 msgid "Label"
 msgstr ""
 
-#: models.py:79
+#: models.py:93
 msgid "Position"
 msgstr ""
 
-#: models.py:84
+#: models.py:98
 msgid "Form field"
 msgstr ""
 
-#: models.py:85
+#: models.py:99
 msgid "Form fields"
 msgstr ""
 
-#: models.py:88
+#: models.py:102
 #, python-format
 msgid "Field “%(field_name)s” in form “%(form_name)s”"
 msgstr ""
 
-#: models.py:144 models.py:148 models.py:149
+#: models.py:158 models.py:166 models.py:167
 msgid "Form data"
 msgstr ""
 
-#: models.py:145
+#: models.py:159
 msgid "Submitted on"
 msgstr ""
 
-#: models.py:152
+#: models.py:160
+msgid "Display key"
+msgstr ""
+
+#: models.py:162
+msgid ""
+"A unique identifier that is used to allow users to view their sent data. "
+"Unique over all stored data sets."
+msgstr ""
+
+#: models.py:170
 #, python-format
 msgid "Form: “%(form)s” on %(date)s"
 msgstr ""
 
-#: views.py:48
-msgid "Thank you for submitting this form."
-msgstr ""
-
-#: views.py:53
-msgid "An error occurred during submitting this form."
+#: templates/dynamic_forms/data_set_404.html:2
+#, python-format
+msgid "Key %(display_key)s not found or not accessible anymore."
 msgstr ""
 
 #: templates/dynamic_forms/email.txt:1
@@ -194,4 +220,12 @@ msgstr ""
 
 #: templates/dynamic_forms/form_success.html:3
 msgid "Form submitted successfully"
+msgstr ""
+
+#: views.py:51
+msgid "Thank you for submitting this form."
+msgstr ""
+
+#: views.py:56
+msgid "An error occurred during submitting this form."
 msgstr ""
