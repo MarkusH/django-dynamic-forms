@@ -10,17 +10,17 @@ v0.3
 * Introduced the settings variables :data:`~conf.DYNAMIC_FORMS_FORM_TEMPLATES`
   and :data:`~conf.DYNAMIC_FORMS_SUCCESS_TEMPLATES` to make defining the
   templates for the form and success display easier and more usable for
-  non-developers.
+  non-developers. (#1)
 * Allow delayed registration of :doc:`actions <ref/actions>` and :doc:`dynamic
   form fields <ref/formfields>`.
 * Allow dynamic fields to exclude their value from the ``mapped_data`` by
-  overriding :classmethod:`~formfields.do_display_data`.
-* Dropped support for Python 3.2. Nobody is really using it and it's a pain to
-  integrate other libraries.
-* Support for `django-simple-captcha <https://github.com/mbi/django-simple-captcha>`_
-* Add Portuguese translation (thanks Gladson Simplicio)
+  overriding :meth:`~formfields.do_display_data`.
+* Support for `django-simple-captcha
+  <https://github.com/mbi/django-simple-captcha>`_ (#2)
+* Add Portuguese translation (thanks Gladson Simplicio) (#4)
 * Replaced :data:`formfields.dynamic_form_field_registry` with
   :data:`formfields.formfield_registry` and deprecated the former.
+* Fixed sorting of actions and field types by their label (#5)
 * Allow users to get a link to see the data they submitted before at a later
   time (#6)
 

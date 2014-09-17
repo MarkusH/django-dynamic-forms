@@ -64,7 +64,7 @@ Third Party Apps
 django-simple-captcha
 ---------------------
 
-.. py:package:: dynamic_forms.contrib.simple_captcha
+.. py:module:: dynamic_forms.contrib.simple_captcha
 
 `django-simple-captcha <https://github.com/mbi/django-simple-captcha>`_ provides
 easy CAPTCHA support for Django forms. This contrib package integrates

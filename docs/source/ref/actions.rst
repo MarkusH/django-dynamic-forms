@@ -33,7 +33,14 @@ this would look like::
    ... def my_function(form_model, form):
    ...     # do something
    ...     pass
-   ...
+   ... 
+
+.. versionadded:: 0.3
+
+   When a dynamic form is submitted through
+   :class:`~dynamic_forms.views.DynamicFormView` the return values of actions
+   are kept for further usage. This allows the view to e.g. add a link to a
+   permanent URL refering to some stored values.
 
 
 Providing and accessing actions
@@ -151,4 +158,10 @@ Default Actions
 
    .. seealso:: :func:`dynamic_form_store_database` for a detailed explaination
       of the arguments.
+
+   .. versionadded:: 0.3
+
+      To allow linking to a stored data set, the action now returns the
+      inserted object.
+
 

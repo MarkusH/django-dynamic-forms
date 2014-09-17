@@ -37,6 +37,10 @@ class DynamicFormView(FormView):
         return kwargs
 
     def get_success_url(self):
+        """
+        If the ``dynamic_form_store_database`` action is active for the current
+        form, include the ``display_key`` for the newly created data set.
+        """
         url = self.form_model.success_url
         if self.form_model.allow_display:
             store_key = 'dynamic_forms.actions.dynamic_form_store_database'
@@ -49,6 +53,11 @@ class DynamicFormView(FormView):
         return self.form_model.form_template
 
     def form_valid(self, form):
+        """
+        Instantiates an empty dict ``self.action_results`` that takes the
+        return values of every action that is called, unless the return value
+        of that action is ``None``.
+        """
         self.action_results = {}
         for actionkey in self.form_model.actions:
             action = action_registry.get(actionkey)
@@ -84,6 +93,11 @@ class DynamicTemplateView(TemplateView):
             **kwargs)
 
     def get_context_data(self, **kwargs):
+        """
+        If a ``display_key`` query parameter is given and the key belongs to a
+        FormModel that has ``allow_display=True``, add the data to the normal
+        Django `TemplateView` context.
+        """
         context = super(DynamicTemplateView, self).get_context_data(**kwargs)
         try:
             display_key = self.request.GET.get('display_key')
