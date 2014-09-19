@@ -4,8 +4,14 @@ Changes
 
 .. py:currentmodule:: dynamic_forms
 
-v0.3
-====
+v0.3.3
+======
+
+* Updated Portuguese translation (thanks Gladson Simplicio) (#8)
+
+
+v0.3.2
+======
 
 * Introduced the settings variables :data:`~conf.DYNAMIC_FORMS_FORM_TEMPLATES`
   and :data:`~conf.DYNAMIC_FORMS_SUCCESS_TEMPLATES` to make defining the
