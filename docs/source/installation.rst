@@ -16,8 +16,8 @@ If you already use the wheel package format you can use the wheel build:
    $ pip install --use-wheel django-dynamic-forms
 
 To make **django-dynamic-forms** available in your Django project, you first
-have to add it to the ``INSTALLED_APPS`` in your ``settings.py``. If you are unsure where to put it,
-just append it:
+have to add it to the ``INSTALLED_APPS`` in your ``settings.py``. If you are
+unsure where to put it, just append it:
 
 .. code-block:: python
 
@@ -40,15 +40,36 @@ section of the documentation:
         'dynamic_forms.middlewares.FormModelMiddleware'
     )
 
-Finally you have to update your database. If you use `South
-<http://south.aeracode.org/>`_ you need to run:
+Last but not least you need to add the ``'dynamic_forms.urls'`` urlpatterns to
+your project's URL patterns::
+
+    urlpatterns = patterns('',
+        ...
+        url(r'^dynamic_forms/',
+            include('dynamic_forms.urls', namespace='dynamic_forms')),
+        ...
+    )
+
+.. important::
+
+   Make sure that you get the namespace straight: ``dynamic_forms``!
+
+
+Finally you have to update your database. If you use Django>=1.7 you need to
+run: 
+
+.. code-block:: console
+
+   $ python manage.py migrate dynamic_forms
+
+If you use `South <http://south.aeracode.org/>`_ you need to run:
 
 .. code-block:: console
 
    $ python manage.py syncdb
    $ python manage.py migrate
 
-otherwise, if you don't use South, you have to run:
+otherwise, if you don't use South or if you use Django<1.7, you have to run:
 
 .. code-block:: console
 

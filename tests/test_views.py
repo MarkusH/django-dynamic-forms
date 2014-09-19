@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import json
 
 try:
     from collections import OrderedDict
@@ -14,7 +15,7 @@ from django.utils.decorators import classonlymethod
 
 from dynamic_forms.actions import action_registry
 from dynamic_forms.forms import FormModelForm
-from dynamic_forms.models import FormFieldModel, FormModel
+from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
 class TestAction(object):
@@ -40,7 +41,6 @@ class TestAction2(object):
 
     def __call__(self):
         pass
-
 
 
 class TestViews(TestCase):
@@ -92,6 +92,31 @@ class TestViews(TestCase):
             ('Date and time', datetime.datetime(2013, 9, 7, 12, 34, 56),),
         ]))
 
+    def test_post_form_not_allow_display(self):
+        self.fm.actions = ['dynamic_forms.actions.dynamic_form_store_database']
+        self.fm.save()
+        response = self.client.post('/form/', {
+            'string-field': 'Some submitted string',
+            'field-for-boolean': True,
+            'date-and-time': '2013-09-07 12:34:56'
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/done/')
+
+    def test_post_form_allow_display(self):
+        self.fm.actions = ['dynamic_forms.actions.dynamic_form_store_database']
+        self.fm.allow_display = True
+        self.fm.save()
+        response = self.client.post('/form/', {
+            'string-field': 'Some submitted string',
+            'field-for-boolean': True,
+            'date-and-time': '2013-09-07 12:34:56'
+        })
+        self.assertEqual(response.status_code, 302)
+        fmd = FormModelData.objects.get()
+        destination = '/done/?display_key=%s' % fmd.display_key
+        self.assertRedirects(response, destination)
+
     def test_post_form_invalid_form(self):
         response = self.client.post('/form/', {
             'field-for-boolean': 'foo',
@@ -129,6 +154,22 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'dynamic_forms/form_success.html')
 
+    def test_get_done_allow_display(self):
+        self.fm.allow_display = True
+        self.fm.save()
+        fmd = FormModelData.objects.create(form=self.fm, value='{}')
+        response = self.client.get('/done/?display_key=%s' % fmd.display_key)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dynamic_forms/form_success.html')
+        self.assertContains(response, fmd.show_url_link, count=1, html=True)
+
+    def test_get_done_not_allow_display(self):
+        fmd = FormModelData.objects.create(form=self.fm, value='{}')
+        response = self.client.get('/done/?display_key=%s' % fmd.display_key)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dynamic_forms/form_success.html')
+        self.assertNotContains(response, fmd.show_url_link, html=True)
+
     def test_form_not_found(self):
         response = self.client.get('/form/does/not/exist/')
         self.assertEqual(response.status_code, 404)
@@ -152,3 +193,43 @@ class TestViews(TestCase):
             'field-for-boolean': True,
             'date-and-time': '2013-09-07 12:34:56'
         })
+
+    def test_get_display_success(self):
+        data = json.dumps({
+            'Another key': 'Another value',
+            'Some Key': 'Some value',
+            'Test': 'data',
+        })
+        self.fm.allow_display = True
+        self.fm.save()
+        fmd = FormModelData.objects.create(form=self.fm, value=data)
+        url = '/dynamic_forms/show/' + fmd.display_key + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'dynamic_forms/data_set.html')
+
+    def test_get_display_404_invalid_key(self):
+        data = json.dumps({
+            'Another key': 'Another value',
+            'Some Key': 'Some value',
+            'Test': 'data',
+        })
+        self.fm.allow_display = True
+        self.fm.save()
+        FormModelData.objects.create(form=self.fm, value=data)
+        url = '/dynamic_forms/show/' + ('0' * 24) + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, 'dynamic_forms/data_set_404.html')
+
+    def test_get_display_404_no_allow_display(self):
+        data = json.dumps({
+            'Another key': 'Another value',
+            'Some Key': 'Some value',
+            'Test': 'data',
+        })
+        FormModelData.objects.create(form=self.fm, value=data)
+        url = '/dynamic_forms/show/' + ('0' * 24) + '/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, 'dynamic_forms/data_set_404.html')

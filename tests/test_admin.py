@@ -11,21 +11,22 @@ from django.utils.safestring import mark_safe
 
 from django.utils.translation import ugettext as _
 
-from dynamic_forms.formfields import dynamic_form_field_registry as dffr
+from dynamic_forms.formfields import formfield_registry as registry
 from dynamic_forms.models import FormModel, FormFieldModel, FormModelData
 
 
 def get_fields_html():
     # TODO: Django >1.4:
-    # reutrn format_html_join('\n', '<option value="{0}">{1}</option>',
-    #     (df for df in dffr.get_as_choices()))
+    # return format_html_join('\n', '<option value="{0}">{1}</option>',
+    #     (df for df in choices))
+    choices = sorted(registry.get_as_choices(), key=lambda x: x[1])
     return mark_safe(
         '\n'.join(
             '<option value="{0}">{1}</option>'.format(
                 conditional_escape(df[0]),
                 conditional_escape(df[1])
             )
-            for df in dffr.get_as_choices()
+            for df in choices
         )
     )
 
@@ -82,6 +83,32 @@ class TestAdmin(TestCase):
         # 3 extra forms + 1 empty for construction
         self.assertContains(response, _('The options for this field will be '
             'available once it has been stored the first time.'), count=4)
+
+    def test_unconfigured_post(self):
+        data = {
+            'name': 'Some Name',
+            'submit_url': '/form/',
+            'success_url': '/done/form/',
+            'actions': 'dynamic_forms.actions.dynamic_form_send_email',
+            'form_template': 'other_form_template.html',
+            'success_template': 'other_success_template.html',
+
+            'fields-TOTAL_FORMS': 1,
+            'fields-INITIAL_FORMS': 0,
+            'fields-MAX_NUM_FORMS': 1000,
+
+            'fields-0-field_type': 'dynamic_forms.formfields.SingleLineTextField',
+            'fields-0-label': 'String Field',
+            'fields-0-name': 'string-field',
+            'fields-0-position': 0,
+            '_save': True,
+        }
+        response = self.client.post('/admin/dynamic_forms/formmodel/add/', data)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<li>Select a valid choice. other_form_template.html '
+                                      'is not one of the available choices.</li>')
+        self.assertContains(response, '<li>Select a valid choice. other_success_template.html '
+                                      'is not one of the available choices.</li>')
 
     def test_add_and_change_post(self):
         data = {
@@ -141,9 +168,9 @@ class TestAdmin(TestCase):
 
         options = FormFieldModel.objects.get().options
         self.assertEqual(options, {
-            'min_length': 5, 
+            'min_length': 5,
             'help_text': 'Some help text',
-            'max_length': 100, 
+            'max_length': 100,
             'required': False
         })
 
@@ -204,6 +231,7 @@ class TestAdmin(TestCase):
 
         # Single Line Text Field
         # TODO: Django >1.4: assertInHTML
+        input_type_number = "text" if VERSION[:2] <= (1, 5) else "number"
         self.assertContains(response, '''
             <div>
                 <label for="id_fields-1-_options_0"> Options:</label>
@@ -213,9 +241,9 @@ class TestAdmin(TestCase):
                             Some help for single line
                         </textarea><br>
                     <label for="id_fields-1-_options_1">max_length:</label>
-                        <input type="text" name="fields-1-_options_1" id="id_fields-1-_options_1" value="100"><br>
+                        <input type="%(number)s" name="fields-1-_options_1" id="id_fields-1-_options_1" value="100"><br>
                     <label for="id_fields-1-_options_2">min_length:</label>
-                        <input type="text" name="fields-1-_options_2" id="id_fields-1-_options_2"><br>
+                        <input type="%(number)s" name="fields-1-_options_2" id="id_fields-1-_options_2"><br>
                     <label for="id_fields-1-_options_3">required:</label>
                         <select name="fields-1-_options_3" id="id_fields-1-_options_3">
                             <option value="1">Unknown</option>
@@ -223,7 +251,7 @@ class TestAdmin(TestCase):
                             <option selected="selected" value="3">No</option>
                         </select>
                 </div>
-            </div>''', count=1, html=True)
+            </div>''' % {'number': input_type_number}, count=1, html=True)
 
         # Date Field
         # TODO: Django >1.4: assertInHTML
@@ -260,7 +288,7 @@ class TestAdmin(TestCase):
         self.assertEqual(FormFieldModel.objects.all().count(), 1)
         self.assertEqual(FormModelData.objects.all().count(), 1)
 
-        response = self.client.post('/admin/dynamic_forms/formmodel/%d/delete/' % form.pk, {'post': 'yes',})
+        response = self.client.post('/admin/dynamic_forms/formmodel/%d/delete/' % form.pk, {'post': 'yes'})
         self.assertRedirects(response, '/admin/dynamic_forms/formmodel/')
 
         self.assertEqual(FormModel.objects.all().count(), 0)

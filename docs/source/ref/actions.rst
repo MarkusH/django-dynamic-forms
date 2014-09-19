@@ -10,9 +10,11 @@ two basic actions :func:`~dynamic_form_send_email` and
 :func:`~dynamic_form_store_database` that, as their names indicate, either
 send the submitted data via e-mail to the receipients defined in the
 :data:`~dynamic_forms.conf.DYNAMIC_FORMS_EMAIL_RECIPIENTS` settings variable
-or stores it into the database (precisely the :class:`~FormModelData` model).
+or stores it into the database (precisely the
+:class:`~dynamic_forms.models.FormModelData` model).
 
-Any action that should be available for usage must be registered in the :class:`ActionRegistry`. This can be done with the following code::
+Any action that should be available for usage must be registered in the
+:class:`ActionRegistry`. This can be done with the following code::
 
    >>> def my_function(form_model, form):
    ...     # do something
@@ -31,7 +33,14 @@ this would look like::
    ... def my_function(form_model, form):
    ...     # do something
    ...     pass
-   ...
+   ... 
+
+.. versionadded:: 0.3
+
+   When a dynamic form is submitted through
+   :class:`~dynamic_forms.views.DynamicFormView` the return values of actions
+   are kept for further usage. This allows the view to e.g. add a link to a
+   permanent URL refering to some stored values.
 
 
 Providing and accessing actions
@@ -56,7 +65,19 @@ Providing and accessing actions
 
    .. py:method:: get(key)
 
+      :param str key: The key to get an action
+      :returns: Either the action previously registered or ``None`` if no
+         action with the given key has been found.
+
+
    .. py:method:: get_as_choices()
+
+      .. versionchanged:: 0.3
+         Returns a generator instead of a list
+
+      Returns a generator that yields all registered actions as 2-tuples in the
+      form ``(key, label)``.
+
 
    .. py:method:: register(func, label)
 
@@ -72,14 +93,43 @@ Providing and accessing actions
 
    .. py:method:: unregister(key)
 
+      Looks up the given key in the internal dictionary and deletes the action
+      if it exists.
+
+      :param str key: The key an action is assigned to
+
 
 .. py:data:: action_registry
+
+   The singleton instance of the :class:`ActionRegistry`.
 
 
 Action registry utilities
 -------------------------
 
 .. py:decorator:: formmodel_action(label)
+
+   Registering various actions by hand can be time consuming. This function
+   decorator eases this heavily: given a string as the first argument, this
+   decorator registeres the decorated function withing the
+   :data:`action_registry` with its fully dotted Python path.
+
+   Usage:
+
+   .. code-block:: python
+
+      @formmodel_action('My super awesome action')
+      def my_action(form_model, form):
+         # do something with the data ...
+
+   This is equivalent to:
+
+   .. code-block:: python
+
+      def my_action(form_model, form):
+         # do something with the data ...
+
+      action_registry.register(my_action, 'My super awesome action')
 
 
 Default Actions
@@ -101,3 +151,17 @@ Default Actions
 
 
 .. py:function:: dynamic_form_store_database(form_model, form)
+
+   This action takes the mapped data from the ``form`` and serializes it as
+   JSON. This value is then stored in the
+   :class:`~dynamic_forms.models.FormModelData`.
+
+   .. seealso:: :func:`dynamic_form_store_database` for a detailed explaination
+      of the arguments.
+
+   .. versionadded:: 0.3
+
+      To allow linking to a stored data set, the action now returns the
+      inserted object.
+
+

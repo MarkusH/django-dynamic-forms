@@ -7,7 +7,7 @@ import six
 from django.core.mail import send_mail
 from django.core.serializers.json import DjangoJSONEncoder
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from dynamic_forms.conf import settings
 
@@ -21,8 +21,8 @@ class ActionRegistry(object):
         return self._actions.get(key, None)
 
     def get_as_choices(self):
-        return sorted([(k, f.label) for k, f in six.iteritems(self._actions)],
-                      key=lambda x: x[1])
+        for k, f in sorted(six.iteritems(self._actions)):
+            yield k, f.label
 
     def register(self, func, label):
         if not callable(func):
@@ -46,7 +46,7 @@ def formmodel_action(label):
     return decorator
 
 
-@formmodel_action(ugettext('Send via email'))
+@formmodel_action(_('Send via email'))
 def dynamic_form_send_email(form_model, form):
     mapped_data = form.get_mapped_data()
 
@@ -60,9 +60,10 @@ def dynamic_form_send_email(form_model, form):
     send_mail(subject, message, from_email, recipient_list)
 
 
-@formmodel_action(ugettext('Store in database'))
+@formmodel_action(_('Store in database'))
 def dynamic_form_store_database(form_model, form):
     from dynamic_forms.models import FormModelData
     mapped_data = form.get_mapped_data()
     value = json.dumps(mapped_data, cls=DjangoJSONEncoder)
-    FormModelData.objects.create(form=form_model, value=value)
+    data = FormModelData.objects.create(form=form_model, value=value)
+    return data

@@ -1,5 +1,10 @@
 # Django settings for example project.
 
+import os
+import django
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -10,9 +15,11 @@ DATABASES = {
     }
 }
 
+ADMINS = (('Jane Doe', 'jane@example.com'), ('John Doe', 'john@example.com'),)
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -39,7 +46,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -50,7 +57,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -87,8 +94,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'dynamic_forms.middlewares.FormModelMiddleware',
 )
 
@@ -111,12 +118,20 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'dynamic_forms',
+    # 'captcha',
+    # 'dynamic_forms.contrib.simple_captcha',
 )
 
-MIGRATION_MODULES = {
-    'dynamic_forms': 'dynamic_forms.dj_migrations',
-}
+if django.VERSION[:2] < (1, 7):
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'dynamic_forms',
+        'south',
+    )
+else:
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'dynamic_forms.apps.DynamicFormsConfig',
+    )
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

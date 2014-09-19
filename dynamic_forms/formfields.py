@@ -9,7 +9,7 @@ from django import forms
 from django.utils.decorators import classonlymethod
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.importlib import import_module
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext_lazy as _
 
 
 def format_display_type(cls_name):
@@ -35,8 +35,8 @@ class DynamicFormFieldRegistry(object):
         return self._fields.get(key, None)
 
     def get_as_choices(self):
-        return sorted([(k, c.get_display_type()) for k, c in
-                       six.iteritems(self._fields)], key=lambda x: x[1])
+        for k, c in sorted(six.iteritems(self._fields)):
+            yield k, c.get_display_type()
 
     def register(self, cls):
         if not issubclass(cls, BaseDynamicFormField):
@@ -50,7 +50,8 @@ class DynamicFormFieldRegistry(object):
             del self._fields[key]
 
 
-dynamic_form_field_registry = DynamicFormFieldRegistry()
+formfield_registry = DynamicFormFieldRegistry()
+dynamic_form_field_registry = formfield_registry
 
 
 def dynamic_form_field(cls):
@@ -58,7 +59,7 @@ def dynamic_form_field(cls):
     A class decorator to register the class as a dynamic form field in the
     :class:`DynamicFormFieldRegistry`.
     """
-    dynamic_form_field_registry.register(cls)
+    formfield_registry.register(cls)
     return cls
 
 
@@ -165,7 +166,7 @@ class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
 
     def set_options(self, **kwargs):
         for key, value in six.iteritems(kwargs):
-            if not key in self.options:
+            if key not in self.options:
                 raise KeyError('%s is not a valid option.' % key)
 
             expected_type = self.options[key][0]
@@ -178,12 +179,16 @@ class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
     def options_valid(self):
         return True
 
+    @classonlymethod
+    def do_display_data(cls):
+        return True
+
 
 @dynamic_form_field
 class BooleanField(BaseDynamicFormField):
 
     cls = 'django.forms.BooleanField'
-    display_type = ugettext('Boolean')
+    display_type = _('Boolean')
 
     class Meta:
         _exclude = ('required',)
@@ -193,7 +198,7 @@ class BooleanField(BaseDynamicFormField):
 class ChoiceField(BaseDynamicFormField):
 
     cls = 'django.forms.ChoiceField'
-    display_type = ugettext('Choices')
+    display_type = _('Choices')
 
     class Meta:
         choices = [six.string_types, '', (forms.CharField, forms.Textarea)]
@@ -213,7 +218,7 @@ class ChoiceField(BaseDynamicFormField):
 class DateField(BaseDynamicFormField):
 
     cls = 'django.forms.DateField'
-    display_type = ugettext('Date')
+    display_type = _('Date')
 
     class Meta:
         localize = [bool, True, forms.NullBooleanField]
@@ -223,7 +228,7 @@ class DateField(BaseDynamicFormField):
 class DateTimeField(BaseDynamicFormField):
 
     cls = 'django.forms.DateTimeField'
-    display_type = ugettext('Date and Time')
+    display_type = _('Date and Time')
 
     class Meta:
         localize = [bool, True, forms.NullBooleanField]
@@ -233,14 +238,14 @@ class DateTimeField(BaseDynamicFormField):
 class EmailField(BaseDynamicFormField):
 
     cls = 'django.forms.EmailField'
-    display_type = ugettext('Email')
+    display_type = _('Email')
 
 
 @dynamic_form_field
 class IntegerField(BaseDynamicFormField):
 
     cls = 'django.forms.IntegerField'
-    display_type = ugettext('Integer')
+    display_type = _('Integer')
 
     class Meta:
         localize = [bool, True, forms.NullBooleanField]
@@ -252,7 +257,7 @@ class IntegerField(BaseDynamicFormField):
 class MultiLineTextField(BaseDynamicFormField):
 
     cls = 'django.forms.CharField'
-    display_type = ugettext('Multi Line Text')
+    display_type = _('Multi Line Text')
     widget = 'django.forms.widgets.Textarea'
 
 
@@ -260,7 +265,7 @@ class MultiLineTextField(BaseDynamicFormField):
 class SingleLineTextField(BaseDynamicFormField):
 
     cls = 'django.forms.CharField'
-    display_type = ugettext('Single Line Text')
+    display_type = _('Single Line Text')
 
     class Meta:
         max_length = [int, None, forms.IntegerField]
@@ -271,7 +276,7 @@ class SingleLineTextField(BaseDynamicFormField):
 class TimeField(BaseDynamicFormField):
 
     cls = 'django.forms.TimeField'
-    display_type = ugettext('Time')
+    display_type = _('Time')
 
     class Meta:
         localize = [bool, True, forms.NullBooleanField]

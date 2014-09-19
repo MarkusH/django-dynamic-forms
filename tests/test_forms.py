@@ -9,9 +9,19 @@ except ImportError:
 
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.utils.decorators import classonlymethod
 
+from dynamic_forms.formfields import (SingleLineTextField,
+    formfield_registry as registry)
 from dynamic_forms.forms import FormModelForm
 from dynamic_forms.models import FormModel, FormFieldModel
+
+
+class CharField(SingleLineTextField):
+
+    @classonlymethod
+    def do_display_data(cls):
+        return False
 
 
 class TestForms(TestCase):
@@ -59,8 +69,30 @@ class TestForms(TestCase):
             OrderedDict([
                 ('Label 2', 'Value 2',),
                 ('Label 1', 'Value 1',),
-            ]
-        ))
+            ])
+        )
+
+    def test_get_mapped_data_no_display(self):
+        try:
+            key = 'tests.test_forms.CharField'
+            registry.register(CharField)
+            fm = FormModel.objects.create(name='Form', submit_url='/form/')
+            FormFieldModel.objects.create(parent_form=fm, label='Label 1',
+                field_type='dynamic_forms.formfields.SingleLineTextField',
+                position=1)
+            FormFieldModel.objects.create(parent_form=fm, label='Label 2',
+                field_type=key, position=2)
+            data = {
+                'label-1': 'Value 1',
+                'label-2': 'NOT SHOWN!',
+            }
+            form = FormModelForm(model=fm, data=data)
+            self.assertTrue(form.is_valid())
+            self.assertEqual(form.get_mapped_data(), OrderedDict([
+                ('Label 1', 'Value 1',),
+            ]))
+        finally:
+            registry.unregister(key)
 
     def test_multi_select_form_field(self):
         data = {

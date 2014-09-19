@@ -45,7 +45,8 @@ class TestActionRegistry(TestCase):
             dynamic_form_store_database)
 
     def test_get_default_actions_as_choices(self):
-        self.assertEqual(action_registry.get_as_choices(), [
+        choices = sorted(action_registry.get_as_choices(), key=lambda x: x[1])
+        self.assertEqual(choices, [
             (self.key1, 'Send via email'),
             (self.key2, 'Store in database')
         ])
@@ -65,7 +66,8 @@ class TestActionRegistry(TestCase):
         action_registry.unregister(self.key3)
 
         self.assertIsNone(action_registry.get(self.key3))
-        self.assertEqual(action_registry.get_as_choices(), [
+        choices = sorted(action_registry.get_as_choices(), key=lambda x: x[1])
+        self.assertEqual(choices, [
             ('dynamic_forms.actions.dynamic_form_send_email',
                 'Send via email'),
             ('dynamic_forms.actions.dynamic_form_store_database',
@@ -94,13 +96,14 @@ class TestActions(TestCase):
 
     def test_store_database(self):
         self.assertTrue(self.form.is_valid())
-        dynamic_form_store_database(self.form_model, self.form)
+        action_data = dynamic_form_store_database(self.form_model, self.form)
         self.assertEqual(FormModelData.objects.count(), 1)
         data = FormModelData.objects.get()
         self.assertEqual(
             data.value,
             '{"Str": "Some string to store", "DT": "2013-08-29T12:34:56.789"}'
         )
+        self.assertEqual(action_data, data)
 
     @override_settings(DYNAMIC_FORMS_EMAIL_RECIPIENTS=['mail@example.com'])
     def test_send_email(self):

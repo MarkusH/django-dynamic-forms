@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import json
 import six
 
@@ -14,7 +15,7 @@ from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from dynamic_forms.formfields import dynamic_form_field_registry
+from dynamic_forms.formfields import formfield_registry
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
@@ -56,7 +57,7 @@ class OptionsWidget(forms.MultiWidget):
         i = 0
         for n, (r, w) in six.moves.zip(self.option_names, rendered_widgets):
             # TODO: Django >1.4:
-            #output.append(format_html('<label for="{0}_{1}">{2}:</label>{3}',
+            # output.append(format_html('<label for="{0}_{1}">{2}:</label>{3}',
             #    w.id_for_label(id_), i, n, r))
             output.append(
                 mark_safe('<label for="{0}_{1}">{2}:</label>{3}'.format(
@@ -136,16 +137,26 @@ class OptionsField(forms.MultiValueField):
         return json.dumps(data)
 
 
+class AdminFormModelForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(AdminFormModelForm, self).__init__(*args, **kwargs)
+        choices = self.fields['actions'].choices
+        self.fields['actions'].choices = sorted(choices, key=lambda x: x[1])
+
+
 class AdminFormFieldInlineForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         instance = kwargs.get('instance', None)
         meta = None
         if instance:
-            df = dynamic_form_field_registry.get(instance.field_type)
+            df = formfield_registry.get(instance.field_type)
             if df:
                 meta = df._meta
         super(AdminFormFieldInlineForm, self).__init__(*args, **kwargs)
+        choices = self.fields['field_type'].choices
+        self.fields['field_type'].choices = sorted(choices, key=lambda x: x[1])
         if meta is not None:
             self.fields['_options'] = OptionsField(meta, required=False,
                 label=_('Options'))
@@ -165,15 +176,18 @@ class FormFieldModelInlineAdmin(admin.StackedInline):
 
 
 class FormModelAdmin(admin.ModelAdmin):
+    form = AdminFormModelForm
     inlines = (FormFieldModelInlineAdmin,)
-    list_display = ('name', 'submit_url', 'success_url')
+    list_display = ('name', 'submit_url', 'success_url', 'allow_display')
     model = FormModel
 
 admin.site.register(FormModel, FormModelAdmin)
 
 
 class FormModelDataAdmin(admin.ModelAdmin):
+    fields = ('form', 'value', 'submitted', 'show_url_link')
     list_display = ('form', 'pretty_value', 'submitted')
     model = FormModelData
+    readonly_fields = ('submitted', 'show_url_link',)
 
 admin.site.register(FormModelData, FormModelDataAdmin)

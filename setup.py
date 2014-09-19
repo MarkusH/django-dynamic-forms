@@ -12,7 +12,7 @@ def read(*parts):
 
 setup(
     name='django-dynamic-forms',
-    version='0.2',
+    version='0.3.1',
     description='django-dynamic-forms is a reusable Django application to create and configure forms through the admin.',
     long_description=read('README.rst'),
     author='Markus Holtermann',
@@ -22,8 +22,9 @@ setup(
     packages=[
         'dynamic_forms',
         'dynamic_forms.migrations',
+        'dynamic_forms.south_migrations',
     ],
-    package_data = {
+    package_data={
         'dynamic_forms': [
             'locale/*/LC_MESSAGES/*',
             'templates/dynamic_forms/*',
@@ -47,6 +48,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
         'Framework :: Django',
     ],
     zip_safe=False

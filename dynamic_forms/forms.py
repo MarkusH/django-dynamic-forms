@@ -10,6 +10,8 @@ except ImportError:  # pragma: no cover
 
 from django import forms
 
+from dynamic_forms.formfields import formfield_registry
+
 
 class MultiSelectFormField(forms.MultipleChoiceField):
     # http://djangosnippets.org/snippets/2753/
@@ -37,7 +39,9 @@ class FormModelForm(forms.Form):
     def __init__(self, model, *args, **kwargs):
         self.model = model
         super(FormModelForm, self).__init__(*args, **kwargs)
+        self.model_fields = OrderedDict()
         for field in self.model.fields.all():
+            self.model_fields[field.name] = field
             field.generate_form_field(self)
 
     def get_mapped_data(self, exclude_missing=False):
@@ -50,11 +54,13 @@ class FormModelForm(forms.Form):
             dictionary. Default: ``False``
         """
         data = self.cleaned_data
-        fields = self.model.get_fields_as_dict()
         mapped_data = OrderedDict()
-        for key, name in six.iteritems(fields):
-            value = data.get(key, None)
-            if exclude_missing and not bool(value):
-                continue
-            mapped_data[name] = value
+        for key, field in six.iteritems(self.model_fields):
+            df = formfield_registry.get(field.field_type)
+            if df and df.do_display_data():
+                name = field.label
+                value = data.get(key, None)
+                if exclude_missing and not bool(value):
+                    continue
+                mapped_data[name] = value
         return mapped_data

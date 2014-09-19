@@ -20,13 +20,28 @@ Form fields
 
    .. py:method:: get_as_choices()
 
+      .. versionchanged:: 0.3
+         Returns a generator instead of a list
+
+      Returns a generator that yields all registered dynamic form fields as
+      2-tuples in the form ``(key, display_type)``.
+
+
    .. py:method:: register(cls)
 
    .. py:method:: unregister(key)
 
 
+.. py:data:: formfield_registry
+
+   .. versionadded:: 0.3
+      Use this instead of :data:`dynamic_form_field_registry`
+
+
 .. py:data:: dynamic_form_field_registry
 
+   .. deprecated:: 0.3
+      Deprecated in favor of :data:`formfield_registry`
 
 .. py:decorator:: dynamic_form_field(cls)
 
@@ -101,6 +116,10 @@ Base Form Field Classes
    .. py:method:: set_options([**kwargs])
 
    .. py:method:: options_valid()
+
+   .. py:classmethod:: do_display_data()
+
+      Default: ``True``
 
 
 Default Fields

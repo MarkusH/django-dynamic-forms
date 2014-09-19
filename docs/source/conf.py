@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 import sys
+import os
 from os.path import abspath, dirname, join
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'example.settings'
+
+sys.path.insert(0, abspath(join(dirname(__file__), '..', '..', 'example')))
 sys.path.insert(0, abspath(join(dirname(__file__), '..', '..')))
 
-from dynamic_forms import get_version
+from dynamic_forms import __version__
 
 # -- General configuration -----------------------------------------------------
 
 project = 'django-dynamic-forms'
 copyright = '2013, Markus Holtermann'
-version = get_version(full=False)
-release = get_version()
+version = __version__
+release = __version__
 
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 exclude_patterns = []
@@ -34,3 +38,5 @@ html_theme = 'nature'
 html_static_path = ['_static']
 htmlhelp_basename = 'django-dynamic-formsdoc'
 modindex_common_prefix = ['dynamic_forms.']
+
+RTD_NEW_THEME = True

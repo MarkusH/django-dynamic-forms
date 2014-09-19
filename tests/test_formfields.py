@@ -7,7 +7,7 @@ from copy import deepcopy
 from django import forms
 from django.test import TestCase
 
-from dynamic_forms.formfields import (dynamic_form_field_registry as registry,
+from dynamic_forms.formfields import (formfield_registry as registry,
     BaseDynamicFormField, BooleanField, ChoiceField, DateField, DateTimeField,
     EmailField, IntegerField, MultiLineTextField, SingleLineTextField,
     TimeField, format_display_type)
@@ -87,7 +87,8 @@ class TestDynamicFormFieldRegistry(TestCase):
         self.assertEqual(registry.get(self.key % 'ChoiceField'), ChoiceField)
 
     def test_get_default_actions_as_choices(self):
-        self.assertEqual(registry.get_as_choices(), [
+        choices = sorted(registry.get_as_choices(), key=lambda x: x[1])
+        self.assertEqual(choices, [
             (self.key % 'BooleanField', 'Boolean'),
             (self.key % 'ChoiceField', 'Choices'),
             (self.key % 'DateField', 'Date'),
@@ -141,7 +142,7 @@ class TestGenericDynamicFormFields(TestCase):
         self.assertTrue(isinstance(formfield, forms.CharField))
 
     def test_construct_options(self):
-        charfield = CharField('name', 'Label', required=False, 
+        charfield = CharField('name', 'Label', required=False,
             help_text='Some help')
         formfield = charfield.construct()
         self.assertFalse(formfield.required)

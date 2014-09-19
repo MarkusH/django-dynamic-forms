@@ -46,8 +46,45 @@ The following code shows the success template after a successful form submit.
 .. literalinclude:: ../../dynamic_forms/templates/dynamic_forms/form_success.html
    :language: html+django
 
-The :class:`~dynamic_forms.views.DynamicTemplateView` exposes three variables to
+The :class:`~dynamic_forms.views.DynamicTemplateView` exposes two variables to
 the template context related to the form:
 
 ``model``
    An instance of the form model assigned to this URL.
+
+``data``
+   If an instance of :class:`~dynamic_forms.models.FormModelData` if a existing
+   ``display_key`` is given and the form model (``model``) has set
+   ``allow_display`` to ``True``.
+
+
+Third Party Apps
+================
+
+django-simple-captcha
+---------------------
+
+.. py:module:: dynamic_forms.contrib.simple_captcha
+
+`django-simple-captcha <https://github.com/mbi/django-simple-captcha>`_ provides
+easy CAPTCHA support for Django forms. This contrib package integrates
+django-simple-captcha into **django-dynamic-forms** allowing users to add a
+CAPTCHA field to their dynamic forms.
+
+To use it make sure you installed **django-simple-captcha**:
+
+.. code-block:: console
+
+   $ pip install django-simple-captcha
+
+Next put ``'captcha'`` and ``'dynamic_forms.contrib.simple_captcha'`` in the
+``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        ...
+        'captcha',
+        'dynamic_forms.contrib.simple_captcha',
+        ...
+    )

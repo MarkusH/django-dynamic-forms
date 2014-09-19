@@ -39,6 +39,21 @@ Add ``'dynamic_forms.middlewares.FormModelMiddleware'`` to the
         'dynamic_forms.middlewares.FormModelMiddleware'
     )
 
+Add ``'dynamic_forms.urls'`` to the URL patterns::
+
+    urlpatterns = patterns('',
+        ...
+        url(r'^dynamic_forms/',
+            include('dynamic_forms.urls', namespace='dynamic_forms')),
+        ...
+    )
+
+.. important::
+
+   Make sure that you get the namespace straight: ``dynamic_forms``!
+
+
+
 You can set ``DYNAMIC_FORMS_EMAIL_RECIPIENTS`` in your settings to a list of
 e-mail addresses. Forms being send via e-mail will then be send to those
 addresses instead of those defined in ``settings.ADMINS``. Each recipient will
@@ -64,5 +79,5 @@ You can find an example form at http://127.0.0.1:8000/example-form/.
 Running the tests
 =================
 
-1. Change into the ``tests/`` directory
-2. Run ``./runtests.sh``
+1. Make sure to install tox: ``$ pip install tox``
+2. Run ``tox``
