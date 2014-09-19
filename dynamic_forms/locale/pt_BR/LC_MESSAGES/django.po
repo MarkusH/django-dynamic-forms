@@ -45,7 +45,7 @@ msgstr ""
 
 #: apps.py:10
 msgid "Django Dynamic Forms"
-msgstr ""
+msgstr "Django Formulários Dinâmicos"
 
 #: conf.py:11
 msgid "Default form template"
@@ -57,7 +57,7 @@ msgstr "Modelo de sucesso padrão"
 
 #: contrib/simple_captcha/models.py:14
 msgid "CAPTCHA"
-msgstr ""
+msgstr "CAPTCHA"
 
 #: formfields.py:191
 msgid "Boolean"
@@ -141,7 +141,7 @@ msgstr "Caminho do modelo Sucesso"
 
 #: models.py:52
 msgid "Allow display"
-msgstr ""
+msgstr "Permitir exibição"
 
 #: models.py:53
 msgid ""
@@ -149,6 +149,9 @@ msgid ""
 "database” action to be active. The sender will be given a unique URL to "
 "recall the data."
 msgstr ""
+"Permitir que o usuário visualize a entrada em um momento posterior. Isto requer que a “Gravação no "
+"banco de dados” seja ativado. O envio será dada a uma única URL para "
+"recuperar os dados."
 
 #: models.py:59
 msgid "Dynamic form"
@@ -193,13 +196,15 @@ msgstr "Enviado em"
 
 #: models.py:165
 msgid "Display key"
-msgstr ""
+msgstr "Chave de exibição"
 
 #: models.py:167
 msgid ""
 "A unique identifier that is used to allow users to view their sent data. "
 "Unique over all stored data sets."
 msgstr ""
+"O identificador único é usado para permitir que os usuários visualizem seus dados enviados. "
+"Único, sobre todos os conjuntos de dados armazenados."
 
 #: models.py:175
 #, python-format
@@ -209,7 +214,7 @@ msgstr "Formulário “%(form)s” em %(date)s"
 #: templates/dynamic_forms/data_set_404.html:2
 #, python-format
 msgid "Key %(display_key)s not found or not accessible anymore."
-msgstr ""
+msgstr "Chave %(display_key)s não foi encontrado ou não está mais acessível."
 
 #: templates/dynamic_forms/email.txt:1
 #, python-format
@@ -237,7 +242,7 @@ msgstr "Formulário enviado com sucesso"
 #: templates/dynamic_forms/form_success.html:4
 #, python-format
 msgid "For your convenience you can see your data at %(link)s."
-msgstr ""
+msgstr "Para sua conveniência, você pode ver os seus dados em %(link)s."
 
 #: views.py:67
 msgid "Thank you for submitting this form."
