@@ -17,7 +17,7 @@ setup(
     long_description=read('README.rst'),
     author='Markus Holtermann',
     author_email='info@markusholtermann.eu',
-    url='http://github.com/Markush2010/django-dynamic-forms',
+    url='http://github.com/MarkusH/django-dynamic-forms',
     license='BSD',
     packages=[
         'dynamic_forms',
