@@ -4,6 +4,13 @@ Changes
 
 .. py:currentmodule:: dynamic_forms
 
+
+v0.3.4
+======
+
+* Fixed a issue with missing migrations on Python 2. (#11)
+
+
 v0.3.3
 ======
 

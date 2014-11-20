@@ -13,7 +13,7 @@ from dynamic_forms import __version__
 # -- General configuration -----------------------------------------------------
 
 project = 'django-dynamic-forms'
-copyright = '2013, Markus Holtermann'
+copyright = '2013 - 2014, Markus Holtermann'
 version = __version__
 release = __version__
 
