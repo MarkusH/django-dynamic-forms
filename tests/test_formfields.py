@@ -57,6 +57,7 @@ class TestDynamicFormFieldRegistry(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        super(TestDynamicFormFieldRegistry, cls).setUpClass()
         cls.key = 'dynamic_forms.formfields.%s'
 
         cls.names = ('BooleanField', 'ChoiceField', 'DateField',

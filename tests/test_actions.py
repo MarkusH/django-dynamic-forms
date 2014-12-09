@@ -22,6 +22,7 @@ class TestActionRegistry(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        super(TestActionRegistry, cls).setUpClass()
         cls.key1 = 'dynamic_forms.actions.dynamic_form_send_email'
         cls.key2 = 'dynamic_forms.actions.dynamic_form_store_database'
         cls.key3 = 'tests.test_actions.some_action'
