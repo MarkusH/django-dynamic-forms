@@ -56,7 +56,10 @@ def dynamic_form_send_email(form_model, form):
         'data': sorted(mapped_data.items()),
     })
     from_email = settings.DEFAULT_FROM_EMAIL
-    recipient_list = settings.DYNAMIC_FORMS_EMAIL_RECIPIENTS
+    if form_model.recipient_email:
+        recipient_list = [form_model.recipient_email]
+    else:
+        recipient_list = settings.DYNAMIC_FORMS_EMAIL_RECIPIENTS
     send_mail(subject, message, from_email, recipient_list)
 
 

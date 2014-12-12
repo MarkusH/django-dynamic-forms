@@ -92,7 +92,7 @@ class TestActions(TestCase):
             position=2)
         self.form = FormModelForm(model=self.form_model, data={
             'str': 'Some string to store',
-            'dt': datetime.datetime(2013, 8, 29, 12, 34, 56, 789000),
+            'dt': datetime.datetime(2013, 8, 29, 12, 34, 56, 789000)
         })
 
     def test_store_database(self):
@@ -121,4 +121,34 @@ DT: Aug. 29, 2013, 12:34 p.m.
 Str: Some string to store
 ''')
         self.assertEqual(message.recipients(), ['mail@example.com'])
+        self.assertEqual(message.from_email, 'webmaster@localhost')
+
+
+    def test_send_email_to_configured_address(self):
+        form_model = FormModel.objects.create(name='Form 1', submit_url='/form_1/',
+            success_url='/form_1/done/', recipient_email='info@example.com')
+        FormFieldModel.objects.create(parent_form=form_model, label='Str',
+            field_type='dynamic_forms.formfields.SingleLineTextField',
+            position=1)
+        FormFieldModel.objects.create(parent_form=form_model, label='DT',
+            field_type='dynamic_forms.formfields.DateTimeField',
+            position=2)
+        form = FormModelForm(model=form_model, data={
+            'str': 'Some string to store',
+            'dt': datetime.datetime(2013, 8, 29, 12, 34, 56, 789000),
+        })
+
+        self.assertTrue(form.is_valid())
+        self.assertEqual(mail.outbox, [])
+        dynamic_form_send_email(form_model, form)
+        message = mail.outbox[0]
+        self.assertEqual(message.subject, 'Form “Form 1” submitted')
+        self.assertEqual(message.body, '''Hello,
+
+you receive this e-mail because someone submitted the form “Form 1”.
+
+DT: Aug. 29, 2013, 12:34 p.m.
+Str: Some string to store
+''')
+        self.assertEqual(message.recipients(), ['info@example.com'])
         self.assertEqual(message.from_email, 'webmaster@localhost')

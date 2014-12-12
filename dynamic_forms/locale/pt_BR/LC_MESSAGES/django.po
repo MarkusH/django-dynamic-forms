@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-18 23:28+0100\n"
+"POT-Creation-Date: 2015-01-19 00:26+0100\n"
 "PO-Revision-Date: 2013-09-16 17:39+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
@@ -28,11 +28,11 @@ msgstr "Enviar por E-mail"
 msgid "Form “%(formname)s” submitted"
 msgstr "Formulário “%(formname)s” enviado"
 
-#: actions.py:63
+#: actions.py:66
 msgid "Store in database"
 msgstr "Salve no banco de dados"
 
-#: admin.py:168 models.py:97
+#: admin.py:168 models.py:99
 msgid "Options"
 msgstr "Opções"
 
@@ -95,7 +95,7 @@ msgstr "Texto uma Linha"
 msgid "Time"
 msgstr "Tempo"
 
-#: models.py:34 models.py:96
+#: models.py:34 models.py:98
 msgid "Name"
 msgstr "Nome"
 
@@ -153,52 +153,60 @@ msgstr ""
 "requer que a “Gravação no banco de dados” seja ativado. O envio será dada a "
 "uma única URL para recuperar os dados."
 
-#: models.py:59
+#: models.py:56
+msgid "Recipient email"
+msgstr ""
+
+#: models.py:57
+msgid "Email address to send form data."
+msgstr ""
+
+#: models.py:61
 msgid "Dynamic form"
 msgstr "Fomulário Dinâmico"
 
-#: models.py:60
+#: models.py:62
 msgid "Dynamic forms"
 msgstr "Fomulários Dinâmicos"
 
-#: models.py:93
+#: models.py:95
 msgid "Type"
 msgstr "Tipo"
 
-#: models.py:95
+#: models.py:97
 msgid "Label"
 msgstr "Legenda"
 
-#: models.py:98
+#: models.py:100
 msgid "Position"
 msgstr "Posição"
 
-#: models.py:103
+#: models.py:105
 msgid "Form field"
 msgstr "Campo de formulário"
 
-#: models.py:104
+#: models.py:106
 msgid "Form fields"
 msgstr "Campos dos formulários"
 
-#: models.py:107
+#: models.py:109
 #, python-format
 msgid "Field “%(field_name)s” in form “%(form_name)s”"
 msgstr "Campo “%(field_name)s” no formulário “%(form_name)s”"
 
-#: models.py:163 models.py:171 models.py:172
+#: models.py:165 models.py:173 models.py:174
 msgid "Form data"
 msgstr "Dados do Formulário"
 
-#: models.py:164
+#: models.py:166
 msgid "Submitted on"
 msgstr "Enviado em"
 
-#: models.py:165
+#: models.py:167
 msgid "Display key"
 msgstr "Chave de exibição"
 
-#: models.py:167
+#: models.py:169
 msgid ""
 "A unique identifier that is used to allow users to view their sent data. "
 "Unique over all stored data sets."
@@ -206,7 +214,7 @@ msgstr ""
 "O identificador único é usado para permitir que os usuários visualizem seus "
 "dados enviados. Único, sobre todos os conjuntos de dados armazenados."
 
-#: models.py:175
+#: models.py:177
 #, python-format
 msgid "Form: “%(form)s” on %(date)s"
 msgstr "Formulário “%(form)s” em %(date)s"

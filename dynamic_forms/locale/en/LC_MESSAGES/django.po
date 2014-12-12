@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-18 23:28+0100\n"
+"POT-Creation-Date: 2015-01-19 00:26+0100\n"
 "PO-Revision-Date: 2013-09-16 17:39+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
@@ -26,11 +26,11 @@ msgstr ""
 msgid "Form “%(formname)s” submitted"
 msgstr ""
 
-#: actions.py:63
+#: actions.py:66
 msgid "Store in database"
 msgstr ""
 
-#: admin.py:168 models.py:97
+#: admin.py:168 models.py:99
 msgid "Options"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Time"
 msgstr ""
 
-#: models.py:34 models.py:96
+#: models.py:34 models.py:98
 msgid "Name"
 msgstr ""
 
@@ -141,58 +141,66 @@ msgid ""
 "recall the data."
 msgstr ""
 
-#: models.py:59
+#: models.py:56
+msgid "Recipient email"
+msgstr ""
+
+#: models.py:57
+msgid "Email address to send form data."
+msgstr ""
+
+#: models.py:61
 msgid "Dynamic form"
 msgstr ""
 
-#: models.py:60
+#: models.py:62
 msgid "Dynamic forms"
 msgstr ""
 
-#: models.py:93
+#: models.py:95
 msgid "Type"
 msgstr ""
 
-#: models.py:95
+#: models.py:97
 msgid "Label"
 msgstr ""
 
-#: models.py:98
+#: models.py:100
 msgid "Position"
 msgstr ""
 
-#: models.py:103
+#: models.py:105
 msgid "Form field"
 msgstr ""
 
-#: models.py:104
+#: models.py:106
 msgid "Form fields"
 msgstr ""
 
-#: models.py:107
+#: models.py:109
 #, python-format
 msgid "Field “%(field_name)s” in form “%(form_name)s”"
 msgstr ""
 
-#: models.py:163 models.py:171 models.py:172
+#: models.py:165 models.py:173 models.py:174
 msgid "Form data"
 msgstr ""
 
-#: models.py:164
+#: models.py:166
 msgid "Submitted on"
 msgstr ""
 
-#: models.py:165
+#: models.py:167
 msgid "Display key"
 msgstr ""
 
-#: models.py:167
+#: models.py:169
 msgid ""
 "A unique identifier that is used to allow users to view their sent data. "
 "Unique over all stored data sets."
 msgstr ""
 
-#: models.py:175
+#: models.py:177
 #, python-format
 msgid "Form: “%(form)s” on %(date)s"
 msgstr ""

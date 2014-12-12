@@ -59,6 +59,10 @@ Models
 
       * default = ``False``
 
+   .. py:attribute:: recipient_email
+
+      :class:`django.db.models.EmailField`
+
 
    .. py:attribute:: fields
 
