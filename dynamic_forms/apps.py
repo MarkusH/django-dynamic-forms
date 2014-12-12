@@ -7,4 +7,4 @@ from django.utils.translation import ugettext_lazy as _
 
 class DynamicFormsConfig(AppConfig):
     name = 'dynamic_forms'
-    verbose_name = _("Django Dynamic Forms")
+    verbose_name = _("Dynamic Forms")
