@@ -79,6 +79,14 @@ class TestFormFieldModel(TestCase):
             label='Field')
         self.assertEqual(six.text_type(ff), 'Field “Field” in form “Form”')
 
+    def test_label_max_length(self):
+        label = 'l' * 255
+        ff = FormFieldModel.objects.create(parent_form=self.form,
+            field_type='dynamic_forms.formfields.SingleLineTextField',
+            label=label)
+        ff = FormFieldModel.objects.get(pk=ff.pk)  # Fetch from db again
+        self.assertEqual(ff.label, label)
+
     def test_options_update(self):
         ff = FormFieldModel.objects.create(parent_form=self.form, label='F',
             field_type='dynamic_forms.formfields.SingleLineTextField')

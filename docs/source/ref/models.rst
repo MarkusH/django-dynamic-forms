@@ -89,7 +89,7 @@ Models
 
 
 :class:`FormFieldModel`
-=============================================
+=======================
 
 .. py:class:: FormFieldModel()
 
@@ -111,7 +111,7 @@ Models
 
       :class:`django.db.models.CharField`
 
-      * max_length = 20
+      * max_length = 255
 
    .. py:attribute:: name
 
@@ -160,8 +160,8 @@ Models
    .. py:method:: save([*args, **kwargs])
 
 
-:class:`~dynamic_forms.models.FormModelData`
-============================================
+:class:`FormModelData`
+======================
 
 .. py:class:: FormModelData()
 

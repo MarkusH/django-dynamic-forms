@@ -10,6 +10,8 @@ v0.4 (under development)
 * Added support for Django 1.8 and experimental support for Django 1.9. (#19)
 * Removed ``django-appconf`` dependency.
 * Added per form email receivers (thanks to Nar Chhantyal). (#13)
+* Increased form fields' label ``max_length`` to 255 (thanks to Nar Chhantyal).
+  (#18)
 
 
 v0.3.4

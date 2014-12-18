@@ -94,7 +94,7 @@ class FormFieldModel(models.Model):
         related_name='fields')
     field_type = models.CharField(_('Type'), max_length=255,
         choices=formfield_registry.get_as_choices())
-    label = models.CharField(_('Label'), max_length=20)
+    label = models.CharField(_('Label'), max_length=255)
     name = models.SlugField(_('Name'), max_length=50, blank=True)
     _options = models.TextField(_('Options'), blank=True, null=True)
     position = models.SmallIntegerField(_('Position'), blank=True, default=0)
