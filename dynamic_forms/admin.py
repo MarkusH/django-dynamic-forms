@@ -6,7 +6,13 @@ import six
 
 from django import forms
 from django.contrib import admin
-from django.forms.util import flatatt
+
+try:
+    from django.forms.utils import flatatt
+except:
+    # TODO: Django <= 1.6
+    from django.forms.util import flatatt
+
 from django.utils.encoding import force_text
 # TODO: Django >1.4:
 # from django.utils.html import format_html
