@@ -66,12 +66,11 @@ Example
 =======
 
 1. Change into the ``example/`` directory
-2. Run ``./manage.py runserver``
+2. Apply all migrations: ``python manage.py migrate``
+3. Create a superuser (if not asked before): ``python manage.py createsuperuser``
+4. Run ``python manage.py runserver``
 
 The *admin* is available at http://127.0.0.1:8000/admin/.
-
-* Username: ``admin``
-* Password: ``password``
 
 You can find an example form at http://127.0.0.1:8000/example-form/.
 
