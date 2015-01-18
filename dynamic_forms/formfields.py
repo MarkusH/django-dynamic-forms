@@ -11,7 +11,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 try:
     from importlib import import_module
-except:
+except ImportError:  # pragma: no cover
     # TODO: Django <= 1.6, Python <= 2.6
     from django.utils.importlib import import_module
 

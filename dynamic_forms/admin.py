@@ -9,7 +9,7 @@ from django.contrib import admin
 
 try:
     from django.forms.utils import flatatt
-except:
+except ImportError:  # pragma: no cover
     # TODO: Django <= 1.6
     from django.forms.util import flatatt
 
