@@ -12,6 +12,7 @@ env:
   - DJANGO=stable/1.5.x
   - DJANGO=stable/1.6.x
   - DJANGO=stable/1.7.x
+  - DJANGO=stable/1.8.x
   - DJANGO=master
 
 install:
@@ -25,24 +26,27 @@ script:
 
 matrix:
   exclude:
-    - python: "3.2"
-      env: DJANGO=stable/1.4.x
-    - python: "3.3"
-      env: DJANGO=stable/1.4.x
-    - python: "3.4"
-      env: DJANGO=stable/1.4.x
-
-    - python: "3.4"
-      env: DJANGO=stable/1.5.x
-
-    - python: "3.4"
-      env: DJANGO=stable/1.6.x
-
     - python: "2.6"
       env: DJANGO=stable/1.7.x
-
+    - python: "2.6"
+      env: DJANGO=stable/1.8.x
     - python: "2.6"
       env: DJANGO=master
+
+    - python: "3.2"
+      env: DJANGO=stable/1.4.x
+    - python: "3.2"
+      env: DJANGO=master
+
+    - python: "3.3"
+      env: DJANGO=stable/1.4.x
+
+    - python: "3.4"
+      env: DJANGO=stable/1.4.x
+    - python: "3.4"
+      env: DJANGO=stable/1.5.x
+    - python: "3.4"
+      env: DJANGO=stable/1.6.x
 
 after_success:
     coveralls
