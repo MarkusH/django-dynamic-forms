@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-19 22:49+0200\n"
+"POT-Creation-Date: 2015-01-18 23:28+0100\n"
 "PO-Revision-Date: 2013-09-16 17:39+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
@@ -32,11 +32,11 @@ msgstr "Formulário “%(formname)s” enviado"
 msgid "Store in database"
 msgstr "Salve no banco de dados"
 
-#: admin.py:162 models.py:97
+#: admin.py:168 models.py:97
 msgid "Options"
 msgstr "Opções"
 
-#: admin.py:165
+#: admin.py:171
 msgid ""
 "The options for this field will be available once it has been stored the "
 "first time."
@@ -44,14 +44,14 @@ msgstr ""
 "As opções para este campo estará disponível após ser salvo a primeira vez."
 
 #: apps.py:10
-msgid "Django Dynamic Forms"
-msgstr "Django Formulários Dinâmicos"
+msgid "Dynamic Forms"
+msgstr "Formulários Dinâmicos"
 
-#: conf.py:11
+#: conf.py:16
 msgid "Default form template"
 msgstr "Modelo de formulário padrão"
 
-#: conf.py:14
+#: conf.py:24
 msgid "Default success template"
 msgstr "Modelo de sucesso padrão"
 
@@ -59,39 +59,39 @@ msgstr "Modelo de sucesso padrão"
 msgid "CAPTCHA"
 msgstr "CAPTCHA"
 
-#: formfields.py:191
+#: formfields.py:197
 msgid "Boolean"
 msgstr "Booleano"
 
-#: formfields.py:201
+#: formfields.py:207
 msgid "Choices"
 msgstr "Seleção"
 
-#: formfields.py:221
+#: formfields.py:227
 msgid "Date"
 msgstr "Data"
 
-#: formfields.py:231
+#: formfields.py:237
 msgid "Date and Time"
 msgstr "Data e Hora"
 
-#: formfields.py:241
+#: formfields.py:247
 msgid "Email"
 msgstr "E-Mail"
 
-#: formfields.py:248
+#: formfields.py:254
 msgid "Integer"
 msgstr "Número Inteiro"
 
-#: formfields.py:260
+#: formfields.py:266
 msgid "Multi Line Text"
 msgstr "Texto Multi Linha"
 
-#: formfields.py:268
+#: formfields.py:274
 msgid "Single Line Text"
 msgstr "Texto uma Linha"
 
-#: formfields.py:279
+#: formfields.py:285
 msgid "Time"
 msgstr "Tempo"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 16:17+0200\n"
+"POT-Creation-Date: 2015-01-18 23:28+0100\n"
 "PO-Revision-Date: 2013-09-16 17:39+0200\n"
 "Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
 "Language-Team: Markus Holtermann <info@markusholtermann.eu>\n"
@@ -30,25 +30,25 @@ msgstr ""
 msgid "Store in database"
 msgstr ""
 
-#: admin.py:162 models.py:97
+#: admin.py:168 models.py:97
 msgid "Options"
 msgstr ""
 
-#: admin.py:165
+#: admin.py:171
 msgid ""
 "The options for this field will be available once it has been stored the "
 "first time."
 msgstr ""
 
 #: apps.py:10
-msgid "Django Dynamic Forms"
+msgid "Dynamic Forms"
 msgstr ""
 
-#: conf.py:11
+#: conf.py:16
 msgid "Default form template"
 msgstr ""
 
-#: conf.py:14
+#: conf.py:24
 msgid "Default success template"
 msgstr ""
 
@@ -56,39 +56,39 @@ msgstr ""
 msgid "CAPTCHA"
 msgstr ""
 
-#: formfields.py:191
+#: formfields.py:197
 msgid "Boolean"
 msgstr ""
 
-#: formfields.py:201
+#: formfields.py:207
 msgid "Choices"
 msgstr ""
 
-#: formfields.py:221
+#: formfields.py:227
 msgid "Date"
 msgstr ""
 
-#: formfields.py:231
+#: formfields.py:237
 msgid "Date and Time"
 msgstr ""
 
-#: formfields.py:241
+#: formfields.py:247
 msgid "Email"
 msgstr ""
 
-#: formfields.py:248
+#: formfields.py:254
 msgid "Integer"
 msgstr ""
 
-#: formfields.py:260
+#: formfields.py:266
 msgid "Multi Line Text"
 msgstr ""
 
-#: formfields.py:268
+#: formfields.py:274
 msgid "Single Line Text"
 msgstr ""
 
-#: formfields.py:279
+#: formfields.py:285
 msgid "Time"
 msgstr ""
 
