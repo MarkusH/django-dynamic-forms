@@ -3,23 +3,23 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 
-settings.EMAIL_RECIPIENTS = getattr(
+settings.DYNAMIC_FORMS_EMAIL_RECIPIENTS = getattr(
     settings,
-    'EMAIL_RECIPIENTS',
+    'DYNAMIC_FORMS_EMAIL_RECIPIENTS',
     [mail[1] for mail in settings.ADMINS]
 )
 
-settings.FORM_TEMPLATES = getattr(
+settings.DYNAMIC_FORMS_FORM_TEMPLATES = getattr(
     settings,
-    'FORM_TEMPLATES',
+    'DYNAMIC_FORMS_FORM_TEMPLATES',
     [
         ('dynamic_forms/form.html', _('Default form template')),
     ]
 )
 
-settings.SUCCESS_TEMPLATES = getattr(
+settings.DYNAMIC_FORMS_SUCCESS_TEMPLATES = getattr(
     settings,
-    'SUCCESS_TEMPLATES',
+    'DYNAMIC_FORMS_SUCCESS_TEMPLATES',
     [
         ('dynamic_forms/form_success.html', _('Default success template')),
     ]
