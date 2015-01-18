@@ -2,14 +2,25 @@
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from appconf import AppConf
 
+settings.EMAIL_RECIPIENTS = getattr(
+    settings,
+    'EMAIL_RECIPIENTS',
+    [mail[1] for mail in settings.ADMINS]
+)
 
-class DynamicFormsConf(AppConf):
-    EMAIL_RECIPIENTS = [mail[1] for mail in settings.ADMINS]
-    FORM_TEMPLATES = (
+settings.FORM_TEMPLATES = getattr(
+    settings,
+    'FORM_TEMPLATES',
+    [
         ('dynamic_forms/form.html', _('Default form template')),
-    )
-    SUCCESS_TEMPLATES = (
+    ]
+)
+
+settings.SUCCESS_TEMPLATES = getattr(
+    settings,
+    'SUCCESS_TEMPLATES',
+    [
         ('dynamic_forms/form_success.html', _('Default success template')),
-    )
+    ]
+)

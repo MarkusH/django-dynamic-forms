@@ -32,7 +32,6 @@ setup(
     },
     install_requires=[
         'Django>=1.4',
-        'django-appconf>=0.6',
         'six',
     ],
     classifiers=[
