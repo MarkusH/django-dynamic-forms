@@ -10,7 +10,7 @@ from django.db.transaction import atomic
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_text, python_2_unicode_compatible
-from django.utils.html import escape, mark_safe
+from django.utils.html import format_html, format_html_join
 from django.utils.translation import ugettext_lazy as _
 
 from dynamic_forms.actions import action_registry
@@ -184,14 +184,14 @@ class FormModelData(models.Model):
 
     def pretty_value(self):
         try:
-            output = ['<dl>']
-            for k, v in self.json_value.items():
-                output.append('<dt>%(key)s</dt><dd>%(value)s</dd>' % {
-                    'key': escape(force_text(k)),
-                    'value': escape(force_text(v)),
-                })
-            output.append('</dl>')
-            return mark_safe(''.join(output))
+            value = format_html_join('',
+                '<dt>{0}</dt><dd>{1}</dd>',
+                (
+                    (force_text(k), force_text(v))
+                    for k, v in self.json_value.items()
+                )
+            )
+            return format_html('<dl>{0}</dl>', value)
         except ValueError:
             return self.value
     pretty_value.allow_tags = True
@@ -215,8 +215,5 @@ class FormModelData(models.Model):
         linking to the permanent URL.
         """
         if self.form.allow_display:
-            # TODO: Django >1.4
-            # Use format_html
-            return mark_safe('<a href="{0}">{1}</a>'.format(self.show_url,
-                self.display_key))
+            return format_html('<a href="{0}">{1}</a>', self.show_url, self.display_key)
         return ''

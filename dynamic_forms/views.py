@@ -16,9 +16,7 @@ class DynamicFormView(FormView):
     form_class = FormModelForm
 
     def dispatch(self, request, *args, **kwargs):
-        # TODO: Django >1.4
-        # self.form_model = self.kwargs.pop('model')
-
+        self.form_model = self.kwargs.pop('model')
         return super(DynamicFormView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -72,24 +70,12 @@ class DynamicFormView(FormView):
             _('An error occurred during submitting this form.'))
         return super(DynamicFormView, self).form_invalid(form)
 
-    # TODO: Django <1.5
-    def get(self, request, *args, **kwargs):
-        self.form_model = self.kwargs.pop('model')
-        return super(DynamicFormView, self).get(request, *args, **kwargs)
-
-    # TODO: Django <1.5
-    def post(self, request, *args, **kwargs):
-        self.form_model = self.kwargs.pop('model')
-        return super(DynamicFormView, self).post(request, *args, **kwargs)
-
 
 class DynamicTemplateView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
-        # TODO: Django >1.4
-        # self.form_model = self.kwargs.pop('model')
-        return super(DynamicTemplateView, self).dispatch(request, *args,
-            **kwargs)
+        self.form_model = self.kwargs.pop('model')
+        return super(DynamicTemplateView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         """
@@ -110,11 +96,6 @@ class DynamicTemplateView(TemplateView):
 
     def get_template_names(self):
         return self.form_model.success_template
-
-    # TODO: Django <1.5
-    def get(self, request, *args, **kwargs):
-        self.form_model = self.kwargs.pop('model')
-        return super(DynamicTemplateView, self).get(request, *args, **kwargs)
 
 
 class DynamicDataMixin(object):

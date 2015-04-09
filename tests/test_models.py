@@ -275,3 +275,26 @@ class TestFormModelData(TestCase):
         fmd = FormModelData(form=self.fm, value=data, display_key='somekey')
         fmd.save()
         self.assertEqual(fmd.display_key, 'somekey')
+
+    def test_not_show_url(self):
+        data = json.dumps({
+            'Some Key': 'Some value',
+            'Another key': 'Another value',
+            'Test': 'data',
+        })
+        fmd = FormModelData.objects.create(form=self.fm, value=data)
+        self.assertEqual(fmd.show_url, '')
+
+    def test_show_url_link(self):
+        data = json.dumps({
+            'Some Key': 'Some value',
+            'Another key': 'Another value',
+            'Test': 'data',
+        })
+        self.fm.allow_display = True
+        self.fm.save()
+        fmd = FormModelData.objects.create(form=self.fm, value=data)
+        self.assertEqual(
+            fmd.show_url_link,
+            '<a href="/dynamic_forms/show/{0}/">{0}</a>'.format(fmd.display_key)
+        )

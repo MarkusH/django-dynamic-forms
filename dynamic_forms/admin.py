@@ -9,9 +9,7 @@ from django import forms
 from django.contrib import admin
 from django.forms.utils import flatatt
 from django.utils.encoding import force_text
-# TODO: Django >1.4:
-# from django.utils.html import format_html
-from django.utils.html import conditional_escape
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
@@ -32,14 +30,10 @@ class ReadOnlyWidget(forms.Widget):
         if self.show_text is not None:
             content = self.show_text
         final_attrs = self.build_attrs(attrs)
-        # TODO: Django >1.4:
-        # return format_html('<span{0}>{1}</span>',
-        #    flatatt(final_attrs),
-        #    force_text(content))
-        return mark_safe('<span{0}>{1}</span>'.format(
-            conditional_escape(flatatt(final_attrs)),
-            conditional_escape(force_text(content))
-        ))
+        return format_html('<span{0}>{1}</span>',
+            flatatt(final_attrs),
+            force_text(content),
+        )
 
 
 class OptionsWidget(forms.MultiWidget):
@@ -56,18 +50,14 @@ class OptionsWidget(forms.MultiWidget):
         output = []
         i = 0
         for n, (r, w) in six.moves.zip(self.option_names, rendered_widgets):
-            # TODO: Django >1.4:
-            # output.append(format_html('<label for="{0}_{1}">{2}:</label>{3}',
-            #    w.id_for_label(id_), i, n, r))
             output.append(
-                mark_safe('<label for="{0}_{1}">{2}:</label>{3}'.format(
-                    conditional_escape(w.id_for_label(id_)),
-                    conditional_escape(i),
-                    conditional_escape(n),
-                    conditional_escape(r)
-                )))
-
+                format_html(
+                    '<label for="{0}_{1}">{2}:</label>{3}',
+                    w.id_for_label(id_), i, n, r
+                )
+            )
             i += 1
+
         return mark_safe('<div style="display:inline-block;">' +
             ('<br />\n'.join(output)) + '</div>')
 

@@ -4,10 +4,7 @@ from __future__ import unicode_literals
 from django import VERSION
 from django.contrib.auth.models import User
 from django.test import TestCase
-# TODO: Django >1.4:
-# from django.utils.html import format_html, format_html_join
-from django.utils.html import conditional_escape
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html_join
 from django.utils.translation import ugettext as _
 
 from dynamic_forms.formfields import formfield_registry as registry
@@ -15,18 +12,10 @@ from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
 def get_fields_html():
-    # TODO: Django >1.4:
-    # return format_html_join('\n', '<option value="{0}">{1}</option>',
-    #     (df for df in choices))
     choices = sorted(registry.get_as_choices(), key=lambda x: x[1])
-    return mark_safe(
-        '\n'.join(
-            '<option value="{0}">{1}</option>'.format(
-                conditional_escape(df[0]),
-                conditional_escape(df[1])
-            )
-            for df in choices
-        )
+    return format_html_join('\n',
+        '<option value="{0}">{1}</option>',
+        (df for df in choices)
     )
 
 
@@ -42,46 +31,58 @@ class TestAdmin(TestCase):
 
     def test_add_form(self):
         response = self.client.get('/admin/dynamic_forms/formmodel/add/')
-        # TODO: Django >1.4: assertInHTML
-        self.assertContains(response, '<input type="hidden" value="3" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">', count=1, html=True)
-        self.assertContains(response, '<input type="hidden" value="0" name="fields-INITIAL_FORMS" id="id_fields-INITIAL_FORMS">', count=1, html=True)
+        self.assertContains(
+            response,
+            '<input type="hidden" value="3" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">',
+            count=1, html=True,
+        )
+        self.assertContains(
+            response,
+            '<input type="hidden" value="0" name="fields-INITIAL_FORMS" id="id_fields-INITIAL_FORMS">',
+            count=1, html=True,
+        )
 
         # 3 extra forms + 1 empty for construction
-        # TODO: Django >1.4: assertInHTML
-        if VERSION < (1, 7):
-            self.assertContains(response, 'Form Field:', count=4, html=False)
-        else:
-            self.assertContains(response, 'Form field:', count=4, html=False)
+        self.assertContains(response, 'Form field:', count=4)
 
         # 3 extra forms + 1 empty for construction
         # don't use html=True as we don't care about the <select>-Tag
         self.assertContains(response, get_fields_html(), count=4)
 
         # 3 extra forms + 1 empty for construction
-        self.assertContains(response, _('The options for this field will be '
-            'available once it has been stored the first time.'), count=4)
+        self.assertContains(
+            response,
+            _('The options for this field will be available once it has been stored the first time.'),
+            count=4
+        )
 
     def test_change(self):
         form = FormModel.objects.create(name='Form', submit_url='/some-form/')
         response = self.client.get('/admin/dynamic_forms/formmodel/%d/' % form.pk)
-        # TODO: Django >1.4: assertInHTML
-        self.assertContains(response, '<input type="hidden" value="3" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">', count=1, html=True)
-        self.assertContains(response, '<input type="hidden" value="0" name="fields-INITIAL_FORMS" id="id_fields-INITIAL_FORMS">', count=1, html=True)
+        self.assertContains(
+            response,
+            '<input type="hidden" value="3" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">',
+            count=1, html=True,
+        )
+        self.assertContains(
+            response,
+            '<input type="hidden" value="0" name="fields-INITIAL_FORMS" id="id_fields-INITIAL_FORMS">',
+            count=1, html=True,
+        )
 
         # 3 extra forms + 1 empty for construction
-        # TODO: Django >1.4: assertInHTML
-        if VERSION < (1, 7):
-            self.assertContains(response, 'Form Field:', count=4, html=False)
-        else:
-            self.assertContains(response, 'Form field:', count=4, html=False)
+        self.assertContains(response, 'Form field:', count=4)
 
         # 3 extra forms + 1 empty for construction
         # don't use html=True as we don't care about the <select>-Tag
         self.assertContains(response, get_fields_html(), count=4)
 
         # 3 extra forms + 1 empty for construction
-        self.assertContains(response, _('The options for this field will be '
-            'available once it has been stored the first time.'), count=4)
+        self.assertContains(
+            response,
+            _('The options for this field will be available once it has been stored the first time.'),
+            count=4
+        )
 
     def test_unconfigured_post(self):
         data = {
@@ -104,10 +105,14 @@ class TestAdmin(TestCase):
         }
         response = self.client.post('/admin/dynamic_forms/formmodel/add/', data)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<li>Select a valid choice. other_form_template.html '
-                                      'is not one of the available choices.</li>')
-        self.assertContains(response, '<li>Select a valid choice. other_success_template.html '
-                                      'is not one of the available choices.</li>')
+        self.assertContains(
+            response,
+            '<li>Select a valid choice. other_form_template.html is not one of the available choices.</li>',
+        )
+        self.assertContains(
+            response,
+            '<li>Select a valid choice. other_success_template.html is not one of the available choices.</li>',
+        )
 
     def test_add_and_change_post(self):
         data = {
@@ -196,27 +201,32 @@ class TestAdmin(TestCase):
         ffd.save()
 
         response = self.client.get('/admin/dynamic_forms/formmodel/%d/' % form.pk)
-        # TODO: Django >1.4: assertInHTML
-        self.assertContains(response, '<input type="hidden" value="6" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">', count=1, html=True)
-        self.assertContains(response, '<input type="hidden" value="3" name="fields-INITIAL_FORMS" id="id_fields-INITIAL_FORMS">', count=1, html=True)
+        self.assertContains(
+            response,
+            '<input type="hidden" value="6" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">',
+            count=1, html=True,
+        )
+        self.assertContains(
+            response,
+            '<input type="hidden" value="3" name="fields-INITIAL_FORMS" id="id_fields-INITIAL_FORMS">',
+            count=1, html=True,
+        )
 
         # 3 existing + 3 extra forms + 1 empty for construction
-        # TODO: Django >1.4: assertInHTML
-        if VERSION < (1, 7):
-            self.assertContains(response, 'Form Field:', count=7, html=False)
-        else:
-            self.assertContains(response, 'Form field:', count=7, html=False)
+        self.assertContains(response, 'Form field:', count=7)
 
         # 3 extra forms + 1 empty for construction
         # don't use html=True as we don't care about the <select>-Tag
         self.assertContains(response, get_fields_html(), count=4)
 
         # 3 extra forms + 1 empty for construction
-        self.assertContains(response, _('The options for this field will be '
-            'available once it has been stored the first time.'), count=4)
+        self.assertContains(
+            response,
+            _('The options for this field will be available once it has been stored the first time.'),
+            count=4,
+        )
 
         # Boolean Field
-        # TODO: Django >1.4: assertInHTML
         self.assertContains(response, '''
             <div>
                 <label for="id_fields-0-_options_0"> Options:</label>
@@ -229,7 +239,6 @@ class TestAdmin(TestCase):
             </div>''', count=1, html=True)
 
         # Single Line Text Field
-        # TODO: Django >1.4: assertInHTML
         input_type_number = "text" if VERSION[:2] <= (1, 5) else "number"
         self.assertContains(response, '''
             <div>
@@ -253,7 +262,6 @@ class TestAdmin(TestCase):
             </div>''' % {'number': input_type_number}, count=1, html=True)
 
         # Date Field
-        # TODO: Django >1.4: assertInHTML
         self.assertContains(response, '''
             <div>
                 <label for="id_fields-2-_options_0"> Options:</label>
