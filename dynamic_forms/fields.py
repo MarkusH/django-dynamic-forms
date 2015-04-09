@@ -8,7 +8,6 @@ from django.db import models
 from django.forms import CheckboxSelectMultiple
 from django.utils.text import capfirst
 
-from dynamic_forms.conf import settings
 from dynamic_forms.forms import MultiSelectFormField
 
 

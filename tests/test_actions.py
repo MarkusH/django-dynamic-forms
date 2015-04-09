@@ -123,7 +123,6 @@ Str: Some string to store
         self.assertEqual(message.recipients(), ['mail@example.com'])
         self.assertEqual(message.from_email, 'webmaster@localhost')
 
-
     def test_send_email_to_configured_address(self):
         form_model = FormModel.objects.create(name='Form 1', submit_url='/form_1/',
             success_url='/form_1/done/', recipient_email='info@example.com')
