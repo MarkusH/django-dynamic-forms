@@ -11,6 +11,8 @@ from django.utils.decorators import classonlymethod
 
 from dynamic_forms.actions import action_registry
 from dynamic_forms.forms import FormModelForm
+
+from .utils import CEST
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
@@ -71,6 +73,7 @@ class TestViews(TestCase):
         self.assertIsInstance(response.context['form'], FormModelForm)
         self.assertTemplateUsed(response, 'dynamic_forms/form.html')
 
+    @override_settings(USE_TZ=False)
     def test_post_form(self):
         response = self.client.post('/form/', {
             'string-field': 'Some submitted string',
@@ -86,6 +89,24 @@ class TestViews(TestCase):
             ('String Field', 'Some submitted string',),
             ('Field for Boolean', True,),
             ('Date and time', datetime.datetime(2013, 9, 7, 12, 34, 56),),
+        ]))
+
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Berlin')
+    def test_post_form_tz_aware(self):
+        response = self.client.post('/form/', {
+            'string-field': 'Some submitted string',
+            'field-for-boolean': True,
+            'date-and-time': '2013-09-07 12:34:56'
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/done/')
+        self.assertEqual(TestAction.calls, 1)
+        self.assertEqual(TestAction.args[0][0], self.fm)
+        self.assertIsInstance(TestAction.args[0][1], FormModelForm)
+        self.assertEqual(TestAction.args[0][1].get_mapped_data(), OrderedDict([
+            ('String Field', 'Some submitted string',),
+            ('Field for Boolean', True,),
+            ('Date and time', datetime.datetime(2013, 9, 7, 12, 34, 56, tzinfo=CEST),),
         ]))
 
     def test_post_form_not_allow_display(self):
@@ -126,6 +147,7 @@ class TestViews(TestCase):
         self.assertEqual(TestAction.calls, 0)
         self.assertEqual(TestAction.args, [])
 
+    @override_settings(USE_TZ=False)
     def test_post_form_invalid_action(self):
         self.fm.actions = ['tests.test_views.TestAction', 'invalid.action']
         self.fm.save()
@@ -143,6 +165,26 @@ class TestViews(TestCase):
             ('String Field', 'Some submitted string',),
             ('Field for Boolean', True,),
             ('Date and time', datetime.datetime(2013, 9, 7, 12, 34, 56),),
+        ]))
+
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Berlin')
+    def test_post_form_invalid_action_tz_aware(self):
+        self.fm.actions = ['tests.test_views.TestAction', 'invalid.action']
+        self.fm.save()
+        response = self.client.post('/form/', {
+            'string-field': 'Some submitted string',
+            'field-for-boolean': True,
+            'date-and-time': '2013-09-07 12:34:56'
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/done/')
+        self.assertEqual(TestAction.calls, 1)
+        self.assertEqual(TestAction.args[0][0], self.fm)
+        self.assertIsInstance(TestAction.args[0][1], FormModelForm)
+        self.assertEqual(TestAction.args[0][1].get_mapped_data(), OrderedDict([
+            ('String Field', 'Some submitted string',),
+            ('Field for Boolean', True,),
+            ('Date and time', datetime.datetime(2013, 9, 7, 12, 34, 56, tzinfo=CEST),),
         ]))
 
     def test_get_done(self):

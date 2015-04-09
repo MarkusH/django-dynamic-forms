@@ -96,6 +96,7 @@ class TestActions(TestCase):
             'dt': datetime.datetime(2013, 8, 29, 12, 34, 56, 789000)
         })
 
+    @override_settings(USE_TZ=False)
     def test_store_database(self):
         self.assertTrue(self.form.is_valid())
         action_data = dynamic_form_store_database(self.form_model, self.form)
@@ -104,6 +105,18 @@ class TestActions(TestCase):
         self.assertEqual(
             data.value,
             '{"Str": "Some string to store", "DT": "2013-08-29T12:34:56.789"}'
+        )
+        self.assertEqual(action_data, data)
+
+    @override_settings(USE_TZ=True, TIME_ZONE='Europe/Berlin')
+    def test_store_database_tz_aware(self):
+        self.assertTrue(self.form.is_valid())
+        action_data = dynamic_form_store_database(self.form_model, self.form)
+        self.assertEqual(FormModelData.objects.count(), 1)
+        data = FormModelData.objects.get()
+        self.assertEqual(
+            data.value,
+            '{"Str": "Some string to store", "DT": "2013-08-29T12:34:56.789+02:00"}'
         )
         self.assertEqual(action_data, data)
 

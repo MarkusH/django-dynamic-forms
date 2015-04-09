@@ -9,6 +9,7 @@ import six
 from django import forms
 from django.db.utils import IntegrityError
 from django.test import TestCase
+from django.utils import timezone
 
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
@@ -217,7 +218,7 @@ class TestFormModelData(TestCase):
             fmd.submitted,))
 
     def test_submitted(self):
-        now = datetime.datetime.now()
+        now = timezone.now()
         past = now - datetime.timedelta(seconds=2)
         future = now + datetime.timedelta(seconds=2)
         FormModelData.objects.create(form=self.fm, value={})

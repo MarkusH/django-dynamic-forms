@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
-import os.path
 
-import django
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 RUNTESTS_DIR = os.path.abspath(os.path.dirname(__file__))
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-    }
-}
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'test-secret-key'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+
+# Application definition
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -17,37 +22,40 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.admin',
+    'dynamic_forms',
     'captcha',
     'tests',
 )
-if django.VERSION[:2] < (1, 7):
-    INSTALLED_APPS = INSTALLED_APPS + (
-        'dynamic_forms',
-    )
-else:
-    INSTALLED_APPS = INSTALLED_APPS + (
-        'dynamic_forms.apps.DynamicFormsConfig',
-    )
-
-SECRET_KEY = 'test-secret-key'
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'dynamic_forms.middlewares.FormModelMiddleware',
 )
 
 ROOT_URLCONF = 'tests.urls'
 
+WSGI_APPLICATION = 'tests.wsgi.application'
+
+# Database
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+    }
+}
+
+
 TEMPLATE_DIRS = (
     os.path.join(RUNTESTS_DIR, 'templates'),
 )
-
-if django.VERSION[:2] < (1, 6):
-    TEST_RUNNER = 'discover_runner.DiscoverRunner'
 
 DYNAMIC_FORMS_FORM_TEMPLATES = (
     ('dynamic_forms/form.html', 'Default form template'),
