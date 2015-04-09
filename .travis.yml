@@ -1,16 +1,12 @@
 language: python
 
 python:
-  - "2.6"
   - "2.7"
   - "3.2"
   - "3.3"
   - "3.4"
 
 env:
-  - DJANGO=stable/1.4.x
-  - DJANGO=stable/1.5.x
-  - DJANGO=stable/1.6.x
   - DJANGO=stable/1.7.x
   - DJANGO=stable/1.8.x
   - DJANGO=master
@@ -26,27 +22,8 @@ script:
 
 matrix:
   exclude:
-    - python: "2.6"
-      env: DJANGO=stable/1.7.x
-    - python: "2.6"
-      env: DJANGO=stable/1.8.x
-    - python: "2.6"
-      env: DJANGO=master
-
-    - python: "3.2"
-      env: DJANGO=stable/1.4.x
     - python: "3.2"
       env: DJANGO=master
-
-    - python: "3.3"
-      env: DJANGO=stable/1.4.x
-
-    - python: "3.4"
-      env: DJANGO=stable/1.4.x
-    - python: "3.4"
-      env: DJANGO=stable/1.5.x
-    - python: "3.4"
-      env: DJANGO=stable/1.6.x
 
   allow_failures:
     - env: DJANGO=master
