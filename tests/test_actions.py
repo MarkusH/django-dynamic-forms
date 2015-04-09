@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import datetime
 
+import datetime
 from copy import deepcopy
 
 from django.core import mail
 from django.test import TestCase
 from django.test.utils import override_settings
 
-from dynamic_forms.actions import (action_registry, dynamic_form_send_email,
-    dynamic_form_store_database)
+from dynamic_forms.actions import (
+    action_registry, dynamic_form_send_email, dynamic_form_store_database,
+)
 from dynamic_forms.forms import FormModelForm
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 

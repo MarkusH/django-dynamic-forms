@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import six
+from collections import OrderedDict
 
-try:  # pragma: no cover
-    from collections import OrderedDict
-except ImportError:  # pragma: no cover
-    from django.utils.datastructures import SortedDict as OrderedDict
+import six
 
 from django import forms
 

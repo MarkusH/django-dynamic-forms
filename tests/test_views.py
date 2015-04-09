@@ -3,11 +3,7 @@ from __future__ import unicode_literals
 
 import datetime
 import json
-
-try:
-    from collections import OrderedDict
-except ImportError:
-    from django.utils.datastructures import SortedDict as OrderedDict
+from collections import OrderedDict
 
 from django.test import TestCase
 from django.test.utils import override_settings

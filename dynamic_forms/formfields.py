@@ -3,18 +3,13 @@ from __future__ import unicode_literals
 
 import copy
 import re
+from importlib import import_module
+
 import six
 
 from django import forms
 from django.utils.decorators import classonlymethod
 from django.utils.encoding import python_2_unicode_compatible
-
-try:
-    from importlib import import_module
-except ImportError:  # pragma: no cover
-    # TODO: Django <= 1.6, Python <= 2.6
-    from django.utils.importlib import import_module
-
 from django.utils.translation import ugettext_lazy as _
 
 

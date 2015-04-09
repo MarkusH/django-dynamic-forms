@@ -2,7 +2,6 @@
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-
 settings.DYNAMIC_FORMS_EMAIL_RECIPIENTS = getattr(
     settings,
     'DYNAMIC_FORMS_EMAIL_RECIPIENTS',

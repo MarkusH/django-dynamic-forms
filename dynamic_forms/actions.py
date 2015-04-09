@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import json
+
 import six
 
 from django.core.mail import send_mail

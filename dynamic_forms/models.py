@@ -2,21 +2,11 @@
 from __future__ import unicode_literals
 
 import json
-
-try:  # pragma: no cover
-    from collections import OrderedDict
-except ImportError:  # pragma: no cover
-    from django.utils.datastructures import SortedDict as OrderedDict
-
-from django.db import models
-
-try:  # pragma: no cover
-    from django.db.transaction import atomic
-except ImportError:  # pragma: no cover
-    from django.db.transaction import commit_on_success as atomic
+from collections import OrderedDict
 
 from django.core.urlresolvers import reverse
-
+from django.db import models
+from django.db.transaction import atomic
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_text, python_2_unicode_compatible

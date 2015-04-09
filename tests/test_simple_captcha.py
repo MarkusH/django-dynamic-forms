@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import re
+
+from captcha.models import CaptchaStore
 
 from django.test import TestCase
 from django.utils.encoding import force_text
 
-from captcha.models import CaptchaStore
-
-from dynamic_forms.models import FormModel, FormFieldModel, FormModelData
 from dynamic_forms.formfields import formfield_registry as registry
+from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
 class TestSimpleCaptcha(TestCase):

@@ -2,22 +2,16 @@
 from __future__ import unicode_literals
 
 import json
+
 import six
 
 from django import forms
 from django.contrib import admin
-
-try:
-    from django.forms.utils import flatatt
-except ImportError:  # pragma: no cover
-    # TODO: Django <= 1.6
-    from django.forms.util import flatatt
-
+from django.forms.utils import flatatt
 from django.utils.encoding import force_text
 # TODO: Django >1.4:
 # from django.utils.html import format_html
 from django.utils.html import conditional_escape
-
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 

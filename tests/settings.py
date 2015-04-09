@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os.path
+
 import django
 
 RUNTESTS_DIR = os.path.abspath(os.path.dirname(__file__))

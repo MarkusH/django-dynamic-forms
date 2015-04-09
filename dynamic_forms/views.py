@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import messages
 from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import TemplateView, DetailView, FormView
+from django.views.generic import DetailView, FormView, TemplateView
 
 from dynamic_forms.actions import action_registry
 from dynamic_forms.forms import FormModelForm

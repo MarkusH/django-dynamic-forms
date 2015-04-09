@@ -8,11 +8,10 @@ from django.test import TestCase
 # from django.utils.html import format_html, format_html_join
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
-
 from django.utils.translation import ugettext as _
 
 from dynamic_forms.formfields import formfield_registry as registry
-from dynamic_forms.models import FormModel, FormFieldModel, FormModelData
+from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
 def get_fields_html():

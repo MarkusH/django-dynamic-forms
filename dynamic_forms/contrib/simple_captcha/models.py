@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.utils.decorators import classonlymethod
 from django.utils.translation import ugettext_lazy as _
 
-from dynamic_forms.formfields import dynamic_form_field, BaseDynamicFormField
+from dynamic_forms.formfields import BaseDynamicFormField, dynamic_form_field
 
 
 @dynamic_form_field

@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-try:
-    from collections import OrderedDict
-except ImportError:
-    from django.utils.datastructures import SortedDict as OrderedDict
-
+from collections import OrderedDict
 
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils.decorators import classonlymethod
 
-from dynamic_forms.formfields import (SingleLineTextField,
-    formfield_registry as registry)
+from dynamic_forms.formfields import (
+    SingleLineTextField, formfield_registry as registry,
+)
 from dynamic_forms.forms import FormModelForm
-from dynamic_forms.models import FormModel, FormFieldModel
+from dynamic_forms.models import FormFieldModel, FormModel
 
 
 class CharField(SingleLineTextField):
