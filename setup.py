@@ -22,7 +22,6 @@ setup(
     packages=[
         'dynamic_forms',
         'dynamic_forms.migrations',
-        'dynamic_forms.south_migrations',
     ],
     package_data={
         'dynamic_forms': [

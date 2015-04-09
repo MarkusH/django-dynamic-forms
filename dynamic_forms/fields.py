@@ -97,9 +97,3 @@ class TextMultiSelectField(six.with_metaclass(models.SubfieldBase,
 
     def get_internal_type(self):
         return "TextField"
-
-
-if 'south' in settings.INSTALLED_APPS:  # pragma: no cover
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules(patterns=['dynamic_forms\.fields'],
-        rules=[((TextMultiSelectField,), [], {})])

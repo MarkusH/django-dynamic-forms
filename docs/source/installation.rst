@@ -60,22 +60,8 @@ your project's URL patterns::
    Make sure that you get the namespace straight: ``dynamic_forms``!
 
 
-Finally you have to update your database. If you use Django>=1.7 you need to
-run: 
+Finally you have to update your database. Run:
 
 .. code-block:: console
 
    $ python manage.py migrate dynamic_forms
-
-If you use `South <http://south.aeracode.org/>`_ you need to run:
-
-.. code-block:: console
-
-   $ python manage.py syncdb
-   $ python manage.py migrate
-
-otherwise, if you don't use South or if you use Django<1.7, you have to run:
-
-.. code-block:: console
-
-   $ python manage.py syncdb
