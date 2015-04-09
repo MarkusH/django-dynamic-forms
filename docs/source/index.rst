@@ -4,6 +4,11 @@ Welcome to django-dynamic-forms's documentation!
 
 Contents:
 
+.. warning::
+
+   **django-dynamic-forms** 0.4.x will be the latest version branch that
+   supports Django < 1.7!
+
 .. toctree::
    :maxdepth: 1
 

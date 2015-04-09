@@ -19,6 +19,11 @@ Django Dynamic Form
 You can add and remove form fields as you need them. That makes it perfect
 for creating survey or application forms.
 
+.. warning::
+
+   **django-dynamic-forms** 0.4.x will be the latest version branch that
+   supports Django < 1.7!
+
 
 INSTALLATION
 ============
@@ -51,7 +56,6 @@ Add ``'dynamic_forms.urls'`` to the URL patterns::
 .. important::
 
    Make sure that you get the namespace straight: ``dynamic_forms``!
-
 
 
 You can set ``DYNAMIC_FORMS_EMAIL_RECIPIENTS`` in your settings to a list of
