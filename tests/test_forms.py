@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from collections import OrderedDict
 
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils.decorators import classonlymethod
 
@@ -108,6 +109,6 @@ class TestForms(TestCase):
             password='password', email='admin@localhost')
         self.client.login(username='admin', password='password')
 
-        response = self.client.post('/admin/dynamic_forms/formmodel/add/', data)
+        response = self.client.post(reverse('admin:dynamic_forms_formmodel_add'), data)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>This field is required.</li>', count=1, html=True)

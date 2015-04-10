@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django import VERSION
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils.html import format_html_join
 from django.utils.translation import ugettext as _
@@ -30,7 +31,7 @@ class TestAdmin(TestCase):
         self.client.logout()
 
     def test_add_form(self):
-        response = self.client.get('/admin/dynamic_forms/formmodel/add/')
+        response = self.client.get(reverse('admin:dynamic_forms_formmodel_add'))
         self.assertContains(
             response,
             '<input type="hidden" value="3" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">',
@@ -58,7 +59,7 @@ class TestAdmin(TestCase):
 
     def test_change(self):
         form = FormModel.objects.create(name='Form', submit_url='/some-form/')
-        response = self.client.get('/admin/dynamic_forms/formmodel/%d/' % form.pk)
+        response = self.client.get(reverse('admin:dynamic_forms_formmodel_change', args=(form.pk,)))
         self.assertContains(
             response,
             '<input type="hidden" value="3" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">',
@@ -103,7 +104,7 @@ class TestAdmin(TestCase):
             'fields-0-position': 0,
             '_save': True,
         }
-        response = self.client.post('/admin/dynamic_forms/formmodel/add/', data)
+        response = self.client.post(reverse('admin:dynamic_forms_formmodel_add'), data)
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
@@ -133,8 +134,8 @@ class TestAdmin(TestCase):
             'fields-0-position': 0,
             '_save': True,
         }
-        response = self.client.post('/admin/dynamic_forms/formmodel/add/', data)
-        self.assertRedirects(response, '/admin/dynamic_forms/formmodel/')
+        response = self.client.post(reverse('admin:dynamic_forms_formmodel_add'), data)
+        self.assertRedirects(response, reverse('admin:dynamic_forms_formmodel_changelist'))
         self.assertEqual(FormModel.objects.all().count(), 1)
         self.assertEqual(FormFieldModel.objects.all().count(), 1)
 
@@ -151,6 +152,7 @@ class TestAdmin(TestCase):
 
             'fields-TOTAL_FORMS': 1,
             'fields-INITIAL_FORMS': 1,
+            'fields-MIN_NUM_FORMS': 1,
             'fields-MAX_NUM_FORMS': 1000,
 
             'fields-0-field_type': 'dynamic_forms.formfields.SingleLineTextField',
@@ -163,10 +165,10 @@ class TestAdmin(TestCase):
             'fields-0-_options_3': 3,  # No
             'fields-0-id': field_pk,
             'fields-0-parent_form': form_pk,
-            '_save': True,
+            '_save': "Save",
         }
-        response = self.client.post('/admin/dynamic_forms/formmodel/%d/' % form_pk, data)
-        self.assertRedirects(response, '/admin/dynamic_forms/formmodel/')
+        response = self.client.post(reverse('admin:dynamic_forms_formmodel_change', args=(form_pk,)), data)
+        self.assertRedirects(response, reverse('admin:dynamic_forms_formmodel_changelist'))
         self.assertEqual(FormModel.objects.all().count(), 1)
         self.assertEqual(FormFieldModel.objects.all().count(), 1)
 
@@ -200,7 +202,7 @@ class TestAdmin(TestCase):
         }
         ffd.save()
 
-        response = self.client.get('/admin/dynamic_forms/formmodel/%d/' % form.pk)
+        response = self.client.get(reverse('admin:dynamic_forms_formmodel_change', args=(form.pk,)))
         self.assertContains(
             response,
             '<input type="hidden" value="6" name="fields-TOTAL_FORMS" id="id_fields-TOTAL_FORMS">',
@@ -295,8 +297,8 @@ class TestAdmin(TestCase):
         self.assertEqual(FormFieldModel.objects.all().count(), 1)
         self.assertEqual(FormModelData.objects.all().count(), 1)
 
-        response = self.client.post('/admin/dynamic_forms/formmodel/%d/delete/' % form.pk, {'post': 'yes'})
-        self.assertRedirects(response, '/admin/dynamic_forms/formmodel/')
+        response = self.client.post(reverse('admin:dynamic_forms_formmodel_delete', args=(form.pk,)), {'post': 'yes'})
+        self.assertRedirects(response, reverse('admin:dynamic_forms_formmodel_changelist'))
 
         self.assertEqual(FormModel.objects.all().count(), 0)
         self.assertEqual(FormFieldModel.objects.all().count(), 0)
