@@ -1,5 +1,6 @@
-flake8
+Pillow
 coverage
 django-simple-captcha
-Pillow
+flake8
+isort
 pytz

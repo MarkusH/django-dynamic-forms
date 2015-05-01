@@ -5,7 +5,6 @@ import json
 import warnings
 
 import six
-
 from django.core.mail import send_mail
 from django.core.serializers.json import DjangoJSONEncoder
 from django.template.loader import render_to_string

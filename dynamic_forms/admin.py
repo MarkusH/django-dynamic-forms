@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import json
 
 import six
-
 from django import forms
 from django.contrib import admin
 from django.forms.utils import flatatt

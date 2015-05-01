@@ -5,7 +5,6 @@ import datetime
 import json
 
 import six
-
 from django import forms
 from django.db.utils import IntegrityError
 from django.test import TestCase

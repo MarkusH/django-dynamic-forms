@@ -9,10 +9,10 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from django.utils.decorators import classonlymethod
 
+from .utils import CEST
+
 from dynamic_forms.actions import action_registry
 from dynamic_forms.forms import FormModelForm
-
-from .utils import CEST
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 

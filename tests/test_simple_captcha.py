@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import re
 
 from captcha.models import CaptchaStore
-
 from django.test import TestCase
 from django.utils.encoding import force_text
 

@@ -6,7 +6,6 @@ import re
 from importlib import import_module
 
 import six
-
 from django import forms
 from django.utils.decorators import classonlymethod
 from django.utils.encoding import python_2_unicode_compatible

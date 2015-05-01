@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from collections import OrderedDict
 
 import six
-
 from django import forms
 
 from dynamic_forms.formfields import formfield_registry
