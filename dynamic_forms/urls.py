@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-urlpatterns = patterns('dynamic_forms.views',
-    url(r'show/(?P<display_key>[a-zA-Z0-9]{24})/$', 'data_set_detail',
+from .views import data_set_detail
+
+urlpatterns = [
+    url(r'show/(?P<display_key>[a-zA-Z0-9]{24})/$', data_set_detail,
         name='data-set-detail'),
-)
+]
