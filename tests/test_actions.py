@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import warnings
 from copy import deepcopy
 
 from django.core import mail
@@ -15,7 +16,11 @@ from dynamic_forms.forms import FormModelForm
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
-def some_action(model, form):
+def some_action(model, form, request):
+    pass
+
+
+def some_old_action(model, form):
     pass
 
 
@@ -27,6 +32,7 @@ class TestActionRegistry(TestCase):
         cls.key1 = 'dynamic_forms.actions.dynamic_form_send_email'
         cls.key2 = 'dynamic_forms.actions.dynamic_form_store_database'
         cls.key3 = 'tests.test_actions.some_action'
+        cls.key4 = 'tests.test_actions.some_old_action'
 
         cls.action_registry_backup = deepcopy(action_registry)
 
@@ -58,6 +64,23 @@ class TestActionRegistry(TestCase):
         func = action_registry.get(self.key3)
         self.assertEqual(func, some_action)
         self.assertEqual(func.label, 'My Label')
+
+    def test_register_old(self):
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter('always')
+            action_registry.register(some_old_action, 'My Old Label')
+            warnings.simplefilter('default')
+        self.assertEqual(len(w), 1)
+        self.assertIs(w[0].category, DeprecationWarning)
+        self.assertEqual(
+            w[0].message.args[0],
+            'The formmodel action "My Old Label" is missing the third argument '
+            '"request". You should update your code to match '
+            'action(form_model, form, request).'
+        )
+        func = action_registry.get(self.key4)
+        self.assertEqual(func, some_old_action)
+        self.assertEqual(func.label, 'My Old Label')
 
     def test_register_not_callable(self):
         self.assertRaises(ValueError, action_registry.register,
@@ -99,7 +122,7 @@ class TestActions(TestCase):
     @override_settings(USE_TZ=False)
     def test_store_database(self):
         self.assertTrue(self.form.is_valid())
-        action_data = dynamic_form_store_database(self.form_model, self.form)
+        action_data = dynamic_form_store_database(self.form_model, self.form, None)
         self.assertEqual(FormModelData.objects.count(), 1)
         data = FormModelData.objects.get()
         self.assertEqual(
@@ -111,7 +134,7 @@ class TestActions(TestCase):
     @override_settings(USE_TZ=True, TIME_ZONE='Europe/Berlin')
     def test_store_database_tz_aware(self):
         self.assertTrue(self.form.is_valid())
-        action_data = dynamic_form_store_database(self.form_model, self.form)
+        action_data = dynamic_form_store_database(self.form_model, self.form, None)
         self.assertEqual(FormModelData.objects.count(), 1)
         data = FormModelData.objects.get()
         self.assertEqual(
@@ -124,7 +147,7 @@ class TestActions(TestCase):
     def test_send_email(self):
         self.assertTrue(self.form.is_valid())
         self.assertEqual(mail.outbox, [])
-        dynamic_form_send_email(self.form_model, self.form)
+        dynamic_form_send_email(self.form_model, self.form, None)
         message = mail.outbox[0]
         self.assertEqual(message.subject, 'Form “Form” submitted')
         self.assertEqual(message.body, '''Hello,
@@ -153,7 +176,7 @@ Str: Some string to store
 
         self.assertTrue(form.is_valid())
         self.assertEqual(mail.outbox, [])
-        dynamic_form_send_email(form_model, form)
+        dynamic_form_send_email(form_model, form, None)
         message = mail.outbox[0]
         self.assertEqual(message.subject, 'Form “Form 1” submitted')
         self.assertEqual(message.body, '''Hello,

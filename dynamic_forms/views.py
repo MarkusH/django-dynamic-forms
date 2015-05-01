@@ -9,6 +9,7 @@ from django.views.generic import DetailView, FormView, TemplateView
 from dynamic_forms.actions import action_registry
 from dynamic_forms.forms import FormModelForm
 from dynamic_forms.models import FormModelData
+from dynamic_forms.utils import is_old_style_action
 
 
 class DynamicFormView(FormView):
@@ -60,7 +61,12 @@ class DynamicFormView(FormView):
             action = action_registry.get(actionkey)
             if action is None:
                 continue
-            self.action_results[actionkey] = action(self.form_model, form)
+            args = (self.form_model, form)
+
+            if not is_old_style_action(action):
+                args = args + (self.request,)
+
+            self.action_results[actionkey] = action(*args)
         messages.success(self.request,
             _('Thank you for submitting this form.'))
         return super(DynamicFormView, self).form_valid(form)

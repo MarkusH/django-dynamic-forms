@@ -23,7 +23,7 @@ class TestAction(object):
 
     __name__ = "TestAction"
 
-    def __call__(self, form_model, form):
+    def __call__(self, form_model, form, request):
         TestAction.calls += 1
         TestAction.args.append((form_model, form))
 
@@ -31,6 +31,14 @@ class TestAction(object):
     def clear(cls):
         cls.calls = 0
         cls.args = []
+
+
+class TestOldAction(object):
+
+    __name__ = "TestOldAction"
+
+    def __call__(self, form_model, form):
+        pass
 
 
 class TestAction2(object):
@@ -45,10 +53,12 @@ class TestViews(TestCase):
 
     def setUp(self):
         action_registry.register(TestAction(), 'Some action')
+        action_registry.register(TestOldAction(), 'Some old action')
         action_registry.register(TestAction2(), 'Some action2')
 
         self.fm = FormModel.objects.create(name='Form', submit_url='/form/',
-            success_url='/done/', actions=['tests.test_views.TestAction'],
+            success_url='/done/', actions=['tests.test_views.TestAction',
+                                           'tests.test_views.TestOldAction'],
             form_template='dynamic_forms/form.html',
             success_template='dynamic_forms/form_success.html')
         self.field1 = FormFieldModel.objects.create(parent_form=self.fm,
@@ -65,6 +75,7 @@ class TestViews(TestCase):
     def tearDown(self):
         TestAction.clear()
         action_registry.unregister('tests.test_views.TestAction')
+        action_registry.unregister('tests.test_views.TestOldAction')
         action_registry.unregister('tests.test_views.TestAction2')
 
     def test_get_form(self):

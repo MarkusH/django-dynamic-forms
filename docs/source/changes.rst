@@ -11,6 +11,8 @@ v0.5 (under development)
 
    **django-dynamic-forms** 0.5.x will only support Django >= 1.7!
 
+* Form action take a required third argument ``request``.
+
 
 v0.4
 ====

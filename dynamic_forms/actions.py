@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import json
+import warnings
 
 import six
 
@@ -11,6 +12,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
 from dynamic_forms.conf import settings
+from dynamic_forms.utils import is_old_style_action
 
 
 class ActionRegistry(object):
@@ -28,6 +30,13 @@ class ActionRegistry(object):
     def register(self, func, label):
         if not callable(func):
             raise ValueError('%r must be a callable' % func)
+
+        if is_old_style_action(func):
+            warnings.warn('The formmodel action "%s" is missing the third '
+                          'argument "request". You should update your code to '
+                          'match action(form_model, form, request).' % label,
+                          DeprecationWarning)
+
         func.label = label
         key = '%s.%s' % (func.__module__, func.__name__)
         self._actions[key] = func
@@ -48,7 +57,7 @@ def formmodel_action(label):
 
 
 @formmodel_action(_('Send via email'))
-def dynamic_form_send_email(form_model, form):
+def dynamic_form_send_email(form_model, form, request):
     mapped_data = form.get_mapped_data()
 
     subject = _('Form “%(formname)s” submitted') % {'formname': form_model}
@@ -65,7 +74,7 @@ def dynamic_form_send_email(form_model, form):
 
 
 @formmodel_action(_('Store in database'))
-def dynamic_form_store_database(form_model, form):
+def dynamic_form_store_database(form_model, form, request):
     from dynamic_forms.models import FormModelData
     mapped_data = form.get_mapped_data()
     value = json.dumps(mapped_data, cls=DjangoJSONEncoder)

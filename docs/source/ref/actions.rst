@@ -8,7 +8,7 @@ Actions define what happens once a user submits a
 :class:`~dynamic_forms.forms.FormModelForm`. **django-dynamic-forms** provides
 two basic actions :func:`~dynamic_form_send_email` and
 :func:`~dynamic_form_store_database` that, as their names indicate, either
-send the submitted data via e-mail to the receipients defined in the
+send the submitted data via e-mail to the recipients defined in the
 :data:`~dynamic_forms.conf.DYNAMIC_FORMS_EMAIL_RECIPIENTS` settings variable
 or stores it into the database (precisely the
 :class:`~dynamic_forms.models.FormModelData` model).
@@ -16,7 +16,7 @@ or stores it into the database (precisely the
 Any action that should be available for usage must be registered in the
 :class:`ActionRegistry`. This can be done with the following code::
 
-   >>> def my_function(form_model, form):
+   >>> def my_function(form_model, form, request):
    ...     # do something
    ...     pass
    ...
@@ -30,7 +30,7 @@ this would look like::
 
    >>> from dynamic_forms.actions import formmodel_action
    >>> @formmodel_action('My Label')
-   ... def my_function(form_model, form):
+   ... def my_function(form_model, form, request):
    ...     # do something
    ...     pass
    ... 
@@ -119,14 +119,14 @@ Action registry utilities
    .. code-block:: python
 
       @formmodel_action('My super awesome action')
-      def my_action(form_model, form):
+      def my_action(form_model, form, request):
          # do something with the data ...
 
    This is equivalent to:
 
    .. code-block:: python
 
-      def my_action(form_model, form):
+      def my_action(form_model, form, request):
          # do something with the data ...
 
       action_registry.register(my_action, 'My super awesome action')
@@ -135,7 +135,7 @@ Action registry utilities
 Default Actions
 ===============
 
-.. py:function:: dynamic_form_send_email(form_model, form)
+.. py:function:: dynamic_form_send_email(form_model, form, request)
 
    Sends the data submitted through the form ``form`` via e-mail to all
    recipients listed in
@@ -148,9 +148,14 @@ Default Actions
       labels defined in the ``form_model`` for each field are needed, in the
       appropriate order by calling
       :meth:`~dynamic_forms.forms.FormModelForm.get_mapped_data`.
+   :param django.http.Request request: The current request
+
+   .. versionadded:: 0.5
+
+      The ``request`` parameter was added.
 
 
-.. py:function:: dynamic_form_store_database(form_model, form)
+.. py:function:: dynamic_form_store_database(form_model, form, request)
 
    This action takes the mapped data from the ``form`` and serializes it as
    JSON. This value is then stored in the
@@ -164,4 +169,7 @@ Default Actions
       To allow linking to a stored data set, the action now returns the
       inserted object.
 
+   .. versionadded:: 0.5
+
+      The ``request`` parameter was added.
 
