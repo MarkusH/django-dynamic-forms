@@ -5,7 +5,7 @@ Form fields
 .. py:module:: dynamic_forms.formfields
 
 
-.. py:function:: format_display_type(cls_name)
+.. py:function:: format_display_label(cls_name)
 
 
 .. py:function:: load_class_from_string(cls_string)
@@ -24,7 +24,7 @@ Form fields
          Returns a generator instead of a list
 
       Returns a generator that yields all registered dynamic form fields as
-      2-tuples in the form ``(key, display_type)``.
+      2-tuples in the form ``(key, display_label)``.
 
 
    .. py:method:: register(cls)
@@ -76,7 +76,7 @@ Base Form Field Classes
 
       ``None``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``None``
 
@@ -105,9 +105,9 @@ Base Form Field Classes
 
    .. py:method:: contribute_to_form(form)
 
-   .. py:method:: get_display_type()
+   .. py:method:: get_display_label()
 
-      Returns a class's :attr:`display_type` is defined or calls :func:`format_display_type` with the class's name.
+      Returns a class's :attr:`display_label` is defined or calls :func:`format_display_label` with the class's name.
 
       This function is only available to the class itself. It is not callable from an instance. 
 
@@ -131,7 +131,7 @@ Default Fields
 
       ``'django.forms.BooleanField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'Boolean``
 
@@ -148,7 +148,7 @@ Default Fields
 
       ``'django.forms.ChoiceField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'Choices``
 
@@ -169,7 +169,7 @@ Default Fields
 
       ``'django.forms.DateField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'Date``
 
@@ -186,7 +186,7 @@ Default Fields
 
       ``'django.forms.DateTimeField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       'Date and Time'
 
@@ -203,7 +203,7 @@ Default Fields
 
       ``'django.forms.EmailField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'Email``
 
@@ -214,7 +214,7 @@ Default Fields
 
       ``'django.forms.IntegerField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'Integer``
 
@@ -239,7 +239,7 @@ Default Fields
 
       ``'django.forms.CharField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'Multi Line Text``
 
@@ -254,7 +254,7 @@ Default Fields
 
       ``'django.forms.CharField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'Single Line Text``
 
@@ -275,7 +275,7 @@ Default Fields
 
       ``'django.forms.TimeField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'Time``
 

@@ -11,7 +11,7 @@ from dynamic_forms.formfields import BaseDynamicFormField, dynamic_form_field
 class CaptchaField(BaseDynamicFormField):
 
     cls = 'captcha.fields.CaptchaField'
-    display_type = _('CAPTCHA')
+    display_label = _('CAPTCHA')
 
     class Meta:
         _exclude = ('required',)

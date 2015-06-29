@@ -11,7 +11,7 @@ django-simple-captcha
 
       ``'captcha.fields.CaptchaField``
 
-   .. py:attribute:: display_type
+   .. py:attribute:: display_label
 
       ``'CAPTCHA``
 

@@ -10,7 +10,7 @@ from django.test import TestCase
 from dynamic_forms.formfields import (
     BaseDynamicFormField, BooleanField, ChoiceField, DateField, DateTimeField,
     EmailField, IntegerField, MultiLineTextField, SingleLineTextField,
-    TimeField, format_display_type, formfield_registry as registry,
+    TimeField, format_display_label, formfield_registry as registry,
 )
 
 
@@ -48,10 +48,10 @@ class NotAField(object):
 
 class TestUtils(TestCase):
 
-    def test_format_display_type(self):
-        self.assertEqual(format_display_type('SomeClassField'), 'Some Class')
-        self.assertEqual(format_display_type('SomeClass'), 'Some Class')
-        self.assertEqual(format_display_type('SomeFOOClass'), 'Some FOOClass')
+    def test_format_display_label(self):
+        self.assertEqual(format_display_label('SomeClassField'), 'Some Class')
+        self.assertEqual(format_display_label('SomeClass'), 'Some Class')
+        self.assertEqual(format_display_label('SomeFOOClass'), 'Some FOOClass')
 
 
 class TestDynamicFormFieldRegistry(TestCase):
@@ -106,7 +106,7 @@ class TestDynamicFormFieldRegistry(TestCase):
         registry.register(CharField)
         cls = registry.get('tests.test_formfields.CharField')
         self.assertEqual(cls, CharField)
-        self.assertEqual(cls.get_display_type(), 'Char')
+        self.assertEqual(cls.get_display_label(), 'Char')
 
     def test_register_not_inherit(self):
         self.assertRaises(ValueError, registry.register, NotAField)
