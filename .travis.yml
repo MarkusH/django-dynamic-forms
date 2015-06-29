@@ -15,7 +15,7 @@ install:
   - pip install https://github.com/django/django/archive/${DJANGO}.tar.gz
   - pip install -e .
   - pip install -r tests/requirements.txt
-  - pip install coveralls
+  - pip install codecov
 
 script:
   - ./tests/runtests.sh
@@ -29,4 +29,4 @@ matrix:
     - env: DJANGO=master
 
 after_success:
-    coveralls
+    codecov
