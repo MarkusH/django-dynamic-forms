@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import six
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.forms import CheckboxSelectMultiple
+from django.utils import six
 from django.utils.text import capfirst
 
 from dynamic_forms.forms import MultiSelectFormField

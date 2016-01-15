@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 
 from copy import deepcopy
 
-import six
 from django import forms
 from django.test import TestCase
+from django.utils import six
 
 from dynamic_forms.formfields import (
     BaseDynamicFormField, BooleanField, ChoiceField, DateField, DateTimeField,

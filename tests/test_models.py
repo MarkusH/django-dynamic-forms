@@ -4,11 +4,10 @@ from __future__ import unicode_literals
 import datetime
 import json
 
-import six
 from django import forms
 from django.db.utils import IntegrityError
 from django.test import TestCase
-from django.utils import timezone
+from django.utils import six, timezone
 
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 

@@ -32,7 +32,6 @@ setup(
     },
     install_requires=[
         'Django>=1.7',
-        'six',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

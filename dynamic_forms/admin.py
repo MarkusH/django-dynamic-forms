@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 import json
 
-import six
 from django import forms
 from django.contrib import admin
 from django.forms.utils import flatatt
+from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe

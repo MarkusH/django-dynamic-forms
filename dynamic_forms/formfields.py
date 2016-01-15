@@ -5,8 +5,8 @@ import copy
 import re
 from importlib import import_module
 
-import six
 from django import forms
+from django.utils import six
 from django.utils.decorators import classonlymethod
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _

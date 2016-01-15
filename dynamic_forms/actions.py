@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 import json
 import warnings
 
-import six
 from django.core.mail import send_mail
 from django.core.serializers.json import DjangoJSONEncoder
 from django.template.loader import render_to_string
+from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 
 from dynamic_forms.conf import settings
