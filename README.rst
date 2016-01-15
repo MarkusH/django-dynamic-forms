@@ -2,17 +2,21 @@
 Django Dynamic Form
 ===================
 
-.. image:: https://pypip.in/version/django-dynamic-forms/badge.png
+.. image:: https://img.shields.io/pypi/v/django-dynamic-forms.svg
    :target: https://pypi.python.org/pypi/django-dynamic-forms
 
-.. image:: https://pypip.in/d/django-dynamic-forms/badge.png
-   :target: https://crate.io/packages/django-dynamic-forms/
+.. image:: https://img.shields.io/pypi/l/django-dynamic-forms.svg
+   :target: https://pypi.python.org/pypi/django-dynamic-forms
 
-.. image:: https://travis-ci.org/MarkusH/django-dynamic-forms.png
+.. image:: https://img.shields.io/pypi/dm/django-dynamic-forms.svg
+   :target: https://pypi.python.org/pypi/django-dynamic-forms
+
+
+.. image:: https://img.shields.io/travis/MarkusH/django-dynamic-forms/develop.svg
    :target: https://travis-ci.org/MarkusH/django-dynamic-forms
 
-.. image:: https://coveralls.io/repos/MarkusH/django-dynamic-forms/badge.png?branch=develop
-   :target: https://coveralls.io/r/MarkusH/django-dynamic-forms
+.. image:: https://img.shields.io/codecov/c/github/MarkusH/django-dynamic-forms/develop.svg
+   :target: https://codecov.io/github/MarkusH/django-dynamic-forms
 
 
 **django-dynamic-forms** lets you create your forms through the Django admin.
