@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django import VERSION
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
@@ -26,9 +25,6 @@ class TestAdmin(TestCase):
         self.user = User.objects.create_superuser(username='admin',
             password='password', email='admin@localhost')
         self.client.login(username='admin', password='password')
-
-    def tearDown(self):
-        self.client.logout()
 
     def test_add_form(self):
         response = self.client.get(reverse('admin:dynamic_forms_formmodel_add'))
@@ -241,7 +237,6 @@ class TestAdmin(TestCase):
             </div>''', count=1, html=True)
 
         # Single Line Text Field
-        input_type_number = "text" if VERSION[:2] <= (1, 5) else "number"
         self.assertContains(response, '''
             <div>
                 <label for="id_fields-1-_options_0"> Options:</label>
@@ -251,9 +246,9 @@ class TestAdmin(TestCase):
                             Some help for single line
                         </textarea><br>
                     <label for="id_fields-1-_options_1">max_length:</label>
-                        <input type="%(number)s" name="fields-1-_options_1" id="id_fields-1-_options_1" value="100"><br>
+                        <input type="number" name="fields-1-_options_1" id="id_fields-1-_options_1" value="100"><br>
                     <label for="id_fields-1-_options_2">min_length:</label>
-                        <input type="%(number)s" name="fields-1-_options_2" id="id_fields-1-_options_2"><br>
+                        <input type="number" name="fields-1-_options_2" id="id_fields-1-_options_2"><br>
                     <label for="id_fields-1-_options_3">required:</label>
                         <select name="fields-1-_options_3" id="id_fields-1-_options_3">
                             <option value="1">Unknown</option>
@@ -261,7 +256,7 @@ class TestAdmin(TestCase):
                             <option selected="selected" value="3">No</option>
                         </select>
                 </div>
-            </div>''' % {'number': input_type_number}, count=1, html=True)
+            </div>''', count=1, html=True)
 
         # Date Field
         self.assertContains(response, '''
