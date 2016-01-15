@@ -11,3 +11,11 @@ def is_old_style_action(func):
         # it's class with __call__()
         argspec = inspect.getargspec(func.__call__)
         return len(argspec.args) == 3  # mind the 'self' arg
+
+
+class RemovedIn05Warning(DeprecationWarning):
+    pass
+
+
+class RemovedIn06Warning(PendingDeprecationWarning):
+    pass

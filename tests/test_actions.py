@@ -14,6 +14,7 @@ from dynamic_forms.actions import (
 )
 from dynamic_forms.forms import FormModelForm
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
+from dynamic_forms.utils import RemovedIn06Warning
 
 
 def some_action(model, form, request):
@@ -71,7 +72,7 @@ class TestActionRegistry(TestCase):
             action_registry.register(some_old_action, 'My Old Label')
             warnings.simplefilter('default')
         self.assertEqual(len(w), 1)
-        self.assertIs(w[0].category, DeprecationWarning)
+        self.assertIs(w[0].category, RemovedIn06Warning)
         self.assertEqual(
             w[0].message.args[0],
             'The formmodel action "My Old Label" is missing the third argument '

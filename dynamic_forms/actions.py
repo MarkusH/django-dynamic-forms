@@ -11,7 +11,7 @@ from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 
 from dynamic_forms.conf import settings
-from dynamic_forms.utils import is_old_style_action
+from dynamic_forms.utils import RemovedIn06Warning, is_old_style_action
 
 
 class ActionRegistry(object):
@@ -34,7 +34,7 @@ class ActionRegistry(object):
             warnings.warn('The formmodel action "%s" is missing the third '
                           'argument "request". You should update your code to '
                           'match action(form_model, form, request).' % label,
-                          DeprecationWarning)
+                          RemovedIn06Warning)
 
         func.label = label
         key = '%s.%s' % (func.__module__, func.__name__)
