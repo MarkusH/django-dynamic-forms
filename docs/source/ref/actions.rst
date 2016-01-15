@@ -33,7 +33,7 @@ this would look like::
    ... def my_function(form_model, form, request):
    ...     # do something
    ...     pass
-   ... 
+   ...
 
 .. versionadded:: 0.3
 

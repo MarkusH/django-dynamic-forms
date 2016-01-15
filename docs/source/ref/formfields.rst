@@ -91,7 +91,7 @@ Base Form Field Classes
       .. py:attribute:: help_text
 
          [six.string_types, '', (forms.CharField, forms.Textarea)]
-      
+
       .. py:attribute:: required
 
          [bool, True, forms.NullBooleanField]
@@ -109,7 +109,7 @@ Base Form Field Classes
 
       Returns a class's :attr:`display_label` is defined or calls :func:`format_display_label` with the class's name.
 
-      This function is only available to the class itself. It is not callable from an instance. 
+      This function is only available to the class itself. It is not callable from an instance.
 
    .. py:method:: get_widget_attrs()
 
@@ -223,7 +223,7 @@ Default Fields
       .. py:attribute:: localize
 
          [bool, True, forms.NullBooleanField]
-      
+
       .. py:attribute:: max_value
 
          [int, None, forms.IntegerField]
@@ -259,7 +259,7 @@ Default Fields
       ``'Single Line Text``
 
    .. py:class:: Meta
-      
+
       .. py:attribute:: max_length
 
          [int, None, forms.IntegerField]
