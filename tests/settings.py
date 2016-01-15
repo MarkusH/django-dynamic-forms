@@ -53,9 +53,25 @@ DATABASES = {
 }
 
 
-TEMPLATE_DIRS = (
-    os.path.join(RUNTESTS_DIR, 'templates'),
-)
+TEMPLATE_DIRS = ()
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 
 DYNAMIC_FORMS_FORM_TEMPLATES = (
     ('dynamic_forms/form.html', 'Default form template'),

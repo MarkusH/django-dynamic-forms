@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import sys
 import warnings
 from copy import deepcopy
 
@@ -71,10 +72,10 @@ class TestActionRegistry(TestCase):
             warnings.simplefilter('always')
             action_registry.register(some_old_action, 'My Old Label')
             warnings.simplefilter('default')
-        self.assertEqual(len(w), 1)
-        self.assertIs(w[0].category, RemovedIn06Warning)
+        self.assertEqual(len(w), 2 if sys.version_info[:2] >= (3, 5) else 1)
+        self.assertIs(w[-1].category, RemovedIn06Warning)
         self.assertEqual(
-            w[0].message.args[0],
+            w[-1].message.args[0],
             'The formmodel action "My Old Label" is missing the third argument '
             '"request". You should update your code to match '
             'action(form_model, form, request).'

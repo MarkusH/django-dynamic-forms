@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 import re
+import sys
+from unittest import skipIf
 
 from captcha.models import CaptchaStore
 from django.test import TestCase
@@ -11,6 +13,8 @@ from dynamic_forms.formfields import formfield_registry as registry
 from dynamic_forms.models import FormFieldModel, FormModel, FormModelData
 
 
+@skipIf(sys.version_info[:2] == (3, 2),
+        'django-simple-captcha is not compatible with Python 3.2')
 class TestSimpleCaptcha(TestCase):
 
     def setUp(self):
