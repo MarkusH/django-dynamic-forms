@@ -43,7 +43,7 @@ class OptionsWidget(forms.MultiWidget):
 
     def decompress(self, value):
         mapping = json.loads(value) if value else {}
-        return [mapping.get(key, None) for key in self.option_names]
+        return [mapping.get(key) for key in self.option_names]
 
     def format_output(self, rendered_widgets, id_):
         output = []
@@ -70,7 +70,7 @@ class OptionsWidget(forms.MultiWidget):
             value = self.decompress(value)
         output = []
         final_attrs = self.build_attrs(attrs)
-        id_ = final_attrs.get('id', None)
+        id_ = final_attrs.get('id')
         for i, widget in enumerate(self.widgets):
             try:
                 widget_value = value[i]
@@ -137,7 +137,7 @@ class AdminFormModelForm(forms.ModelForm):
 class AdminFormFieldInlineForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        instance = kwargs.get('instance', None)
+        instance = kwargs.get('instance')
         meta = None
         if instance:
             df = formfield_registry.get(instance.field_type)

@@ -42,7 +42,7 @@ class DynamicFormView(FormView):
         url = self.form_model.success_url
         if self.form_model.allow_display:
             store_key = 'dynamic_forms.actions.dynamic_form_store_database'
-            data = self.action_results.get(store_key, None)
+            data = self.action_results.get(store_key)
             if data is not None:
                 url += '?display_key=%s' % data.display_key
         return url
@@ -121,7 +121,7 @@ class DynamicDataMixin(object):
 
     def render_404(self, context=None, **response_kwargs):
         ctx = {
-            'display_key': self.kwargs.get(self.slug_url_kwarg, None)
+            'display_key': self.kwargs.get(self.slug_url_kwarg)
         }
         if context:
             ctx.update(context)

@@ -17,5 +17,5 @@ class CaptchaField(BaseDynamicFormField):
         _exclude = ('required',)
 
     @classonlymethod
-    def do_display_data(self):
+    def do_display_data(cls):
         return False

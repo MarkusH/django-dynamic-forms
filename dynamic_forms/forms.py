@@ -55,7 +55,7 @@ class FormModelForm(forms.Form):
             df = formfield_registry.get(field.field_type)
             if df and df.do_display_data():
                 name = field.label
-                value = data.get(key, None)
+                value = data.get(key)
                 if exclude_missing and not bool(value):
                     continue
                 mapped_data[name] = value

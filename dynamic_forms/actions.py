@@ -20,7 +20,7 @@ class ActionRegistry(object):
         self._actions = {}
 
     def get(self, key):
-        return self._actions.get(key, None)
+        return self._actions.get(key)
 
     def get_as_choices(self):
         for k, f in sorted(six.iteritems(self._actions)):

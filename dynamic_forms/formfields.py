@@ -32,7 +32,7 @@ class DynamicFormFieldRegistry(object):
         self._fields = {}
 
     def get(self, key):
-        return self._fields.get(key, None)
+        return self._fields.get(key)
 
     def get_as_choices(self):
         for k, c in sorted(six.iteritems(self._fields)):
@@ -108,10 +108,10 @@ class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
         self._meta = copy.deepcopy(self.__class__._meta)
         return self
 
-    def __init__(self, name, label, widget_attrs={}, **kwargs):
+    def __init__(self, name, label, widget_attrs=None, **kwargs):
         self.name = name
         self.label = label
-        self.widget_attrs = widget_attrs
+        self.widget_attrs = widget_attrs or {}
         self.set_options(**kwargs)
 
     def __str__(self):

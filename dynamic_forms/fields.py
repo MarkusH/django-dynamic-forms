@@ -33,7 +33,7 @@ class TextMultiSelectField(six.with_metaclass(models.SubfieldBase,
     def deconstruct(self):
         name, path, args, kwargs = super(TextMultiSelectField, self).deconstruct()
         kwargs['separate_values_by'] = self.separate_values_by
-        if kwargs.get('separate_values_by', None) == '\n':
+        if kwargs.get('separate_values_by') == '\n':
             del kwargs['separate_values_by']
         return name, path, args, kwargs
 
