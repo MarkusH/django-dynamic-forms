@@ -2,7 +2,7 @@
 import codecs
 import os
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 def read(*parts):
@@ -20,16 +20,8 @@ setup(
     author_email='info@markusholtermann.eu',
     url='http://github.com/MarkusH/django-dynamic-forms',
     license='BSD',
-    packages=[
-        'dynamic_forms',
-        'dynamic_forms.migrations',
-    ],
-    package_data={
-        'dynamic_forms': [
-            'locale/*/LC_MESSAGES/*',
-            'templates/dynamic_forms/*',
-        ]
-    },
+    packages=find_packages(exclude=('docs', 'example', 'tests', 'tests.*')),
+    include_package_data=True,
     install_requires=[
         'Django>=1.7',
     ],
@@ -46,9 +38,11 @@ setup(
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Framework :: Django',
         'Framework :: Django :: 1.7',
         'Framework :: Django :: 1.8',
+        'Framework :: Django :: 1.9',
     ],
     zip_safe=False
 )

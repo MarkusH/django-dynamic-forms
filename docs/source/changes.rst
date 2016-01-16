@@ -14,6 +14,7 @@ v0.5 (under development)
 * Form action take a required third argument ``request``.
 * Support for Django 1.9
 * Removed ``six`` dependency
+* Added missing contrib packages (thanks Seán Hayes) (#23)
 
 
 v0.4

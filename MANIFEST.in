@@ -1,9 +1,7 @@
 include AUTHORS
 include LICENSE
 include README.rst
-recursive-include docs *
-recursive-include dynamic_forms/locale *
-recursive-include dynamic_forms/templates *
-recursive-include example *.py example.db
-recursive-include tests *.py *.html requirements.txt
-recursive-exclude docs/build *
+
+prune docs
+prune example
+prune tests
