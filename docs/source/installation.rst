@@ -28,7 +28,7 @@ unsure where to put it, just append it:
 
     INSTALLED_APPS = (
         ...
-        'dynamic_forms',
+        'dynamic_forms.apps.DynamicFormsConfig',
         ...
     )
 

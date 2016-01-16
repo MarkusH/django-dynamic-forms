@@ -32,11 +32,11 @@ for creating survey or application forms.
 INSTALLATION
 ============
 
-Add ``'dynamic_forms'`` to the ``INSTALLED_APPS``::
+Add ``'dynamic_forms.apps.DynamicFormsConfig'`` to the ``INSTALLED_APPS``::
 
     INSTALLED_APPS = (
         ...
-        'dynamic_forms',
+        'dynamic_forms.apps.DynamicFormsConfig',
         ...
     )
 
