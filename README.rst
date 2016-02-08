@@ -12,10 +12,10 @@ Django Dynamic Form
    :target: https://pypi.python.org/pypi/django-dynamic-forms
 
 
-.. image:: https://img.shields.io/travis/MarkusH/django-dynamic-forms/develop.svg
+.. image:: https://img.shields.io/travis/MarkusH/django-dynamic-forms/master.svg
    :target: https://travis-ci.org/MarkusH/django-dynamic-forms
 
-.. image:: https://img.shields.io/codecov/c/github/MarkusH/django-dynamic-forms/develop.svg
+.. image:: https://img.shields.io/codecov/c/github/MarkusH/django-dynamic-forms/master.svg
    :target: https://codecov.io/github/MarkusH/django-dynamic-forms
 
 
