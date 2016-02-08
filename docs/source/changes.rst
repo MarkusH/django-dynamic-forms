@@ -17,6 +17,13 @@ v0.5 (under development)
 * Added missing contrib packages (thanks Seán Hayes) (#23)
 
 
+v0.4.1 (SECURITY RELEASE)
+=========================
+
+* Fixed a CSRF vulnerability in the ``POST`` handling of forms. Thanks
+ `Marten Kenbeek <https://github.com/knbk>`_ for the report and patch. (#26)
+
+
 v0.4
 ====
 
