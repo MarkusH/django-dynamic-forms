@@ -7,10 +7,6 @@ Changes
 v0.5 (under development)
 ========================
 
-.. warning::
-
-   **django-dynamic-forms** 0.5.x will only support Django >= 1.7!
-
 * Form action take a required third argument ``request``.
 * Support for Django 1.9
 * Removed ``six`` dependency
@@ -26,11 +22,6 @@ v0.4.1 (SECURITY RELEASE)
 
 v0.4
 ====
-
-.. warning::
-
-   **django-dynamic-forms** 0.4.x will be the latest version branch that
-   supports Django < 1.7!
 
 * Added support for Django 1.8 and experimental support for Django 1.9. (#19)
 * Removed ``django-appconf`` dependency.
