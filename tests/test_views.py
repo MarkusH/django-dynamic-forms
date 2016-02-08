@@ -5,7 +5,7 @@ import datetime
 import json
 from collections import OrderedDict
 
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 from django.test.utils import override_settings
 from django.utils.decorators import classonlymethod
 
