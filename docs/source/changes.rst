@@ -12,6 +12,13 @@ v0.5 (under development)
    **django-dynamic-forms** 0.5.x will only support Django >= 1.7!
 
 
+v0.4.1 (SECURITY RELEASE)
+=========================
+
+* Fixed a CSRF vulnerability in the ``POST`` handling of forms. Thanks
+ `Marten Kenbeek <https://github.com/knbk>`_ for the report and patch. (#26)
+
+
 v0.4
 ====
 

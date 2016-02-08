@@ -9,7 +9,7 @@ try:
 except ImportError:
     from django.utils.datastructures import SortedDict as OrderedDict
 
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.test.utils import override_settings
 from django.utils.decorators import classonlymethod
 
@@ -233,3 +233,12 @@ class TestViews(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
         self.assertTemplateUsed(response, 'dynamic_forms/data_set_404.html')
+
+    def test_post_csrf_check(self):
+        csrf_client = Client(enforce_csrf_checks=True)
+        response = csrf_client.post('/form/', {
+            'string-field': 'Some submitted string',
+            'field-for-boolean': True,
+            'date-and-time': '2013-09-07 12:34:56'
+        })
+        self.assertEqual(response.status_code, 403)
