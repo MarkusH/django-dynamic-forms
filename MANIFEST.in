@@ -1,6 +1,7 @@
 include AUTHORS
 include LICENSE
 include README.rst
+recursive-include dynamic_forms *.html *.mo *.po *.txt
 
 prune docs
 prune example
