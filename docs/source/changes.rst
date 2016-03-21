@@ -4,8 +4,18 @@ Changes
 
 .. py:currentmodule:: dynamic_forms
 
-v0.5 (under development)
-========================
+v0.5.2 (under development)
+==========================
+
+
+v0.5.1
+======
+
+* Added missing data files (thanks Nar Chhantyal)
+
+
+v0.5
+====
 
 .. warning::
 
