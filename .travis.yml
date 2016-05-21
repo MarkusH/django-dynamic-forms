@@ -10,6 +10,7 @@ env:
   - DJANGO=stable/1.7.x
   - DJANGO=stable/1.8.x
   - DJANGO=stable/1.9.x
+  - DJANGO=stable/1.10.x
   - DJANGO=master
 
 install:
@@ -28,6 +29,8 @@ matrix:
   exclude:
     - python: "3.3"
       env: DJANGO=stable/1.9.x
+    - python: "3.3"
+      env: DJANGO=stable/1.10.x
     - python: "3.3"
       env: DJANGO=master
 
