@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import datetime
 import json
 
+import django
 from django import forms
 from django.db.utils import IntegrityError
 from django.test import TestCase
@@ -197,11 +198,17 @@ class TestFormFieldModel(TestCase):
             field_type='dynamic_forms.formfields.BooleanField')
         ff2.generate_form_field(form)
 
-        self.assertHTMLEqual(form.as_p(),
-            '<p><label for="id_my-label">Label:</label> <input type="text" '
-            'id="id_my-label" name="my-label" /></p>\n<p><label '
-            'for="id_label2">Label2:</label> <input id="id_label2" '
-            'name="label2" type="checkbox" /></p>')
+        required = ' required' if django.VERSION >= (1, 10) else ''
+        self.assertHTMLEqual(
+            form.as_p(),
+            '<p>'
+            '  <label for="id_my-label">Label:</label>'
+            '  <input type="text" id="id_my-label"%s name="my-label" />'
+            '</p><p>'
+            '  <label for="id_label2">Label2:</label>'
+            '  <input id="id_label2" name="label2"%s type="checkbox" />'
+            '</p>' % (required, required)
+        )
 
 
 class TestFormModelData(TestCase):
