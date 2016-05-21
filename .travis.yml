@@ -30,7 +30,7 @@ matrix:
   exclude:
     - python: "3.2"
       env: DJANGO=stable/1.9.x
-    - python: "3.3"
+    - python: "3.2"
       env: DJANGO=stable/1.10.x
     - python: "3.2"
       env: DJANGO=master
