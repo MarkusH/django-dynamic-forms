@@ -10,8 +10,16 @@ from django.utils.text import capfirst
 from dynamic_forms.forms import MultiSelectFormField
 
 
-class TextMultiSelectField(six.with_metaclass(models.SubfieldBase,
-                                              models.TextField)):
+try:
+    # SubfieldBase is deprecated in Django 1.8 and removed in 1.10
+    class BaseTextMultiSelectField(six.with_metaclass(models.SubfieldBase, models.TextField)):
+        pass
+except AttributeError:
+    class BaseTextMultiSelectField(models.TextField):
+        pass
+
+
+class TextMultiSelectField(BaseTextMultiSelectField):
     # http://djangosnippets.org/snippets/2753/
 
     widget = CheckboxSelectMultiple
@@ -52,6 +60,9 @@ class TextMultiSelectField(six.with_metaclass(models.SubfieldBase,
         defaults['widget'] = self.widget
         return MultiSelectFormField(**defaults)
 
+    def from_db_value(self, value, expression, connection, context):
+        return self.to_python(value)
+
     def get_db_prep_value(self, value, connection=None, prepared=False):
         if isinstance(value, six.string_types):
             return value
@@ -73,10 +84,13 @@ class TextMultiSelectField(six.with_metaclass(models.SubfieldBase,
         return value
 
     def to_python(self, value):
-        if value is not None:
-            return (value if isinstance(value, list) else
-                value.split(self.separate_values_by))
-        return []
+        if value is None:
+            return []
+
+        if isinstance(value, list):
+            return value
+
+        return value.split(self.separate_values_by)
 
     def validate(self, value, model_instance):
         """
