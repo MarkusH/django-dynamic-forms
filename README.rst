@@ -11,7 +11,6 @@ Django Dynamic Form
 .. image:: https://img.shields.io/pypi/dm/django-dynamic-forms.svg
    :target: https://pypi.python.org/pypi/django-dynamic-forms
 
-
 .. image:: https://img.shields.io/travis/MarkusH/django-dynamic-forms/master.svg
    :target: https://travis-ci.org/MarkusH/django-dynamic-forms
 
