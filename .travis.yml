@@ -1,44 +1,40 @@
 language: python
 
-python:
-  - "2.7"
-  - "3.3"
-  - "3.4"
-  - "3.5"
+python: 3.5
 
 env:
-  - DJANGO=stable/1.7.x
-  - DJANGO=stable/1.8.x
-  - DJANGO=stable/1.9.x
-  - DJANGO=stable/1.10.x
-  - DJANGO=master
+  - TOXENV=py27-dj17
+  - TOXENV=py33-dj17
+  - TOXENV=py34-dj17
+  - TOXENV=py33-dj18
+  - TOXENV=py27-dj18
+  - TOXENV=py27-dj19
+  - TOXENV=py27-dj110
+  - TOXENV=py34-dj18
+  - TOXENV=py34-dj19
+  - TOXENV=py34-dj110
+  - TOXENV=py35-dj18
+  - TOXENV=py35-dj19
+  - TOXENV=py35-dj110
+  - TOXENV=py27-djmaster
+  - TOXENV=py34-djmaster
+  - TOXENV=py35-djmaster
+  - TOXENV=flake8
+  - TOXENV=isort
 
 install:
-  - pip install https://github.com/django/django/archive/${DJANGO}.tar.gz
-  - pip install -e .
-  - pip install -r tests/requirements.txt
+  - pip install -U pip
+  - pip install -U tox
   - pip install codecov
 
 script:
-  - coverage run `which django-admin.py` test --pythonpath=./ --settings=tests.settings
-  - flake8
-  - isort --recursive --check-only dynamic_forms tests
-
+  - tox -e ${TOXENV}
 
 matrix:
-  exclude:
-    - python: "3.3"
-      env: DJANGO=stable/1.9.x
-    - python: "3.3"
-      env: DJANGO=stable/1.10.x
-    - python: "3.3"
-      env: DJANGO=master
-
-    - python: "3.5"
-      env: DJANGO=stable/1.7.x
-
   allow_failures:
-    - env: DJANGO=master
+    - env: TOXENV=py27-djmaster
+    - env: TOXENV=py34-djmaster
+    - env: TOXENV=py35-djmaster
 
 after_success:
     codecov
