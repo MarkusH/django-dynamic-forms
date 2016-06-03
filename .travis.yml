@@ -20,10 +20,10 @@ install:
   - pip install codecov
 
 script:
-  - coverage run `which django-admin.py` test --pythonpath=./ --settings=tests.settings
   - flake8
   - isort --recursive --check-only dynamic_forms tests
-
+  - coverage run `which django-admin.py` test -v 2 --pythonpath=./ --settings=tests.settings
+  - coverage report
 
 matrix:
   exclude:
