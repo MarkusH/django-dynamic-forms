@@ -8,6 +8,7 @@ v0.5.2
 ======
 
 * Django 1.10 support
+* Dropped support for Python 3.2
 
 
 v0.5.1
