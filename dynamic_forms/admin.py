@@ -170,6 +170,7 @@ class FormModelAdmin(admin.ModelAdmin):
     list_display = ('name', 'submit_url', 'success_url', 'allow_display')
     model = FormModel
 
+
 admin.site.register(FormModel, FormModelAdmin)
 
 
@@ -178,5 +179,6 @@ class FormModelDataAdmin(admin.ModelAdmin):
     list_display = ('form', 'pretty_value', 'submitted')
     model = FormModelData
     readonly_fields = ('submitted', 'show_url_link',)
+
 
 admin.site.register(FormModelData, FormModelDataAdmin)
