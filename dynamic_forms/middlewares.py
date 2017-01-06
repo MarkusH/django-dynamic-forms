@@ -6,8 +6,14 @@ from dynamic_forms.conf import settings
 from dynamic_forms.models import FormModel
 from dynamic_forms.views import DynamicFormView, DynamicTemplateView
 
+try:
+    from django.utils.deprecation import MiddlewareMixin
+except ImportError:
+    # TODO Remove when dropping Django 1.8
+    MiddlewareMixin = object
 
-class FormModelMiddleware(object):
+
+class FormModelMiddleware(MiddlewareMixin):
 
     def process_response(self, request, response):
         if response.status_code != 404:

@@ -3,6 +3,8 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+import django
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 RUNTESTS_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,17 +29,30 @@ INSTALLED_APPS = (
     'tests',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'dynamic_forms.middlewares.FormModelMiddleware',
-)
+if django.VERSION[:2] < (1, 10):
+    MIDDLEWARE_CLASSES = (
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.locale.LocaleMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'dynamic_forms.middlewares.FormModelMiddleware',
+    )
+else:
+    MIDDLEWARE = (
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.locale.LocaleMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'dynamic_forms.middlewares.FormModelMiddleware',
+    )
 
 ROOT_URLCONF = 'tests.urls'
 
