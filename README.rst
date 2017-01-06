@@ -22,6 +22,8 @@ Django Dynamic Form
 You can add and remove form fields as you need them. That makes it perfect
 for creating survey or application forms.
 
+Documentation: https://django-dynamic-forms.readthedocs.org/
+
 
 INSTALLATION
 ============
