@@ -135,4 +135,5 @@ class DynamicDataSetDetailView(DynamicDataMixin, DetailView):
     model = FormModelData
     template_name = 'dynamic_forms/data_set.html'
 
+
 data_set_detail = DynamicDataSetDetailView.as_view()
