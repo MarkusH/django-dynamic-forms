@@ -29,13 +29,18 @@ unsure where to put it, just append it:
 
 To make Django aware of the dynamic forms while processing the requests /
 responses you need to add the ``FormModelMiddleware`` to the list of
-``MIDDLEWARE_CLASSES``. The best place is probably at the end of the list. If
-your forms are not shown please refer to the :doc:`known problems <problems>`
-section of the documentation:
+``MIDDLEWARE_CLASSES`` (or ``MIDDLEWARE`` for Django 1.10+). The best place is
+probably at the end of the list. If your forms are not shown please refer to
+the :doc:`known problems <problems>` section of the documentation:
 
 .. code-block:: python
 
-    MIDDLEWARE_CLASSES = (
+    MIDDLEWARE_CLASSES = (  # Django <= 1.9
+        ...
+        'dynamic_forms.middlewares.FormModelMiddleware'
+    )
+
+    MIDDLEWARE = (  # Django >= 1.10
         ...
         'dynamic_forms.middlewares.FormModelMiddleware'
     )
