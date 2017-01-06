@@ -13,9 +13,5 @@ def is_old_style_action(func):
         return len(argspec.args) == 3  # mind the 'self' arg
 
 
-class RemovedIn05Warning(DeprecationWarning):
-    pass
-
-
 class RemovedIn06Warning(PendingDeprecationWarning):
     pass
