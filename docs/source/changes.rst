@@ -4,6 +4,12 @@ Changes
 
 .. py:currentmodule:: dynamic_forms
 
+v0.5.3
+======
+
+* Fixed Django 1.10 support (#37)
+
+
 v0.5.2
 ======
 
