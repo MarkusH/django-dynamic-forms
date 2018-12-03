@@ -2,6 +2,10 @@
 Django Dynamic Form
 ===================
 
+.. image:: http://unmaintained.tech/badge.svg
+   :target: http://unmaintained.tech/
+   :alt: No Maintenance Intended 
+
 .. image:: https://img.shields.io/pypi/v/django-dynamic-forms.svg
    :target: https://pypi.python.org/pypi/django-dynamic-forms
 
