@@ -32,7 +32,7 @@ template context related to the form:
 ``name``
    The form's name as defined in :attr:`dynamic_forms.models.FormModel.name`.
 
-``success_url``
+``submit_url``
    The URL the form will be submitted to as defined in
    :attr:`dynamic_forms.models.FormModel.submit_url`. This is *not* the
    :attr:`~dynamic_forms.models.FormModel.success_url`!
